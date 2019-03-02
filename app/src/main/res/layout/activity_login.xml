@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.p.jumptime.LoginActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginRight="32dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="60dp"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="30dp"
+                android:paddingTop="16dp"
+                android:paddingRight="48dp"
+                android:paddingBottom="16dp"
+                android:hint="Логин"/>
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="60dp"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:paddingLeft="30dp"
+                android:paddingTop="16dp"
+                android:paddingRight="48dp"
+                android:paddingBottom="16dp"
+                android:hint="Пароль"/>
+
+            <Button
+                android:id="@+id/singIn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginRight="72dp"
+                android:text="Войти" />
+
+            <Button
+                android:id="@+id/singUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="72dp"
+                android:text="Зарегестрироваться" />
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

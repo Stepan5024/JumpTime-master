@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "865140747719",
+    "firebase_url": "https://organiser4you.firebaseio.com",
+    "project_id": "organiser4you",
+    "storage_bucket": "organiser4you.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:865140747719:android:2779f3204b22a5b6",
+        "android_client_info": {
+          "package_name": "com.example.p.jumptime"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "865140747719-e67eud34ahub6lf2abo0005cjn4qapmj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.p.jumptime",
+            "certificate_hash": "61ea2b43258c8956afc12245a181be8b8b8851b0"
+          }
+        },
+        {
+          "client_id": "865140747719-mgp2358g5a47beqll2sqrr9fcbv5phiv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAG9VhAyjimCBTtkid7M8WZW9LFgIseuMc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "865140747719-mgp2358g5a47beqll2sqrr9fcbv5phiv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
