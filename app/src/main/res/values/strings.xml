@@ -25,4 +25,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_sign_up">SignUp</string>
     <string name="fragment_email_text">trqw</string>
+    <string name="tab_text">match_parent</string>
+    <string name="input_text">Введите задачу</string>
 </resources>

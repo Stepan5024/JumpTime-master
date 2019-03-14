@@ -6,21 +6,16 @@
     android:orientation="vertical">
 
 
-    <!-- <ListView
-
-        android:layout_height="wrap_content"
-        android:id="@+id/list_for_task"
-        android:layout_width="match_parent"
-        />-->
-
     <Button
         android:id="@+id/addBut"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="191dp"
-        android:text="Add to FireBase" />
+
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/Field"
+        android:text="Add to FireBase"
+        tools:ignore="UnknownId"
+        android:layout_alignParentLeft="true" />
 
     <EditText
         android:id="@+id/ValueView"
@@ -30,6 +25,15 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="72dp"
         android:ems="10"
+        android:hint="@string/input_text"
         android:inputType="textPersonName"
-        android:text="Name" />
+         />
+
+    <ListView
+        android:id="@+id/Field"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="176dp" />
 </RelativeLayout>

@@ -67,7 +67,7 @@ public class Tasks extends Fragment {
         listBooks = rootView.findViewById(R.id.booksListView2);
 
         updateUI();
-        Toast.makeText(rootView.getContext(), "Фрагмент Storage", Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(rootView.getContext(), "Фрагмент Storage", Toast.LENGTH_SHORT).show();
 
         // обработчик на ListView
 
