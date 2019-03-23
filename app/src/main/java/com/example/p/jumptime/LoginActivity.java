@@ -1,6 +1,7 @@
 package com.example.p.jumptime;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -41,7 +42,40 @@ public class LoginActivity extends AppCompatActivity {
             setContentView(R.layout.activity_login);
             Button singIn = (Button) findViewById(R.id.singIn); // кнопка авторизации
             EditText login = (EditText) findViewById(R.id.login), password = (EditText) findViewById(R.id.password);
+            login.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                @Override
+                public void onFocusChange(View view, boolean b) {
 
+                    EditText editText = (EditText) view;
+
+                    if (b) {
+                        editText.setBackground(getResources().getDrawable(R.drawable.input_selected));
+                        editText.setTextColor(Color.parseColor("#000000"));
+                    } else {
+                        editText.setBackground(getResources().getDrawable(R.drawable.input_default));
+                        editText.setTextColor(Color.parseColor("#FFFFFF"));
+                    }
+
+                }
+            });
+            password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                @Override
+                public void onFocusChange(View view, boolean b) {
+
+                    EditText editText = (EditText) view;
+
+                    if (b) {
+                        editText.setBackground(getResources().getDrawable(R.drawable.input_selected));
+                        editText.setTextColor(Color.parseColor("#000000"));
+                    } else {
+                        editText.setBackground(getResources().getDrawable(R.drawable.input_default));
+                        editText.setTextColor(Color.parseColor("#FFFFFF"));
+                    }
+
+                }
+            });
             singIn.setOnClickListener(new View.OnClickListener() {
                 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                 @Override

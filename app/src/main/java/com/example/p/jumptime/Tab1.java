@@ -17,7 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Tab1 extends Fragment {
 
     Button add;
-    EditText field_1;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

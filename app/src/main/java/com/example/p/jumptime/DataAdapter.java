@@ -12,23 +12,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
+import java.util.ArrayList;
 import java.util.List;
 
 class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
     private LayoutInflater inflater;
-    private List<TaskForRecyclerView> news;
+    private ArrayList<TaskForRecyclerView> news;
+    View view;
 
-
-    DataAdapter(Context context, List<TaskForRecyclerView> phones) {
+    DataAdapter(Context context, ArrayList<TaskForRecyclerView> phones) {
         this.news = phones;
         this.inflater = LayoutInflater.from(context);
     }
@@ -36,7 +30,7 @@ class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @NonNull
     public DataAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.recycler_view, parent, false);
+         view = inflater.inflate(R.layout.recycler_view, parent, false);
         return new ViewHolder(view);
     }
 
@@ -60,12 +54,22 @@ class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
             }
         });
     }
-
+    public void restoreItem(TaskForRecyclerView task, int position) {
+        news.add(position, task);
+        notifyItemInserted(position);
+    }
+    public void removeItem(int position) {
+        news.remove(position);
+        notifyItemRemoved(position);
+    }
+    public List<TaskForRecyclerView> getData() {
+        return news;
+    }
     @Override
     public int getItemCount() {
         return news.size();
     }
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         final ImageView imageView;
         final TextView newsView;
         final TextView ViewData;
@@ -73,11 +77,11 @@ class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
         LinearLayout linearLayout;
         ViewHolder(View view){
             super(view);
-            imageView = (ImageView)view.findViewById(R.id.image);
-            newsView = (TextView) view.findViewById(R.id.TaskName);
-            ViewData = (TextView) view.findViewById(R.id.DataTask);
-            ViewTime = (TextView) view.findViewById(R.id.TimeTask);
-            linearLayout = (LinearLayout) view.findViewById((R.id.linLayout));
+            imageView = view.findViewById(R.id.image);
+            newsView = view.findViewById(R.id.TaskName);
+            ViewData = view.findViewById(R.id.DataTask);
+            ViewTime = view.findViewById(R.id.TimeTask);
+            linearLayout = view.findViewById((R.id.linLayout));
         }
     }
 }

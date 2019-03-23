@@ -1,9 +1,7 @@
 package com.example.p.jumptime;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,13 +18,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.SubMenu;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -38,7 +33,6 @@ public class MainActivity extends AppCompatActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -58,6 +52,7 @@ public class MainActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -65,14 +60,14 @@ public class MainActivity extends AppCompatActivity
         drawer.setScrimColor(Color.TRANSPARENT);
 
         if (drawer.isDrawerOpen(GravityCompat.START)) {
-         //   Toast.makeText(MainActivity.this,"test",Toast.LENGTH_SHORT).show();
+            //   Toast.makeText(MainActivity.this,"test",Toast.LENGTH_SHORT).show();
             drawer.closeDrawer(Gravity.LEFT);
         } else {
             drawer.openDrawer(Gravity.LEFT);
         }
 
         // super.onBackPressed();
-       // openQuitDialog();
+        // openQuitDialog();
     }
 
     private void openQuitDialog() {
@@ -97,6 +92,7 @@ public class MainActivity extends AppCompatActivity
 
         quitDialog.show();
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -123,11 +119,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_tasks) {
             fragment = new Tasks();
 
-        }
-        else if (id == R.id.nav_addTask) {
-            fragment = new addTask();
+        } else if (id == R.id.nav_addTask) {
+            fragment = new Tab2();
         } else if (id == R.id.time_table) {
-          fragment = new Test();
+            fragment = new Test();
         }
         /*else if (id == R.id.nav_addTask) {
             fragment = new Test();
@@ -137,7 +132,7 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             finish();
-          // fragment = new Test();
+            // fragment = new Test();
         }
         if (fragment != null) {
 
