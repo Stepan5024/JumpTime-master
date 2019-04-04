@@ -4,39 +4,56 @@ import android.os.Bundle;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.view.Gravity;
+import android.support.v4.widget.SlidingPaneLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
 
 public class Goal extends Fragment {
+    View  view;
 
-    View view;
-    public Goal() {
-    }
-
+    SlidingPaneLayout slidingPaneLayout;
 
 
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) view.findViewById(R.id.drawer_layout);
-
-        drawer.openDrawer(Gravity.LEFT);
-        Toast.makeText(getActivity(),"test",Toast.LENGTH_SHORT).show();
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            Toast.makeText(getActivity(),"test",Toast.LENGTH_SHORT).show();
-            drawer.openDrawer(Gravity.LEFT);
-        } else {
-           drawer.openDrawer(Gravity.LEFT);
-        }
-    }
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-               view = inflater.inflate(R.layout.fragment_add_task, container, false);
+        view = inflater.inflate(R.layout.activity_pane_testing, container, false);
+        slidingPaneLayout = (SlidingPaneLayout) view.findViewById(R.id.slidingpanelayout);
 
+        slidingPaneLayout.setPanelSlideListener(new SlidingPaneLayout.SimplePanelSlideListener() {
+
+            @Override
+            public void onPanelClosed(View panel) {
+
+                switch (panel.getId()) {
+                    case R.id.fragment_secondpane:
+                        getActivity().getFragmentManager().findFragmentById(R.id.fragment_firstpane).setHasOptionsMenu(false);
+                        getActivity().getFragmentManager().findFragmentById(R.id.fragment_secondpane).setHasOptionsMenu(true);
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+
+            @Override
+            public void onPanelOpened(View panel) {
+                switch (panel.getId()) {
+                    case R.id.fragment_secondpane:
+                        getActivity().getFragmentManager().findFragmentById(R.id.fragment_firstpane).setHasOptionsMenu(true);
+                        getActivity().getFragmentManager().findFragmentById(R.id.fragment_secondpane).setHasOptionsMenu(false);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onPanelSlide(View panel, float slideOffset) {
+            }
+
+        });
         return view;
     }
+
 }
