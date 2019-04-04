@@ -27,7 +27,7 @@
         android:ems="10"
         android:hint="@string/input_text"
         android:inputType="textPersonName"
-        />
+         />
 
     <ListView
         android:id="@+id/Field"
