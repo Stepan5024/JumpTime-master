@@ -5,10 +5,12 @@
 
     <!--<solid android:color="#ffffff" />-->
 
-    <corners android:radius="50dp" />
+    <gradient
+        android:angle="0"
+        android:centerColor="#2681c2"
+        android:endColor="#00ffffff"
+        android:startColor="#00ffffff" />
 
-    <stroke
-        android:width="5dip"
-        android:color="#ad0606" />
+
 
 </shape>
