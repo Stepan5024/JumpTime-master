@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/department"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:paddingLeft="100sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/add"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentRight="true"
+
+            android:layout_below="@id/department"
+
+            android:text="Add" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+        <EditText
+            android:id="@+id/product"
+
+            android:layout_width="10dp"
+
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/department"
+
+            android:layout_alignBaseline="@id/add"
+
+            android:layout_alignParentLeft="true"
+
+            android:layout_toLeftOf="@id/add"
+
+            android:ems="10"
+
+            android:hint="Enter Product for above Category"
+
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/textView1"
+
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentLeft="true"
+
+            android:layout_below="@id/product"
+
+            android:layout_margin="5dp"
+
+            android:background="#000080"
+
+            android:padding="5dp"
+
+            android:text="Different Categories with Products..."
+
+            android:textAppearance="?android:attr/textAppearanceMedium"
+
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+
+        <ExpandableListView
+            android:id="@+id/myList"
+
+            android:layout_width="match_parent"
+
+            android:layout_height="fill_parent"
+
+            android:layout_below="@id/textView1" />
+
+    </RelativeLayout>
+
+</LinearLayout>

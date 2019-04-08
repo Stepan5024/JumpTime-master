@@ -31,7 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Calendar;
 
 
-public class addTask extends Fragment {
+public class AddTask extends Fragment {
     Calendar dateAndTime=Calendar.getInstance();
     TextView priority;
     TextView repeat;
