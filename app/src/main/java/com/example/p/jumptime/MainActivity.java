@@ -43,6 +43,19 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        // устанавливаем начальный фрагмент - Home
+        Fragment fragment = null;
+        Class fragmentClass = Home.class;
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        assert fragment != null;
+        fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
     }
 
 
@@ -92,15 +105,13 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_goal) {
-            fragment = new Goal();
+            fragment = new Goal2();
         } else if (id == R.id.nav_tasks) {
-            fragment = new Tasks();
+            fragment = new Tab3();
 
         }
         else if (id == R.id.nav_addTask) {
             fragment = new AddTask();
-        } else if (id == R.id.time_table) {
-            fragment = new Test();
         }
         else if (id == R.id.nav_project_category) {
             fragment = new Categories();
@@ -109,10 +120,13 @@ public class MainActivity extends AppCompatActivity
             fragment = new Test();
         }
         else if (id == R.id.nav_my_day) {
-            fragment = new Test();
+            fragment = new UserDay();
+        }
+        else if (id == R.id.nav_plan_day) {
+            fragment = new TimeTable();
         }
         else if (id == R.id.nav_time) {
-            fragment = new Test();
+            fragment = new Motivation();
         }
 
         else if (id == R.id.nav_exit) {

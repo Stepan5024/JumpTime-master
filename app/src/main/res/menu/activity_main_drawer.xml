@@ -23,7 +23,7 @@
         <item
             android:id="@+id/nav_project_category"
             android:icon="@drawable/ic_menu_share"
-            android:title="Категории" />
+            android:title="Категории дел" />
         <item
             android:id="@+id/nav_exit"
             android:icon="@drawable/ic_menu_share"
@@ -40,6 +40,10 @@
                 android:id="@+id/nav_my_day"
                 android:icon="@drawable/ic_menu_send"
                 android:title="Мой день такой..." />
+            <item
+                android:id="@+id/nav_plan_day"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Расписание" />
             <item
                 android:id="@+id/nav_time"
                 android:icon="@drawable/ic_menu_send"

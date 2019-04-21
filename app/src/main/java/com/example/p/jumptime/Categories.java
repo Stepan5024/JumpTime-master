@@ -1,16 +1,19 @@
 package com.example.p.jumptime;
 
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import java.util.ArrayList;
 
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,26 +30,44 @@ import java.util.Map;
 public class Categories  extends Fragment {
     private LinkedHashMap<String, HeaderInfo> mySection = new LinkedHashMap<>();
     private ArrayList<HeaderInfo> SectionList = new ArrayList<>();
-
+    Toolbar myToolbar;
+    Spinner mySpinner;
     private MyListAdapter listAdapter;
     private ExpandableListView expandableListView;
     View view;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_category , container, false);
-        Spinner spinner = (Spinner) view.findViewById(R.id.department);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.dept_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
 
         //Just add some data to start with
         AddProduct();
+        myToolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        mySpinner = (Spinner) view.findViewById(R.id.spinner);
 
+        myToolbar.setTitle(getResources().getString(R.string.app_name));
+
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(getContext(),
+                R.layout.custom_spinner_item,
+                getResources().getStringArray(R.array.names));
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mySpinner.setAdapter(myAdapter);
+
+        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getContext(),
+                        mySpinner.getSelectedItem().toString(),
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         //get reference to the ExpandableListView
         expandableListView = (ExpandableListView) view.findViewById(R.id.myList);
         //create the adapter by passing your ArrayList data
@@ -67,14 +88,14 @@ public class Categories  extends Fragment {
                     //add entry to the List
                     case R.id.add:
 
-                        Spinner spinner = (Spinner) view.findViewById(R.id.department);
-                        String department = spinner.getSelectedItem().toString();
+                  /*     // Spinner spinner = (Spinner) view.findViewById(R.id.department);
+                       // String department = spinner.getSelectedItem().toString();
                         EditText editText = (EditText) view.findViewById(R.id.product);
                         String product = editText.getText().toString();
                         editText.setText("");
 
                         //add a new item to the list
-                        int groupPosition = addProduct(department,product);
+                      ///  int groupPosition = addProduct(department,product);
                         //notify the list so that changes can take effect
                         listAdapter.notifyDataSetChanged();
 
@@ -84,7 +105,7 @@ public class Categories  extends Fragment {
                         expandableListView.expandGroup(groupPosition);
                         //set the current group to be selected so that it becomes visible
                         expandableListView.setSelectedGroup(groupPosition);
-
+*/
                         break;
                 }
             }

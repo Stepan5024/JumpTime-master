@@ -46,10 +46,10 @@ public class Test extends Fragment {
         viewPager = (ViewPager) rootView.findViewById(R.id.pager);
 
         //Creating our pager adapter
-        Pager adapter = new Pager(getActivity().getSupportFragmentManager(), tabLayout.getTabCount());
+     /*   Pager adapter = new Pager(getActivity().getSupportFragmentManager(), tabLayout.getTabCount());
 
         //Adding adapter to pager
-        viewPager.setAdapter(adapter);
+        viewPager.setAdapter(adapter);*/
         tabLayout.setupWithViewPager(viewPager);
         //Adding onTabSelectedListener to swipe views
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

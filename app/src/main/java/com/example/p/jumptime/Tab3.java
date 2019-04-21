@@ -1,6 +1,9 @@
 package com.example.p.jumptime;
 
 
+
+
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,8 +17,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,11 +34,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tab2 extends Fragment {
+public class Tab3 extends Fragment {
     ArrayList<TaskForRecyclerView> tasks;
     FirebaseUser user;
+
     DataAdapter adapter;
     ArrayList sizeArray = new ArrayList();
+    Button add;
     View rootView;
     List<String[]> array;
     ArrayList images;
@@ -40,9 +49,8 @@ public class Tab2 extends Fragment {
     DatabaseReference myRef;
     DatabaseReference myRef1;
     LinearLayoutManager layoutManager;
-    int[] image_priority = {R.mipmap.white, R.mipmap.yellow, R.mipmap.orange, R.mipmap.red};
 
-    public Tab2() {
+    public Tab3() {
         tasks = new ArrayList<>();
         array = new ArrayList<>();
         images = new ArrayList();
@@ -58,33 +66,35 @@ public class Tab2 extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.tab2, container, false);
         user = FirebaseAuth.getInstance().getCurrentUser();
+
         myRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
         myRef1 = FirebaseDatabase.getInstance().getReference();
         coordinatorLayout = rootView.findViewById(R.id.coordinatorLayout);
         layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        recyclerView = rootView.findViewById(R.id.list);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.list);
         recyclerView.setLayoutManager(layoutManager);
-        setRef();
-        setElement();
         adapter = new DataAdapter(getContext(), tasks);
         // устанавливаем для списка адаптер
         recyclerView.setAdapter(adapter);
-
-
+        setElement();
+        setRef();
         enableSwipeToDeleteAndUndo();
+
 
 
         return rootView;
 
     }
-
-    private void setRef() {
-       /* myRef.addValueEventListener(new ValueEventListener() {
+    private void setRef(){
+        tasks.clear();
+        myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot childSbapshot : dataSnapshot.getChildren()) {
+                for (DataSnapshot childSbapshot : dataSnapshot.getChildren()){
                     images.add((childSbapshot.getValue()));
                 }
+
+
 
 
             }
@@ -93,7 +103,7 @@ public class Tab2 extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });*/
+        });
         myRef1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -102,23 +112,17 @@ public class Tab2 extends Fragment {
 
                     // Toast.makeText(rootView.getContext(),s, Toast.LENGTH_SHORT).show();
                     String name = "" + dataSnapshot.child("users").child(user.getUid()).child("tasks").child(s).child("name").getValue(String.class);
-                    String data = "" + dataSnapshot.child("users").child(user.getUid()).child("tasks").child(s).child("data").getValue(String.class);
-                    String time = "" + dataSnapshot.child("users").child(user.getUid()).child("tasks").child(s).child("time").getValue(String.class);
-                    String priority = dataSnapshot.child("users").child(user.getUid()).child("tasks").child(s).child("priority").getValue(String.class);
-                    String kilo = "" + dataSnapshot.child("users").child(user.getUid()).child("tasks").child(s).child("kilo").getValue(String.class);
-                    String project = "" + dataSnapshot.child("users").child(user.getUid()).child("tasks").child(s).child("project").getValue(String.class);
+                    String data = ""+ dataSnapshot.child("users").child(user.getUid()).child("tasks").child(s).child("data").getValue(String.class);
+                    String kilo = ""+ dataSnapshot.child("users").child(user.getUid()).child("tasks").child(s).child("kilo").getValue(String.class);
+                    String time = ""+ dataSnapshot.child("users").child(user.getUid()).child("tasks").child(s).child("time").getValue(String.class);
+                    String project = ""+ dataSnapshot.child("users").child(user.getUid()).child("tasks").child(s).child("project").getValue(String.class);
 
-
-                    String[] a = {name, data, kilo, time, project};
+                    String[] a = {name,data,kilo,time,project};
                     array.add(a);
 
-                        tasks.add(new TaskForRecyclerView(s, a[1], a[3], image_priority[0], getActivity()));
-
-
-
-
+                    tasks.add(new TaskForRecyclerView(s, a[1],a[3], R.mipmap.ic_launcher, getActivity()));
+                    recyclerView.setAdapter(adapter);
                 }
-                recyclerView.setAdapter(adapter);
             }
 
             @Override
@@ -129,8 +133,7 @@ public class Tab2 extends Fragment {
 
 
     }
-
-    private void setElement() {
+    private void setElement(){
 
         DatabaseReference info = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).child("tasks");
         info.addValueEventListener(new ValueEventListener() {
@@ -152,7 +155,6 @@ public class Tab2 extends Fragment {
 
 
     }
-
     private void enableSwipeToDeleteAndUndo() {
         SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(getContext()) {
             @Override
@@ -161,6 +163,9 @@ public class Tab2 extends Fragment {
 
                 final int position = viewHolder.getAdapterPosition();
                 final String item = String.valueOf(adapter.getData().get(position));
+
+                adapter.removeItem(position);
+
 
                 Toast.makeText(getContext(), position + " kk size" + tasks.get(0).getTaskName(), Toast.LENGTH_SHORT).show();
                 //  tasks.remove(position);
@@ -172,11 +177,11 @@ public class Tab2 extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
 
-                        myRef.child("users").child(user.getUid()).child("tasks").child(String.valueOf(sizeArray.get(position))).child("name").setValue(null);
-                        myRef.child("users").child(user.getUid()).child("tasks").child(String.valueOf(sizeArray.get(position))).child("data").setValue(null);
-                        myRef.child("users").child(user.getUid()).child("tasks").child(String.valueOf(sizeArray.get(position))).child("time").setValue(null);
-                        myRef.child("users").child(user.getUid()).child("tasks").child(String.valueOf(sizeArray.get(position))).child("priority").setValue(null);
-                        myRef.child("users").child(user.getUid()).child("tasks").child(String.valueOf(sizeArray.get(position))).child("project").setValue(null);
+                        myRef.child("users").child(user.getUid()).child("tasks").child(tasks.get(position).getTaskName()).child("name").setValue(null);
+                        myRef.child("users").child(user.getUid()).child("tasks").child(tasks.get(position).getTaskName()).child("data").setValue(null);
+                        myRef.child("users").child(user.getUid()).child("tasks").child(tasks.get(position).getTaskName()).child("time").setValue(null);
+                        myRef.child("users").child(user.getUid()).child("tasks").child(tasks.get(position).getTaskName()).child("priority").setValue(null);
+                        myRef.child("users").child(user.getUid()).child("tasks").child(tasks.get(position).getTaskName()).child("project").setValue(null);
 
                     }
 
@@ -188,7 +193,6 @@ public class Tab2 extends Fragment {
 
                     }
                 });
-                adapter.removeItem(position);
 
                 Snackbar snackbar = Snackbar
                         .make(coordinatorLayout, "Item was removed from the list.", Snackbar.LENGTH_LONG);
@@ -196,14 +200,7 @@ public class Tab2 extends Fragment {
                     @Override
                     public void onClick(View view) {
 
-                        try {// ошибка при удалении самого последнего элемента из Recycler
-
-
-                            adapter.restoreItem(tasks.get(0), position);
-
-                        } catch (IndexOutOfBoundsException ex) {
-
-                        }
+                        adapter.restoreItem(tasks.get(0), position);
                         recyclerView.scrollToPosition(position);
                     }
                 });

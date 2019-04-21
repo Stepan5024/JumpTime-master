@@ -1,10 +1,247 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/ValueView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="@string/input_text"
+                android:inputType="textPersonName" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ValueView"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Do"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="10dp"
+                    android:text="До:"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="163dp"
+                    android:layout_height="44dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginRight="0dp"
+                    android:gravity="center" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:id="@+id/r1"
+                        android:layout_width="250dp"
+                        android:layout_height="60dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center_vertical">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="5dp"
+                            android:background="@drawable/good_text_view" />
+
+
+                        <Spinner
+                            android:id="@+id/spinner_repeat"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:entries="@array/list_for_repeat"
+                            android:spinnerMode="dialog" />
+
+                        <TextView
+                            android:id="@+id/repeat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:text="Повтор"
+                            android:textSize="24sp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:background="@drawable/good_text_view"
+                            android:elevation="9dp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/r2"
+                        android:layout_width="250dp"
+                        android:layout_height="60dp"
+                        android:layout_below="@+id/r1"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center_vertical">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:background="@drawable/good_text_view" />
+
+                        <Spinner
+                            android:id="@+id/spinner_remind"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:entries="@array/list_for_remind"
+                            android:spinnerMode="dialog" />
+
+                        <TextView
+                            android:id="@+id/remind"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:elevation="5dp"
+                            android:gravity="center"
+                            android:text="Напомнить за"
+                            android:textSize="24sp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:background="@drawable/good_text_view"
+                            android:elevation="9dp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/r3"
+                        android:layout_width="250dp"
+                        android:layout_height="60dp"
+                        android:layout_below="@+id/r2"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center_vertical">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:background="@drawable/good_text_view"
+                            android:elevation="9dp" />
+
+
+                        <TextView
+                            android:id="@+id/priority"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:text="Приоритет"
+                            android:textSize="24sp" />
+
+                        <Spinner
+                            android:id="@+id/spinner_priority"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:entries="@array/list_for_priority"
+                            android:spinnerMode="dialog" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:background="@drawable/good_text_view"
+                            android:elevation="9dp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/r4"
+                        android:layout_width="250dp"
+                        android:layout_height="60dp"
+                        android:layout_below="@+id/r3"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center_vertical">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:background="@drawable/good_text_view"
+                            android:elevation="9dp" />
+
+                        <ImageView
+                            android:id="@+id/image_category"
+                            android:layout_width="60dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginStart="216dp"
+                            android:layout_marginLeft="216dp"
+                            android:layout_marginBottom="3dp"
+                            app:srcCompat="@drawable/common_google_signin_btn_icon_light_normal" />
+
+                        <TextView
+                            android:id="@+id/category"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+
+
+                            android:gravity="center"
+                            android:text="Категория"
+                            android:textSize="24sp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="5dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:background="@drawable/good_text_view"
+                            android:elevation="9dp" />
+                    </RelativeLayout>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
 
 
     <Button
@@ -12,276 +249,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
         android:layout_marginBottom="21dp"
-        android:text="Add to FireBase"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="0dp" />
-
-    <EditText
-        android:id="@+id/ValueView"
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="56dp"
-        android:ems="10"
-        android:hint="@string/input_text"
-        android:inputType="textPersonName" />
-
-    <TextView
-        android:id="@+id/date"
-        android:gravity="center"
-        android:layout_width="183dp"
-        android:layout_height="45dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="157dp"
-        android:layout_marginEnd="201dp"
-        android:layout_marginRight="201dp" />
-
-    <TextView
-        android:id="@+id/time"
-        android:gravity="center"
-        android:layout_width="163dp"
-        android:layout_height="44dp"
-        android:layout_alignBottom="@+id/date"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_alignParentRight="true" />
+        android:text="Add to FireBase" />
 
 
-    <TextView
-        android:id="@+id/Ot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="109dp"
-        android:text="От:"
-        android:textSize="24sp"
-        android:layout_alignParentLeft="true" />
-
-    <TextView
-        android:id="@+id/Do"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/time"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="109dp"
-        android:text="До:"
-        android:textSize="24sp"
-        android:layout_alignLeft="@+id/time" />
-
-    <RelativeLayout
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:gravity="center_vertical"
-
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="210dp">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="@drawable/good_text_view"
-            />
-
-
-        <ImageView
-            android:id="@+id/image_repeat"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="216dp"
-            android:layout_marginLeft="216dp"
-            android:layout_marginBottom="3dp"
-            app:srcCompat="@drawable/common_google_signin_btn_icon_light_normal" />
-
-        <TextView
-            android:id="@+id/repeat"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:gravity="center"
-            android:textSize="24sp"
-            android:text="Повтор" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:background="@drawable/good_text_view"
-            android:elevation="9dp"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="280dp"
-
-        android:gravity="center_vertical">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:background="@drawable/good_text_view" />
-        <ImageView
-            android:id="@+id/image_remind"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="216dp"
-            android:layout_marginLeft="216dp"
-            android:layout_marginBottom="3dp"
-            app:srcCompat="@drawable/common_google_signin_btn_icon_light_normal" />
-
-        <TextView
-            android:id="@+id/remind"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:gravity="center"
-            android:textSize="24sp"
-            android:text="Напоминание"
-            android:elevation="5dp"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:background="@drawable/good_text_view"
-            android:elevation="9dp"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="350dp"
-
-        android:gravity="center_vertical">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:background="@drawable/good_text_view"
-            android:elevation="9dp"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:background="@drawable/good_text_view"
-            android:elevation="9dp"/>
-
-        <TextView
-            android:id="@+id/priority"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:gravity="center"
-            android:textSize="24sp"
-            android:text="Приоритет" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:background="@drawable/good_text_view"
-            android:elevation="9dp"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="420dp"
-
-        android:gravity="center_vertical">
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:background="@drawable/good_text_view"
-            android:layout_alignParentLeft="true"
-            android:elevation="9dp"/>
-        <ImageView
-            android:id="@+id/image_category"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="216dp"
-            android:layout_marginLeft="216dp"
-            android:layout_marginBottom="3dp"
-            app:srcCompat="@drawable/common_google_signin_btn_icon_light_normal" />
-
-        <TextView
-            android:id="@+id/category"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:gravity="center"
-            android:textSize="24sp"
-            android:text="Категория" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:background="@drawable/good_text_view"
-            android:elevation="9dp"/>
-    </RelativeLayout>
-
-
-</RelativeLayout>
+</LinearLayout>

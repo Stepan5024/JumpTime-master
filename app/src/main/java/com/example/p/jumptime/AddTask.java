@@ -19,8 +19,11 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -28,20 +31,29 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.Calendar;
 
 
 public class AddTask extends Fragment {
-    Calendar dateAndTime=Calendar.getInstance();
+    Calendar dateAndTime = Calendar.getInstance();
     TextView priority;
     TextView repeat;
     TextView reminder;
     TextView category;
     View rootView;
+
+    String timeTask = "10:00"; // потом инициализировать текущим временем
     Button add;
     TextView EndDateTime;
-    TextView StartDateTime;
     EditText ValueView;
+    Spinner spinner_remind;
+    Spinner spinner_priority;
+    Spinner spinner_repeat;
+    String selected_repeat;
+    String selected_remind;
+    int selected_priority = 0;
+    String dataTask;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,27 +69,108 @@ public class AddTask extends Fragment {
         repeat = rootView.findViewById(R.id.repeat);
         category = rootView.findViewById(R.id.category);
         reminder = rootView.findViewById(R.id.remind);
-
+        EndDateTime = rootView.findViewById(R.id.time);
         ValueView = rootView.findViewById(R.id.ValueView);
+        spinner_remind = (Spinner) rootView.findViewById(R.id.spinner_remind);
+        spinner_priority = (Spinner) rootView.findViewById(R.id.spinner_priority);
+        spinner_repeat = (Spinner) rootView.findViewById(R.id.spinner_repeat);
+        spinner_remind.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent,
+                                       View itemSelected, int selectedItemPosition, long selectedId) {
 
+                String[] choose = getResources().getStringArray(R.array.list_for_remind);
+                selected_remind = choose[selectedItemPosition];
+                Toast toast = Toast.makeText(getContext(),
+                        "Ваш выбор: " + choose[selectedItemPosition], Toast.LENGTH_SHORT);
+                toast.show();
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        spinner_priority.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent,
+                                       View itemSelected, int selectedItemPosition, long selectedId) {
+
+                String[] choose = getResources().getStringArray(R.array.list_for_priority);
+                if(choose[selectedItemPosition].compareTo("Не важно") == 0){
+                    selected_priority = 0;
+                }
+                else if(choose[selectedItemPosition].compareTo("Среднее") == 0) {
+                    selected_priority = 1;
+                }
+                else if(choose[selectedItemPosition].compareTo("Важно") == 0) {
+                    selected_priority = 2;
+                }
+                else {
+                    selected_priority = 3;
+                }
+
+                Toast toast = Toast.makeText(getContext(),
+                        "Ваш выбор: " + choose[selectedItemPosition], Toast.LENGTH_SHORT);
+
+                toast.show();
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        spinner_repeat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent,
+                                       View itemSelected, int selectedItemPosition, long selectedId) {
+
+                String[] choose = getResources().getStringArray(R.array.list_for_repeat);
+                selected_repeat = choose[selectedItemPosition];
+                Toast toast = Toast.makeText(getContext(),
+                        "Ваш выбор: " + choose[selectedItemPosition], Toast.LENGTH_SHORT);
+                toast.show();
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        dataTask = EndDateTime.getText().toString();
+                    /*final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+	                        final View uview = View.inflate(getContext(), R.layout.dialog_field_kilo, null);
+	                        builder.setView(uview);
+	                        final AlertDialog show = builder.show();
+
+	                        Button ok = uview.findViewById(R.id.good_day);
+	                        ok.setOnClickListener(new View.OnClickListener() {
+	                            @Override
+	                            public void onClick(View view) {
+
+
+	                                show.dismiss();
+	                            }
+	                        });*/
 
         add = (Button) rootView.findViewById(R.id.addBut);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
+                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
                 final DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
                 myRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                        String email = user.getEmail();
+                        Toast.makeText(getContext(),"data "+ dataTask,Toast.LENGTH_SHORT).show();
 
-                        myRef.child("users").child(user.getUid()).child("tasks").child(ValueView.getText().toString()).child("data").setValue("13/03/2018 12:00");
-                        myRef.child("users").child(user.getUid()).child("tasks").child(ValueView.getText().toString()).child("priority").setValue("0");
-                        myRef.child("users").child(user.getUid()).child("tasks").child(ValueView.getText().toString()).child("kilo").setValue("kilo");
-                        myRef.child("users").child(user.getUid()).child("tasks").child(ValueView.getText().toString()).child("project").setValue("#1");
-                        myRef.child("users").child(user.getUid()).child("tasks").child(ValueView.getText().toString()).child("active").setValue(1);
+                        if (ValueView.getText().toString().compareTo("")!=0 && user!=null) {
+                            myRef.child("users").child(user.getUid()).child("tasks").child(ValueView.getText().toString()).child("name").setValue(ValueView.getText().toString());
+                            myRef.child("users").child(user.getUid()).child("tasks").child(ValueView.getText().toString()).child("data").setValue(dataTask);
+                            myRef.child("users").child(user.getUid()).child("tasks").child(ValueView.getText().toString()).child("time").setValue(timeTask);
+                            myRef.child("users").child(user.getUid()).child("tasks").child(ValueView.getText().toString()).child("priority").setValue(selected_priority+"");
+                            myRef.child("users").child(user.getUid()).child("tasks").child(ValueView.getText().toString()).child("project").setValue("#1");
+
+                        }
+                        ValueView.setText("");
+                        // очистить введенные данные потом создав метод инитиализе
                     }
 
                     @Override
@@ -86,65 +179,30 @@ public class AddTask extends Fragment {
                     }
                 });
 
+
+
+
+
             }
         });
 
 
-        StartDateTime = rootView.findViewById(R.id.date);
+
         EndDateTime = rootView.findViewById(R.id.time);
         EndDateTime.setText(DateUtils.formatDateTime(getContext(),
                 dateAndTime.getTimeInMillis(),
                 DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR | DateUtils.FORMAT_SHOW_TIME));
-        StartDateTime.setText(DateUtils.formatDateTime(getContext(),
-                dateAndTime.getTimeInMillis(),
-                DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR | DateUtils.FORMAT_SHOW_TIME));
 
-        StartDateTime.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View view) {
-                new TimePickerDialog(getContext(),t,
-                        dateAndTime.get(Calendar.HOUR_OF_DAY),
-                        dateAndTime.get(Calendar.MINUTE), true)
-                        .show();
-                new DatePickerDialog(getContext(), d,
-                        dateAndTime.get(Calendar.YEAR),
-                        dateAndTime.get(Calendar.MONTH),
-                        dateAndTime.get(Calendar.DAY_OF_MONTH))
-                        .show();
 
-            }
-
-            private void setInitialDateTime() {
-
-                StartDateTime.setText(DateUtils.formatDateTime(getContext(),
-                        dateAndTime.getTimeInMillis(),
-                        DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR | DateUtils.FORMAT_SHOW_TIME));
-            }
-            DatePickerDialog.OnDateSetListener d=new DatePickerDialog.OnDateSetListener() {
-                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                    dateAndTime.set(Calendar.YEAR, year);
-                    dateAndTime.set(Calendar.MONTH, monthOfYear);
-                    dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                    setInitialDateTime();
-                }
-            };
-
-            TimePickerDialog.OnTimeSetListener t=new TimePickerDialog.OnTimeSetListener() {
-                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    dateAndTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                    dateAndTime.set(Calendar.MINUTE, minute);
-                    setInitialDateTime();
-                }
-            };
-        });
         EndDateTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new TimePickerDialog(getContext(),t,
+                new TimePickerDialog(getContext(), t,
                         dateAndTime.get(Calendar.HOUR_OF_DAY),
                         dateAndTime.get(Calendar.MINUTE), true)
                         .show();
+
                 new DatePickerDialog(getContext(), d,
                         dateAndTime.get(Calendar.YEAR),
                         dateAndTime.get(Calendar.MONTH),
@@ -161,18 +219,22 @@ public class AddTask extends Fragment {
                         DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR | DateUtils.FORMAT_SHOW_TIME));
             }
 
-            DatePickerDialog.OnDateSetListener d=new DatePickerDialog.OnDateSetListener() {
+            DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                     dateAndTime.set(Calendar.YEAR, year);
                     dateAndTime.set(Calendar.MONTH, monthOfYear);
                     dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    Toast.makeText(getContext(),
+                            "year  = " + year + "month " + monthOfYear + " day " + dayOfMonth, Toast.LENGTH_SHORT).show();
+                    dataTask = dayOfMonth + "." + monthOfYear + "." + year;
                     setInitialDateTime();
                 }
             };
-            TimePickerDialog.OnTimeSetListener t=new TimePickerDialog.OnTimeSetListener() {
+            TimePickerDialog.OnTimeSetListener t = new TimePickerDialog.OnTimeSetListener() {
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                     dateAndTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
                     dateAndTime.set(Calendar.MINUTE, minute);
+                    timeTask = hourOfDay + ":" + minute;
                     setInitialDateTime();
                 }
             };

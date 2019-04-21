@@ -22,7 +22,7 @@ public class OnSwipeTouchListener implements View.OnTouchListener {
         return gestureDetector.onTouchEvent(event);
     }
 
-    private final class GestureListener extends GestureDetector.SimpleOnGestureListener{
+    protected final class GestureListener extends GestureDetector.SimpleOnGestureListener{
 
         private static final int SWIPE_THRESHOLD = 200;
         public static final int SWIPE_VELOCITY_THRESHOLD = 200;
@@ -39,7 +39,7 @@ public class OnSwipeTouchListener implements View.OnTouchListener {
                 if (Math.abs(diffX) > Math.abs(diffY)) {
                     if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
                         if (diffX > 0) {
-                            result = onSwipeRight();
+                            result = (boolean) onSwipeRight();
                         } else {
                             result = onSwipeLeft();
                         }

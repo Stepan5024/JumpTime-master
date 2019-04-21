@@ -61,11 +61,13 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                    final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
                     final DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
                     myRef.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            myRef.child("users").child(FirebaseInstanceId.getInstance().getToken()).child("infoUser").child("name").setValue(mLogin);
+                            myRef.child("users").child(user.getUid()).child("infoUser").child("name").setValue(mLogin);
                         }
 
                         @Override

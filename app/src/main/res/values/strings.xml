@@ -15,6 +15,16 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string-array name="names">
+        <item>Josh</item>
+        <item>Sara</item>
+        <item>Steve</item>
+        <item>Joe</item>
+        <item>Dave</item>
+        <item>Mike</item>
+        <item>Lisa</item>
+    </string-array>
+
     <string-array name="dept_array">
         <item>Vegetable</item>
         <item>Fruits</item>
@@ -22,6 +32,24 @@
         <item>Electronics</item>
         <item>Books</item>
         <item>Language</item>
+    </string-array>
+    <string-array name="list_for_repeat">
+    <item>Рабочие дни</item>
+    <item>Выходные</item>
+    <item>Настраить дни</item>
+
+    </string-array>
+    <string-array name="list_for_remind">
+        <item>30 мин</item>
+        <item>1 час</item>
+        <item>1.5 часа</item>
+        <item>настроить</item>
+    </string-array>
+    <string-array name="list_for_priority">
+        <item>Не важно</item>
+        <item>Среднее</item>
+        <item>Важно</item>
+        <item>Очень важно</item>
     </string-array>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
     <string name="title_activity_main">MainActivity</string>
