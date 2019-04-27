@@ -2,7 +2,9 @@ package com.example.p.jumptime;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,6 +12,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +56,7 @@ public class AddTask extends Fragment {
     String selected_repeat;
     String selected_remind;
     int selected_priority = 0;
+    final String LOG_TAG = "myLogs";
     String dataTask;
 
     @Override
@@ -153,31 +157,39 @@ public class AddTask extends Fragment {
 
 
 
-                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                final DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
-                myRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Toast.makeText(getContext(),"data "+ dataTask,Toast.LENGTH_SHORT).show();
-
-                        if (ValueView.getText().toString().compareTo("")!=0 && user!=null) {
-                            myRef.child("users").child(user.getUid()).child("tasks").child(ValueView.getText().toString()).child("name").setValue(ValueView.getText().toString());
+                if (ValueView.getText().toString().compareTo("")!=0) {
+                          /*  myRef.child("users").child(user.getUid()).child("tasks").child(ValueView.getText().toString()).child("name").setValue(ValueView.getText().toString());
                             myRef.child("users").child(user.getUid()).child("tasks").child(ValueView.getText().toString()).child("data").setValue(dataTask);
                             myRef.child("users").child(user.getUid()).child("tasks").child(ValueView.getText().toString()).child("time").setValue(timeTask);
                             myRef.child("users").child(user.getUid()).child("tasks").child(ValueView.getText().toString()).child("priority").setValue(selected_priority+"");
                             myRef.child("users").child(user.getUid()).child("tasks").child(ValueView.getText().toString()).child("project").setValue("#1");
+*/
+                    DataBase.DBHelper dbHelper = new DataBase.DBHelper(getContext());
+                    // подключаемся к БД
 
-                        }
-                        ValueView.setText("");
-                        // очистить введенные данные потом создав метод инитиализе
-                    }
+                    SQLiteDatabase db = dbHelper.getWritableDatabase();
+                    // создаем объект для данных
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
+                    ContentValues cv = new ContentValues();
+                    Log.d(LOG_TAG, "--- Insert in mytable: ---");
+                    // подготовим данные для вставки в виде пар: наименование столбца -
+                    // значение
+                    cv.put("name", ValueView.getText().toString());
+                    cv.put("data", dataTask);
+                    cv.put("time",timeTask);
+                    cv.put("k", "k");
+                    cv.put("i", "i");
+                    cv.put("l", "l");
+                    cv.put("o", "o");
+                    cv.put("priority", selected_priority);
+                    cv.put("project", "#1");
+                    cv.put("active", "1");
+                    // вставляем запись и получаем ее ID
+                    long rowID = db.insert("mytable", null, cv);
+                    Log.d(LOG_TAG, "row inserted, ID = " + rowID);
+                }
+                ValueView.setText("");
+                // очистить введенные данные потом создав метод инитиализе
 
 
 

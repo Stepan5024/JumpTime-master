@@ -2,8 +2,7 @@ package com.example.p.jumptime;
 
 
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+
 public class Pager extends Fragment {
     private String tabTitles[] = new String[] { "КАЛЕНДАРЬ", "СПИСОК ДЕЛ"};
     //integer to count number of tabs
@@ -20,7 +19,7 @@ public class Pager extends Fragment {
                 Tab1 tab1 = new Tab1();
                 return tab1;
             case 1:
-                Tab2 tab2 = new Tab2();
+                TasksForCurrentPerfomance tab2 = new TasksForCurrentPerfomance();
                 return tab2;
 
             default:

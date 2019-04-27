@@ -67,7 +67,7 @@ class DataAdapterRecyclerViewToTimeTable extends RecyclerView.Adapter<DataAdapte
             @Override
             public void onClick(View v) {
 
-               /* Fragment fragment = new Tab2();
+               /* Fragment fragment = new TasksForCurrentPerfomance();
                 FragmentTransaction fragmentManager = new1.getActivity().getSupportFragmentManager().beginTransaction();
                 fragmentManager.replace(R.id.container, fragment).commit();*/
 

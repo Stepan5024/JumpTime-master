@@ -1,6 +1,8 @@
 package com.example.p.jumptime;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,7 +23,10 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    // это будет именем файла настроек
+    public static final String APP_PREFERENCES = "mysettings";
+    public static final String APP_PREFERENCES_NAME = "Nickname"; // имя кота
+    public static final String APP_PREFERENCES_AGE = "Age"; // возраст кота
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +38,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        SharedPreferences mySharedPreferences = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -107,17 +112,20 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_goal) {
             fragment = new Goal2();
         } else if (id == R.id.nav_tasks) {
-            fragment = new Tab3();
+            fragment = new TasksForCurrentPerfomance();
 
         }
         else if (id == R.id.nav_addTask) {
             fragment = new AddTask();
         }
+        else if (id == R.id.time_plan) {
+            fragment = new TimePlans();
+        }
         else if (id == R.id.nav_project_category) {
             fragment = new Categories();
         }
         else if (id == R.id.nav_comand) {
-            fragment = new Test();
+            fragment = new DataBase();
         }
         else if (id == R.id.nav_my_day) {
             fragment = new UserDay();

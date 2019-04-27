@@ -10,10 +10,11 @@ public class TaskForRecyclerView {
     private String taskData;
     private String taskTime;
     private int image;
+    private int id;
     public FragmentActivity activity;
 
-    public TaskForRecyclerView(String taskName, String taskData,String taskTime,int image, FragmentActivity activity) {
-
+    public TaskForRecyclerView(String taskName, String taskData,String taskTime,int image,int id, FragmentActivity activity) {
+        this.id = id;
         this.taskName = taskName;
         this.taskData = taskData;
         this.taskTime = taskTime;
@@ -23,7 +24,9 @@ public class TaskForRecyclerView {
     }
 
 
-
+    public int getID() {
+        return this.id;
+    }
     public String getTaskData() {
         return this.taskData;
     }

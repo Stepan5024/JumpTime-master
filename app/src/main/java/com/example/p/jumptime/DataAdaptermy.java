@@ -16,26 +16,26 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
+class DataAdaptermy extends RecyclerView.Adapter<DataAdaptermy.ViewHolder> {
 
     private LayoutInflater inflater;
     private ArrayList<TaskForRecyclerView> news;
     View view;
 
-    DataAdapter(Context context, ArrayList<TaskForRecyclerView> phones) {
+    DataAdaptermy(Context context, ArrayList<TaskForRecyclerView> phones) {
         this.news = phones;
         this.inflater = LayoutInflater.from(context);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @NonNull
-    public DataAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public DataAdaptermy.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
          view = inflater.inflate(R.layout.recycler_view, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final DataAdapter.ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(@NonNull final DataAdaptermy.ViewHolder viewHolder, final int position) {
         final TaskForRecyclerView new1 = news.get(position);
         viewHolder.imageView.setImageResource(new1.getImage());
         viewHolder.newsView.setText(new1.getName());
@@ -47,7 +47,7 @@ class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                Fragment fragment = new Tab2();
+                Fragment fragment = new TasksForCurrentPerfomance();
                 FragmentTransaction fragmentManager = new1.getActivity().getSupportFragmentManager().beginTransaction();
                 fragmentManager.replace(R.id.container, fragment).commit();
 

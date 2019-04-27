@@ -123,7 +123,7 @@ public class TimeTable extends Fragment {
 
     }
     private void addItemIntoListView(){
-        tasks.add(new TaskForRecyclerView(ar.get(0)+"", ar.get(1)+"", ar.get(2) + "", image_label[Integer.valueOf((Integer) ar.get(3))], getActivity()));
+        tasks.add(new TaskForRecyclerView(ar.get(0)+"", ar.get(1)+"", ar.get(2) + "", image_label[Integer.valueOf((Integer) ar.get(3))],0, getActivity()));
 
 
 
@@ -179,7 +179,7 @@ private  void initializeViews(){
 }
     public void setElementNull() {
 
-        tasks.add(new TaskForRecyclerView("Добавьте дело", "укажите время", " ", R.drawable.plus, getActivity()));
+        tasks.add(new TaskForRecyclerView("Добавьте дело", "укажите время", " ", R.drawable.plus,0, getActivity()));
 
 
 

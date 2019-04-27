@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sothree="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:sothree="http://schemas.android.com/apk/res-auto"
+    <com.sothree.slidinguppanel.SlidingUpPanelLayout
         android:id="@+id/sliding_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,7 +18,7 @@
         sothree:umanoShadowHeight="4dp">
 
         <!-- MAIN CONTENT -->
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -26,26 +27,29 @@
                 android:id="@+id/text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
                 android:clickable="true"
                 android:focusable="false"
-                android:text="conntent"
-                android:textColor="@android:color/holo_blue_dark"
                 android:focusableInTouchMode="true"
                 android:gravity="center"
+                android:text="conntent"
+                android:textColor="@android:color/holo_blue_dark"
                 android:textSize="16sp" />
 
             <Button
                 android:id="@+id/btn_show"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/text"
-                android:layout_centerInParent="true"
-                android:layout_marginRight="15dp"
                 android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:text="show"
                 android:visibility="gone" />
-        </RelativeLayout>
+
+            <Button
+                android:id="@+id/butn_new_goal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="добавить цель" />
+        </LinearLayout>
 
         <!-- SLIDING LAYOUT -->
         <LinearLayout

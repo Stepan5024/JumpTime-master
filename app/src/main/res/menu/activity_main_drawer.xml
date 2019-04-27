@@ -17,9 +17,9 @@
             android:icon="@drawable/plus"
             android:title="Добавить дело" />
         <item
-            android:id="@+id/time_table"
+            android:id="@+id/time_plan"
             android:icon="@drawable/time_table"
-            android:title="Расписание" />
+            android:title="Текущие планы" />
         <item
             android:id="@+id/nav_project_category"
             android:icon="@drawable/ic_menu_share"

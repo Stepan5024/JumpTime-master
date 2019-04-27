@@ -1,9 +1,7 @@
 package com.example.p.jumptime;
 
 
-
-
-
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,30 +15,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
 
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tab3 extends Fragment {
+public class TasksForCurrentPerfomance extends Fragment {
     ArrayList<TaskForRecyclerView> tasks;
     FirebaseUser user;
-
-    DataAdapter adapter;
+    DataAdaptermy adapter;
     ArrayList sizeArray = new ArrayList();
-    Button add;
     View rootView;
     List<String[]> array;
     ArrayList images;
@@ -48,9 +34,11 @@ public class Tab3 extends Fragment {
     CoordinatorLayout coordinatorLayout;
     DatabaseReference myRef;
     DatabaseReference myRef1;
+    ArrayList arForAdapter;
     LinearLayoutManager layoutManager;
+    int[] image_priority = {R.mipmap.white, R.mipmap.yellow, R.mipmap.orange, R.mipmap.red};
 
-    public Tab3() {
+    public TasksForCurrentPerfomance() {
         tasks = new ArrayList<>();
         array = new ArrayList<>();
         images = new ArrayList();
@@ -65,36 +53,47 @@ public class Tab3 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.tab2, container, false);
-        user = FirebaseAuth.getInstance().getCurrentUser();
-
-        myRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
-        myRef1 = FirebaseDatabase.getInstance().getReference();
+        //user = FirebaseAuth.getInstance().getCurrentUser();
+        arForAdapter = new ArrayList();
+      /*  myRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
+        myRef1 = FirebaseDatabase.getInstance().getReference();*/
         coordinatorLayout = rootView.findViewById(R.id.coordinatorLayout);
         layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.list);
+        recyclerView = rootView.findViewById(R.id.list);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new DataAdapter(getContext(), tasks);
+        /*setRef();
+        setElement();*/
+        sizeArray = DataBase.listtasks;
+        getArray(sizeArray);
+        adapter = new DataAdaptermy(getContext(), tasks);
         // устанавливаем для списка адаптер
         recyclerView.setAdapter(adapter);
-        setElement();
-        setRef();
-        enableSwipeToDeleteAndUndo();
 
+
+        enableSwipeToDeleteAndUndo();
 
 
         return rootView;
 
     }
-    private void setRef(){
-        tasks.clear();
-        myRef.addValueEventListener(new ValueEventListener() {
+
+    private void getArray(ArrayList ar) {
+        if(ar.isEmpty()){}
+        else {
+            for (int i = 0; i < ar.size(); i++) {
+                ArrayList temp = (ArrayList) ar.get(i);//справить костыль то есть сделать нормальный консруктор в классе с полем ид
+                tasks.add(new TaskForRecyclerView(temp.get(1).toString(), temp.get(2).toString(), temp.get(3).toString(), image_priority[1],Integer.valueOf((Integer) temp.get(0)), getActivity()));
+                temp.clear();
+            }
+        }
+    }
+   /* private void setRef() {
+       /* myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot childSbapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot childSbapshot : dataSnapshot.getChildren()) {
                     images.add((childSbapshot.getValue()));
                 }
-
-
 
 
             }
@@ -103,8 +102,8 @@ public class Tab3 extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
-        myRef1.addValueEventListener(new ValueEventListener() {
+        });*/
+     /*   myRef1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (int i = 0; i < sizeArray.size(); i++) {
@@ -112,17 +111,23 @@ public class Tab3 extends Fragment {
 
                     // Toast.makeText(rootView.getContext(),s, Toast.LENGTH_SHORT).show();
                     String name = "" + dataSnapshot.child("users").child(user.getUid()).child("tasks").child(s).child("name").getValue(String.class);
-                    String data = ""+ dataSnapshot.child("users").child(user.getUid()).child("tasks").child(s).child("data").getValue(String.class);
-                    String kilo = ""+ dataSnapshot.child("users").child(user.getUid()).child("tasks").child(s).child("kilo").getValue(String.class);
-                    String time = ""+ dataSnapshot.child("users").child(user.getUid()).child("tasks").child(s).child("time").getValue(String.class);
-                    String project = ""+ dataSnapshot.child("users").child(user.getUid()).child("tasks").child(s).child("project").getValue(String.class);
+                    String data = "" + dataSnapshot.child("users").child(user.getUid()).child("tasks").child(s).child("data").getValue(String.class);
+                    String time = "" + dataSnapshot.child("users").child(user.getUid()).child("tasks").child(s).child("time").getValue(String.class);
+                    String priority = dataSnapshot.child("users").child(user.getUid()).child("tasks").child(s).child("priority").getValue(String.class);
+                    String kilo = "" + dataSnapshot.child("users").child(user.getUid()).child("tasks").child(s).child("kilo").getValue(String.class);
+                    String project = "" + dataSnapshot.child("users").child(user.getUid()).child("tasks").child(s).child("project").getValue(String.class);
 
-                    String[] a = {name,data,kilo,time,project};
+
+                    String[] a = {name, data, kilo, time, project};
                     array.add(a);
 
-                    tasks.add(new TaskForRecyclerView(s, a[1],a[3], R.mipmap.ic_launcher, getActivity()));
-                    recyclerView.setAdapter(adapter);
+                        tasks.add(new TaskForRecyclerView(s, a[1], a[3], image_priority[0], getActivity()));
+
+
+
+
                 }
+                recyclerView.setAdapter(adapter);
             }
 
             @Override
@@ -132,8 +137,9 @@ public class Tab3 extends Fragment {
         });
 
 
-    }
-    private void setElement(){
+    }*/
+
+   /* private void setElement() {
 
         DatabaseReference info = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).child("tasks");
         info.addValueEventListener(new ValueEventListener() {
@@ -154,7 +160,8 @@ public class Tab3 extends Fragment {
         });
 
 
-    }
+    }*/
+
     private void enableSwipeToDeleteAndUndo() {
         SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(getContext()) {
             @Override
@@ -164,43 +171,33 @@ public class Tab3 extends Fragment {
                 final int position = viewHolder.getAdapterPosition();
                 final String item = String.valueOf(adapter.getData().get(position));
 
+
+
+                DataBase.DBHelper dbHelper = new DataBase.DBHelper(getContext());
+
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                Log.d("LOG", "--- Delete from mytable: ---");
+                // удаляем по id
+                TaskForRecyclerView temp = tasks.get(position);
+
+
+                int delCount = db.delete("mytable", "id = " + temp.getID(), null);
+                Log.d("LOG", "deleted rows count = " + delCount);
                 adapter.removeItem(position);
-
-
-                Toast.makeText(getContext(), position + " kk size" + tasks.get(0).getTaskName(), Toast.LENGTH_SHORT).show();
-                //  tasks.remove(position);
-                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                final DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
-                myRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-
-                        myRef.child("users").child(user.getUid()).child("tasks").child(tasks.get(position).getTaskName()).child("name").setValue(null);
-                        myRef.child("users").child(user.getUid()).child("tasks").child(tasks.get(position).getTaskName()).child("data").setValue(null);
-                        myRef.child("users").child(user.getUid()).child("tasks").child(tasks.get(position).getTaskName()).child("time").setValue(null);
-                        myRef.child("users").child(user.getUid()).child("tasks").child(tasks.get(position).getTaskName()).child("priority").setValue(null);
-                        myRef.child("users").child(user.getUid()).child("tasks").child(tasks.get(position).getTaskName()).child("project").setValue(null);
-
-                    }
-
-                    // очистить введенные данные потом создав метод инитиализе
-
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
                 Snackbar snackbar = Snackbar
                         .make(coordinatorLayout, "Item was removed from the list.", Snackbar.LENGTH_LONG);
                 snackbar.setAction("UNDO", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
-                        adapter.restoreItem(tasks.get(0), position);
+                        try {
+
+
+                            adapter.restoreItem(tasks.get(0), position);
+
+                        } catch (IndexOutOfBoundsException ex) {
+
+                        }
                         recyclerView.scrollToPosition(position);
                     }
                 });
