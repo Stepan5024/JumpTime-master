@@ -23,24 +23,51 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/text"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:focusableInTouchMode="true"
+                    android:text="Моя цель:"
+                    android:textColor="@android:color/holo_orange_dark"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text"
+                    android:layout_centerHorizontal="true"
+                    android:text=""
+                    android:textSize="16sp" />
+            </RelativeLayout>
+            <android.support.design.widget.TabLayout
+                android:id="@+id/sliding_tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="false"
-                android:focusableInTouchMode="true"
-                android:gravity="center"
-                android:text="conntent"
-                android:textColor="@android:color/holo_blue_dark"
-                android:textSize="16sp" />
 
+                />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                />
             <Button
                 android:id="@+id/btn_show"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+                android:layout_below="@+id/textView23"
                 android:text="show"
                 android:visibility="gone" />
 
@@ -49,6 +76,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="добавить цель" />
+
+
         </LinearLayout>
 
         <!-- SLIDING LAYOUT -->
@@ -71,37 +100,47 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textColor="@android:color/holo_green_dark"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
-                    android:text="slide"
+                    android:text="План достижения"
+                    android:textColor="@android:color/holo_green_dark"
                     android:textSize="14sp" />
 
-                <Button
+                <ImageView
                     android:id="@+id/btn_hide"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|right"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="hide"
-                    android:textSize="14sp" />
+                    android:src="@drawable/strelka_down" />
 
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#FFCCCC">
 
-                <ImageView
+                <ListView
+                    android:id="@+id/recycler_step"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/korona" />
-            </LinearLayout>
+                    android:layout_marginStart="2dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/roboto_light" />
+                <Button
+                    android:id="@+id/butn_analiz"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/recycler_step"
+                    android:layout_centerHorizontal="true"
+                    android:text="анализ" />
+
+            </RelativeLayout>
         </LinearLayout>
     </com.sothree.slidinguppanel.SlidingUpPanelLayout>
 

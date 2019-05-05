@@ -24,7 +24,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 public class SignUpActivity extends AppCompatActivity {
 
     private String mLogin;
-    private FirebaseUser user ;
+    private FirebaseUser user;
     private String mPassword;
     private String mPasswordRepeat;
     private FirebaseAuth.AuthStateListener mAuthStateListener;

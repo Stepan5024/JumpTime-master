@@ -13,7 +13,7 @@ public class TaskForRecyclerView {
     private int id;
     public FragmentActivity activity;
 
-    public TaskForRecyclerView(String taskName, String taskData,String taskTime,int image,int id, FragmentActivity activity) {
+    public TaskForRecyclerView(String taskName, String taskData,String taskTime, int image,int id, FragmentActivity activity) {
         this.id = id;
         this.taskName = taskName;
         this.taskData = taskData;

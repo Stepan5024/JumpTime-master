@@ -3,39 +3,32 @@ package com.example.p.jumptime;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentValues;
-import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Objects;
 
 
 public class AddTask extends Fragment {
@@ -75,6 +68,12 @@ public class AddTask extends Fragment {
         reminder = rootView.findViewById(R.id.remind);
         EndDateTime = rootView.findViewById(R.id.time);
         ValueView = rootView.findViewById(R.id.ValueView);
+        // Текущее время
+        Date currentDate = new Date();
+        // Форматирование времени как "день.месяц.год"
+        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+
+        dataTask = dateFormat.format(currentDate);
         spinner_remind = (Spinner) rootView.findViewById(R.id.spinner_remind);
         spinner_priority = (Spinner) rootView.findViewById(R.id.spinner_priority);
         spinner_repeat = (Spinner) rootView.findViewById(R.id.spinner_repeat);
@@ -133,7 +132,7 @@ public class AddTask extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        dataTask = EndDateTime.getText().toString();
+
                     /*final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 	                        final View uview = View.inflate(getContext(), R.layout.dialog_field_kilo, null);
 	                        builder.setView(uview);
@@ -208,6 +207,7 @@ public class AddTask extends Fragment {
 
 
         EndDateTime.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View view) {
                 new TimePickerDialog(getContext(), t,
@@ -215,7 +215,7 @@ public class AddTask extends Fragment {
                         dateAndTime.get(Calendar.MINUTE), true)
                         .show();
 
-                new DatePickerDialog(getContext(), d,
+                new DatePickerDialog(Objects.requireNonNull(getContext()), d,
                         dateAndTime.get(Calendar.YEAR),
                         dateAndTime.get(Calendar.MONTH),
                         dateAndTime.get(Calendar.DAY_OF_MONTH))
@@ -240,6 +240,7 @@ public class AddTask extends Fragment {
                             "year  = " + year + "month " + monthOfYear + " day " + dayOfMonth, Toast.LENGTH_SHORT).show();
                     dataTask = dayOfMonth + "." + monthOfYear + "." + year;
                     setInitialDateTime();
+                    dataTask = EndDateTime.getText().toString();
                 }
             };
             TimePickerDialog.OnTimeSetListener t = new TimePickerDialog.OnTimeSetListener() {
