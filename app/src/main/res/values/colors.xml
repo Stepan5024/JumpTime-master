@@ -3,9 +3,15 @@
 
     <color name="colorPrimary">#4660AB</color>
     <color name="colorPrimaryDark">#434A5E</color>
+    <color name="colorHeader">#D8FFF7</color>
     <color name="colorAccent">#27355e</color>
     <color name="bgStartColor">#5C7EE1</color>
-    <color name="bgEndColor">#6B34D3</color>
+    <color name="bgEndColor">#5CE1E1</color>
+    <color name="colorStringTab">#469232</color>
+    <color name="colorGray">#1600ACC1</color>
+    <color name="bg_default">#A4C4F5</color>
+    <color name="colorSelectedTab">#B71C1C</color>
     <color name="transparent">#FF22EDCC</color>
     <color name="red">#FF0000</color>
+    <color name="green">#64DD17</color>
 </resources>

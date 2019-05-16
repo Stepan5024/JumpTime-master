@@ -2,40 +2,31 @@ package com.example.p.jumptime;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.widget.DatePicker;
-import android.widget.ListView;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.view.KeyEvent;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
-import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,8 +35,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 
 public class Goal2 extends Fragment {
@@ -63,7 +52,7 @@ public class Goal2 extends Fragment {
     ListView lastBook;
     ArrayList achiv = new ArrayList();
     ArrayList step = new ArrayList();
-    private String tabTitles[] = new String[] { "КАЛЕНДАРЬ", "СПИСОК ДЕЛ"};
+
     //integer to count number of tabs
     int tabCount;
 
@@ -75,7 +64,28 @@ public class Goal2 extends Fragment {
         textView = view.findViewById(R.id.text);
         final TextView tv_goal = view.findViewById(R.id.textView23);
         lastBook = view.findViewById(R.id.recycler_step);
+        Button addStep = view.findViewById(R.id.butn_add);
+        addStep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
+                final View uview = View.inflate(getContext(), R.layout.dialog_new_plan_task, null);
+                builder.setView(uview);
+                final android.support.v7.app.AlertDialog show = builder.show();
 
+                Button ok = uview.findViewById(R.id.button6);
+                final EditText ed_in_alertDialog = uview.findViewById(R.id.editText3);
+                ok.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                      //  indexMonth.add(saveInDataBase("month", ed_in_alertDialog.getText().toString()));
+                        step.add(ed_in_alertDialog.getText().toString());
+                        updateUI();
+                        show.dismiss();
+                    }
+                });
+            }
+        });
         updateUI();
         lastBook.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -84,8 +94,22 @@ public class Goal2 extends Fragment {
 
 
                 if (position + 1 == step.size()) {
-                    Toast.makeText(getContext(), "добавить", Toast.LENGTH_SHORT).show();
-                    step.add("fff2");
+                    final android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
+                    final View uview = View.inflate(getContext(), R.layout.dialog_new_plan_task, null);
+                    builder.setView(uview);
+                    final android.support.v7.app.AlertDialog show = builder.show();
+
+                    Button ok = uview.findViewById(R.id.button6);
+                    final EditText ed_in_alertDialog = uview.findViewById(R.id.editText3);
+                    ok.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                           // indexMonth.add(saveInDataBase("month", ed_in_alertDialog.getText().toString()));
+                            step.add(ed_in_alertDialog.getText().toString());
+                            updateUI();
+                            show.dismiss();
+                        }
+                    });
                     updateUI();
                 } else {
                     final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -123,16 +147,10 @@ public class Goal2 extends Fragment {
         tabLayout.addTab(tabLayout.newTab().setText(""));
         tabLayout.addTab(tabLayout.newTab().setText(""));
         //tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        tabLayout.setTabTextColors(Color.parseColor("#00FF00"), Color.parseColor("#f00f0f"));
+        tabLayout.setTabTextColors(Color.parseColor("#469232"), Color.parseColor("#B71C1C"));
         //Initializing viewPager
        final ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewpager);
-        int[] imageResId = {
-                R.drawable.plus, R.drawable.plus_orange
-        };
 
-        for (int i = 0; i < imageResId.length; i++) {
-            tabLayout.getTabAt(i).setIcon(imageResId[i]);
-        }
         //Creating our pager adapter
         Pager adapter = new Pager(getActivity().getSupportFragmentManager(), tabLayout.getTabCount());
 
@@ -156,8 +174,6 @@ public class Goal2 extends Fragment {
 
             }
         });
-
-
 
 
         newGoal = view.findViewById(R.id.butn_new_goal);
@@ -189,21 +205,26 @@ public class Goal2 extends Fragment {
             myRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    int count = Integer.parseInt(dataSnapshot.child("users").child(user.getUid()).child("infoUser").child("achiv").child("counter").getValue(String.class));
-                    for (int j = 0; j < count; j++) {
-                        achiv.add(dataSnapshot.child("users").child(user.getUid()).child("infoUser").child("achiv").child(j + "").getValue(String.class));
+                    try {
+                        int count = Integer.parseInt(dataSnapshot.child("users").child(user.getUid()).child("infoUser").child("achiv").child("counter").getValue(String.class));
+                        for (int j = 0; j < count; j++) {
+                            achiv.add(dataSnapshot.child("users").child(user.getUid()).child("infoUser").child("achiv").child(j + "").getValue(String.class));
+                        }
+                        int count2 = Integer.parseInt(dataSnapshot.child("users").child(user.getUid()).child("infoUser").child("trackGoal").child("counter").getValue(String.class));
+                        for (int j = 0; j < count2; j++) {
+                            step.add(dataSnapshot.child("users").child(user.getUid()).child("infoUser").child("trackGoal").child(j + "").getValue(String.class));
+                        }
+                        goal = dataSnapshot.child("users").child(user.getUid()).child("infoUser").child("goal").getValue(String.class);
+                        dataEnd = dataSnapshot.child("users").child(user.getUid()).child("infoUser").child("dataEnd").getValue(String.class);
+                        k = dataSnapshot.child("users").child(user.getUid()).child("infoUser").child("k").getValue(String.class);
+                        i = dataSnapshot.child("users").child(user.getUid()).child("infoUser").child("i").getValue(String.class);
+                        l = dataSnapshot.child("users").child(user.getUid()).child("infoUser").child("l").getValue(String.class);
+                        tv_goal.setText(goal);
+                        updateUI();
+                    }catch (Exception e){
+
                     }
-                    int count2 = Integer.parseInt(dataSnapshot.child("users").child(user.getUid()).child("infoUser").child("trackGoal").child("counter").getValue(String.class));
-                    for (int j = 0; j < count2; j++) {
-                        step.add(dataSnapshot.child("users").child(user.getUid()).child("infoUser").child("trackGoal").child(j + "").getValue(String.class));
-                    }
-                    goal = dataSnapshot.child("users").child(user.getUid()).child("infoUser").child("goal").getValue(String.class);
-                    dataEnd = dataSnapshot.child("users").child(user.getUid()).child("infoUser").child("dataEnd").getValue(String.class);
-                    k = dataSnapshot.child("users").child(user.getUid()).child("infoUser").child("k").getValue(String.class);
-                    i = dataSnapshot.child("users").child(user.getUid()).child("infoUser").child("i").getValue(String.class);
-                    l = dataSnapshot.child("users").child(user.getUid()).child("infoUser").child("l").getValue(String.class);
-                    tv_goal.setText(goal);
-                    updateUI();
+
                 }
 
                 @Override

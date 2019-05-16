@@ -22,36 +22,36 @@
             android:title="Текущие планы" />
         <item
             android:id="@+id/nav_project_category"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/category"
             android:title="Категории дел" />
         <item
             android:id="@+id/nav_exit"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/exit"
             android:title="Выход" />
 
     </group>
-    <item android:title="Communicate">
+    <item android:title="Инструменты">
         <menu>
             <item
                 android:id="@+id/nav_comand"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Команда" />
+                android:icon="@drawable/priv"
+                android:title="Привычка" />
             <item
                 android:id="@+id/nav_my_day"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/my_day"
                 android:title="Мой день такой..." />
             <item
                 android:id="@+id/nav_plan_day"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/time_table"
                 android:title="Расписание" />
             <item
                 android:id="@+id/nav_time"
-                android:icon="@drawable/ic_menu_send"
-                android:title="+Time" />
+                android:icon="@drawable/ic_motivation"
+                android:title="Мотивация" />
             <item
                 android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:icon="@drawable/ic_time_menedgment"
+                android:title="Тайм-менеджмент" />
         </menu>
     </item>
 

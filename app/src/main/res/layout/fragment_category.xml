@@ -6,140 +6,192 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@color/colorPrimary"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:orientation="horizontal">
 
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/toolbar"
-            android:layout_alignStart="@+id/toolbar"
-            android:layout_below="@+id/toolbar"
-            android:layout_gravity="end"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imageFamile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@drawable/happy_famile" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/imageFamile"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/ubuntu_bold"
+                android:text="Семья" />
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@+id/textView9"
+                android:fontFamily="@font/ubuntu_medium"
+                android:text="Напоминание об общении, звонке, визите, дне рождении" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+           >
+
+            <View
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/good_text_view" />
+
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imageSport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                app:srcCompat="@drawable/sport"
+                android:layout_centerHorizontal="true"/>
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/imageSport"
+                android:fontFamily="@font/ubuntu_bold"
+                android:layout_marginTop="10dp"
+                android:text="Здоровье" />
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@+id/textView11"
+                android:fontFamily="@font/ubuntu_medium"
+                android:text="Добавляйте знятия спортом, прогулки, пробежки, зарядки" />
+        </RelativeLayout>
 
 
-    </android.support.v7.widget.Toolbar>
+    </LinearLayout>
 
-    <android.support.constraint.ConstraintLayout
-
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/add"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@drawable/good_text_view" />
 
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imageStudy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                app:srcCompat="@drawable/grow_up" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/imageStudy"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/ubuntu_bold"
+                android:text="Самообразование" />
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@+id/textView13"
+                android:fontFamily="@font/ubuntu_medium"
+                android:text="Чтение книг, духовный рост, приобретение новых навыков" />
+        </RelativeLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
+            <View
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/good_text_view" />
+
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imageBusiness"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@drawable/money" />
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/imageBusiness"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/ubuntu_bold"
+                android:text="Бизнес" />
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@+id/textView15"
+                android:fontFamily="@font/ubuntu_medium"
+                android:text="То что Вам приносит доход или в начнет в ближайшем будущем, работа или учеба" />
+        </RelativeLayout>
 
 
-            android:layout_marginStart="89dp"
-            android:layout_marginLeft="89dp"
-            android:layout_marginBottom="52dp"
-            android:text="Add"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <EditText
-            android:id="@+id/product"
-
-            android:layout_width="0dp"
-
-            android:layout_height="wrap_content"
+    </LinearLayout>
 
 
-            android:layout_alignParentLeft="true"
 
-            android:layout_marginStart="56dp"
-
-            android:layout_marginLeft="56dp"
-
-            android:layout_marginBottom="44dp"
-
-            android:layout_toLeftOf="@id/add"
-            android:ems="10"
-            android:hint="Enter Product for above Category"
-            android:inputType="text"
-            app:layout_constraintBottom_toTopOf="@+id/add"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/textView1"
-
-            android:layout_width="0dp"
-
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="143dp"
-            android:background="#000080"
-            android:padding="5dp"
-            android:text="Different Categories with Products..."
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#ffffff"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ExpandableListView
-            android:id="@+id/myList"
-
-            android:layout_width="0dp"
-
-            android:layout_height="0dp"
-
-            android:layout_marginTop="33dp"
-            android:layout_marginBottom="36dp"
-            app:layout_constraintBottom_toTopOf="@+id/product"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView1" />
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="106dp"
-            android:layout_marginLeft="106dp"
-            android:layout_marginBottom="39dp"
-            android:text="Цель:"
-            android:textSize="25sp"
-            app:layout_constraintBottom_toTopOf="@+id/textView1"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="59dp"
-            android:layout_marginRight="59dp"
-            android:text="Примерное название цели"
-            android:textSize="25sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/textView9"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="65dp"
-            android:layout_marginRight="65dp"
-            android:layout_marginBottom="52dp"
-            android:text="Аналитика"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-    </android.support.constraint.ConstraintLayout>
 
 </LinearLayout>

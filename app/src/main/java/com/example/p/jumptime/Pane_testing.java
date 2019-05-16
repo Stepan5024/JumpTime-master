@@ -3,7 +3,6 @@ package com.example.p.jumptime;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.widget.SlidingPaneLayout;
-import android.view.Menu;
 import android.view.View;
 
 public class Pane_testing extends Activity {

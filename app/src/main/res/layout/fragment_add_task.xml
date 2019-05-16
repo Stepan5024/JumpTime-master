@@ -25,16 +25,16 @@
                 android:hint="@string/input_text"
                 android:inputType="textPersonName" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ValueView"
-                android:orientation="vertical">
+                android:layout_below="@+id/ValueView">
 
                 <TextView
                     android:id="@+id/Do"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginLeft="25dp"
                     android:layout_marginTop="10dp"
                     android:text="До:"
@@ -44,13 +44,15 @@
                     android:id="@+id/time"
                     android:layout_width="163dp"
                     android:layout_height="44dp"
+                    android:layout_below="@+id/Do"
                     android:layout_marginEnd="0dp"
                     android:layout_marginRight="0dp"
                     android:gravity="center" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/time">
 
                     <RelativeLayout
                         android:id="@+id/r1"
@@ -58,56 +60,12 @@
                         android:layout_height="60dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="20dp"
+
                         android:gravity="center_vertical">
 
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="5dp"
-                            android:background="@drawable/good_text_view" />
-
-
-                        <Spinner
-                            android:id="@+id/spinner_repeat"
-                            android:layout_width="40dp"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:entries="@array/list_for_repeat"
-                            android:spinnerMode="dialog" />
-
-                        <TextView
-                            android:id="@+id/repeat"
-                            android:layout_width="wrap_content"
-                            android:layout_height="50dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_centerVertical="true"
-                            android:gravity="center"
-                            android:text="Повтор"
-                            android:textSize="24sp" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentBottom="true"
-                            android:background="@drawable/good_text_view"
-                            android:elevation="9dp" />
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/r2"
-                        android:layout_width="250dp"
-                        android:layout_height="60dp"
-                        android:layout_below="@+id/r1"
-                        android:layout_centerHorizontal="true"
-                        android:gravity="center_vertical">
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentBottom="true"
                             android:background="@drawable/good_text_view" />
 
                         <Spinner
@@ -125,7 +83,6 @@
                             android:layout_height="50dp"
                             android:layout_alignParentLeft="true"
                             android:layout_centerVertical="true"
-                            android:elevation="5dp"
                             android:gravity="center"
                             android:text="Напомнить за"
                             android:textSize="24sp" />
@@ -135,15 +92,17 @@
                             android:layout_height="1dp"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentBottom="true"
-                            android:background="@drawable/good_text_view"
+                            android:background="@drawable/good_text_view_red"
                             android:elevation="9dp" />
+
                     </RelativeLayout>
+
 
                     <RelativeLayout
                         android:id="@+id/r3"
                         android:layout_width="250dp"
                         android:layout_height="60dp"
-                        android:layout_below="@+id/r2"
+                        android:layout_below="@+id/r1"
                         android:layout_centerHorizontal="true"
                         android:gravity="center_vertical">
 
@@ -178,81 +137,38 @@
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentBottom="true"
-                            android:background="@drawable/good_text_view"
-                            android:elevation="9dp" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/r4"
-                        android:layout_width="250dp"
-                        android:layout_height="60dp"
-                        android:layout_below="@+id/r3"
-                        android:layout_centerHorizontal="true"
-                        android:gravity="center_vertical">
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="3dp"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentBottom="true"
-                            android:background="@drawable/good_text_view"
-                            android:elevation="9dp" />
-
-                        <ImageView
-                            android:id="@+id/image_category"
-                            android:layout_width="60dp"
-                            android:layout_height="50dp"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginStart="216dp"
-                            android:layout_marginLeft="216dp"
-                            android:layout_marginBottom="3dp"
-                            app:srcCompat="@drawable/common_google_signin_btn_icon_light_normal" />
-
-                        <TextView
-                            android:id="@+id/category"
-                            android:layout_width="wrap_content"
-                            android:layout_height="50dp"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentLeft="true"
-                            android:layout_centerVertical="true"
-
-
-                            android:gravity="center"
-                            android:text="Категория"
-                            android:textSize="24sp" />
-
-                        <View
-                            android:layout_width="match_parent"
                             android:layout_height="5dp"
-                            android:layout_alignParentStart="true"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentBottom="true"
-                            android:background="@drawable/good_text_view"
-                            android:elevation="9dp" />
+                            android:background="@drawable/good_text_view" />
                     </RelativeLayout>
+
+
                 </RelativeLayout>
 
-            </LinearLayout>
+            </RelativeLayout>
 
         </RelativeLayout>
     </ScrollView>
 
 
-    <Button
-        android:id="@+id/addBut"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent">
 
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginBottom="21dp"
-        android:text="Add to FireBase" />
+        <Button
+            android:id="@+id/addBut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="21dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="#FFF"
+            android:background="@drawable/button_default_green"
+            android:text="Добавить" />
+    </RelativeLayout>
 
 
 </LinearLayout>

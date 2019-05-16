@@ -14,11 +14,18 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="24sp"
+                    android:text="Оцените свой день" />
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -26,18 +33,20 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/imageButton6"
+                    android:id="@+id/perfectDay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
+                    android:background="@null"
+                    app:srcCompat="@drawable/perfect_ok" />
 
                 <ImageButton
-                    android:id="@+id/imageButton7"
+                    android:id="@+id/normalDay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
+                    android:background="@null"
+                    app:srcCompat="@drawable/normal_ok" />
             </LinearLayout>
 
             <LinearLayout
@@ -46,25 +55,19 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/imageButton8"
+                    android:id="@+id/badDay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
-
-                <ImageButton
-                    android:id="@+id/imageButton9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
+                    android:background="@null"
+                    app:srcCompat="@drawable/bad_ok" />
             </LinearLayout>
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/button_history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Button" />
+                android:text="посмотреть историю" />
         </LinearLayout>
 
     </RelativeLayout>

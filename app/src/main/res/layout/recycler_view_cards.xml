@@ -1,0 +1,74 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#46FF4081"
+    android:padding="16dp"
+    tools:ignore="MissingDefaultResource">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+           >
+
+            <TextView
+                android:id="@+id/Date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="data 05.05.2019" />
+
+            <TextView
+                android:id="@+id/characteristic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Date"
+                android:text="Характеристика отличный день" />
+
+            <TextView
+                android:id="@+id/Tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/characteristic"
+                android:text="В этот день вы сделали:" />
+
+            <ListView
+                android:id="@+id/listTasks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Tv"/>
+
+            <TextView
+                android:id="@+id/Tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/listTasks"
+                android:text="Таким для вас он был:" />
+
+            <ListView
+                android:id="@+id/listMind"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Tv2"/>
+            <TextView
+                android:id="@+id/Tv3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/listMind"
+                android:text="Новые навыки" />
+
+            <ListView
+                android:id="@+id/listNew"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Tv3"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

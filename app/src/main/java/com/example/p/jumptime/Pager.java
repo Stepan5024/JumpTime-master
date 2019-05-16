@@ -1,17 +1,11 @@
 package com.example.p.jumptime;
 
-
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
 public class Pager extends FragmentStatePagerAdapter {
-    private String tabTitles[] = new String[] { "КИЛО", "ХЗ", "ГРАФИК ДОСТИЖЕНИЯ","СОВЕТ"};
+    private String tabTitles[] = new String[] { "КИЛО", "УСПЕХИ", "ГРАФИК","4 КОЛЕСА"};
     //integer to count number of tabs
     int tabCount;
 

@@ -25,7 +25,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@color/colorHeader">
 
                 <TextView
                     android:id="@+id/text"
@@ -38,7 +39,7 @@
                     android:focusableInTouchMode="true"
                     android:text="Моя цель:"
                     android:textColor="@android:color/holo_orange_dark"
-                    android:textSize="16sp" />
+                    android:textSize="22sp" />
 
                 <TextView
                     android:id="@+id/textView23"
@@ -53,7 +54,7 @@
                 android:id="@+id/sliding_tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:background="@color/colorHeader"
                 />
 
             <android.support.v4.view.ViewPager
@@ -132,14 +133,25 @@
                     android:layout_marginRight="2dp"
                     android:layout_marginBottom="8dp"
                     android:fontFamily="@font/roboto_light" />
-                <Button
-                    android:id="@+id/butn_analiz"
-                    android:layout_width="match_parent"
+                <LinearLayout
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/recycler_step"
-                    android:layout_centerHorizontal="true"
-                    android:text="анализ" />
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/butn_analiz"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="анализ" />
+                    <Button
+                        android:id="@+id/butn_add"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Добавить шаг"
+                        />
 
+                </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
     </com.sothree.slidinguppanel.SlidingUpPanelLayout>

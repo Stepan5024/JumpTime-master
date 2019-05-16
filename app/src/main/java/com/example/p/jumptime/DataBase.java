@@ -1,32 +1,21 @@
 package com.example.p.jumptime;
 
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -35,7 +24,7 @@ public class DataBase extends Fragment implements OnClickListener {
 
     Button btnAdd, btnRead, btnClear, btnUpd, btnDel;
     EditText etName, etEmail, etID;
-     static ArrayList<ArrayList> listtasks;
+     static ArrayList listtasks;
     static DBHelper dbHelper;
 
     @Override
@@ -125,9 +114,11 @@ public class DataBase extends Fragment implements OnClickListener {
                 break;
             case R.id.btnClear:
                 Log.d(LOG_TAG, "--- Clear mytable: ---");
-                listtasks.clear();
+
                 // удаляем все записи
                 int clearCount = db.delete("mytable", null, null);
+                db.delete("table_plans", null, null);
+              //  db.delete("table_user_day", null, null);
                 Log.d(LOG_TAG, "deleted rows count = " + clearCount);
                 break;
             case R.id.btnUpd:
@@ -224,13 +215,15 @@ public class DataBase extends Fragment implements OnClickListener {
     }
     static class DBHelper extends SQLiteOpenHelper {
 
-        public DBHelper(Context context) {
+        DBHelper(Context context) {
             // конструктор суперкласса
-            super(context, "myDB", null, 1);
+            super(context, "myDB", null, 1);// число отвечает за обновление
+
         }
 
         public void onCreate(SQLiteDatabase db) {
             Log.d("LOG", "--- onCreate database ---");
+            //Создавать таблицы с проверкой на предыдущее существование
             // создаем таблицу с полями
             db.execSQL("create table mytable ("
                     + "id integer primary key autoincrement,"
@@ -252,10 +245,18 @@ public class DataBase extends Fragment implements OnClickListener {
                     + "time text,"
                     + "active text"
                      + ");");
+            db.execSQL("create table table_user_day ("
+                    + "id integer primary key autoincrement,"
+                    + "whatday text,"
+                    + "importantdeal text,"
+                    + "remember text,"
+                    + "newexpereance text,"
+                    + "time text"
+                    + ");");
         }
 
         @Override
-        public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        public void onUpgrade(SQLiteDatabase db, int i, int i1) {
 
         }
 

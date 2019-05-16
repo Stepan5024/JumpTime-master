@@ -11,32 +11,20 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <Switch
-                android:id="@+id/switch1"
+                android:id="@+id/switchToCalendar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Switch" />
+                android:layout_centerHorizontal="true"
+                android:text="Календарный вид" />
 
-            <Switch
-                android:id="@+id/switch2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Switch" />
 
-            <Switch
-                android:id="@+id/switch3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Switch" />
-        </LinearLayout>
+        </RelativeLayout>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
@@ -57,6 +45,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:clickable="true"
-        android:src="@android:drawable/ic_menu_help" />
+        android:layout_margin="@dimen/fab_margin"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        android:src="@drawable/plus_orange" />
 
 </android.support.design.widget.CoordinatorLayout>

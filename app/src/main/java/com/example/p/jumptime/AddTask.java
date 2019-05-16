@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,9 +35,7 @@ import java.util.Objects;
 public class AddTask extends Fragment {
     Calendar dateAndTime = Calendar.getInstance();
     TextView priority;
-    TextView repeat;
     TextView reminder;
-    TextView category;
     View rootView;
 
     String timeTask = "10:00"; // потом инициализировать текущим временем
@@ -45,8 +44,6 @@ public class AddTask extends Fragment {
     EditText ValueView;
     Spinner spinner_remind;
     Spinner spinner_priority;
-    Spinner spinner_repeat;
-    String selected_repeat;
     String selected_remind;
     int selected_priority = 0;
     final String LOG_TAG = "myLogs";
@@ -63,8 +60,7 @@ public class AddTask extends Fragment {
 
         rootView = inflater.inflate(R.layout.fragment_add_task, container, false);
         priority = rootView.findViewById(R.id.priority);
-        repeat = rootView.findViewById(R.id.repeat);
-        category = rootView.findViewById(R.id.category);
+
         reminder = rootView.findViewById(R.id.remind);
         EndDateTime = rootView.findViewById(R.id.time);
         ValueView = rootView.findViewById(R.id.ValueView);
@@ -76,7 +72,7 @@ public class AddTask extends Fragment {
         dataTask = dateFormat.format(currentDate);
         spinner_remind = (Spinner) rootView.findViewById(R.id.spinner_remind);
         spinner_priority = (Spinner) rootView.findViewById(R.id.spinner_priority);
-        spinner_repeat = (Spinner) rootView.findViewById(R.id.spinner_repeat);
+
         spinner_remind.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent,
                                        View itemSelected, int selectedItemPosition, long selectedId) {
@@ -118,20 +114,7 @@ public class AddTask extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        spinner_repeat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent,
-                                       View itemSelected, int selectedItemPosition, long selectedId) {
 
-                String[] choose = getResources().getStringArray(R.array.list_for_repeat);
-                selected_repeat = choose[selectedItemPosition];
-                Toast toast = Toast.makeText(getContext(),
-                        "Ваш выбор: " + choose[selectedItemPosition], Toast.LENGTH_SHORT);
-                toast.show();
-            }
-
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
 
                     /*final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 	                        final View uview = View.inflate(getContext(), R.layout.dialog_field_kilo, null);
@@ -147,22 +130,12 @@ public class AddTask extends Fragment {
 	                                show.dismiss();
 	                            }
 	                        });*/
-
         add = (Button) rootView.findViewById(R.id.addBut);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-
                 if (ValueView.getText().toString().compareTo("")!=0) {
-                          /*  myRef.child("users").child(user.getUid()).child("tasks").child(ValueView.getText().toString()).child("name").setValue(ValueView.getText().toString());
-                            myRef.child("users").child(user.getUid()).child("tasks").child(ValueView.getText().toString()).child("data").setValue(dataTask);
-                            myRef.child("users").child(user.getUid()).child("tasks").child(ValueView.getText().toString()).child("time").setValue(timeTask);
-                            myRef.child("users").child(user.getUid()).child("tasks").child(ValueView.getText().toString()).child("priority").setValue(selected_priority+"");
-                            myRef.child("users").child(user.getUid()).child("tasks").child(ValueView.getText().toString()).child("project").setValue("#1");
-*/
                     DataBase.DBHelper dbHelper = new DataBase.DBHelper(getContext());
                     // подключаемся к БД
 
@@ -189,7 +162,9 @@ public class AddTask extends Fragment {
                 }
                 ValueView.setText("");
                 // очистить введенные данные потом создав метод инитиализе
-
+                Fragment fragment = new TasksForCurrentPerfomance();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
 
 
 
@@ -236,11 +211,10 @@ public class AddTask extends Fragment {
                     dateAndTime.set(Calendar.YEAR, year);
                     dateAndTime.set(Calendar.MONTH, monthOfYear);
                     dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                    Toast.makeText(getContext(),
-                            "year  = " + year + "month " + monthOfYear + " day " + dayOfMonth, Toast.LENGTH_SHORT).show();
-                    dataTask = dayOfMonth + "." + monthOfYear + "." + year;
+
+                    dataTask = dayOfMonth + "." + (monthOfYear+1) + "." + year;
                     setInitialDateTime();
-                    dataTask = EndDateTime.getText().toString();
+
                 }
             };
             TimePickerDialog.OnTimeSetListener t = new TimePickerDialog.OnTimeSetListener() {

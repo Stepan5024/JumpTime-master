@@ -3,16 +3,13 @@ package com.example.p.jumptime;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -49,7 +45,7 @@ public class TimePlans extends Fragment {
     ListView week;
     ListView month;
     ListView year;
-    
+
     String title = "Редактирование";
     String message = "Выбери нужное действие";
     String button1String = "Редактировать";
@@ -153,6 +149,7 @@ public class TimePlans extends Fragment {
                 });
             }
         });
+        inflater.inflate(R.layout.fragment_calendar_view, container, false);
         return rootView;
     }
 
@@ -189,9 +186,6 @@ public class TimePlans extends Fragment {
                 ad.setMessage(message); // сообщение
                 ad.setPositiveButton(button1String, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int arg1) {
-
-
-
 
                         //происходит редактирование
                         final android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());

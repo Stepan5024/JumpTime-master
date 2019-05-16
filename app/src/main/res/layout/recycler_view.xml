@@ -3,8 +3,8 @@
     android:id="@+id/linLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#447290"
-    android:padding="16dp"
+    android:background="#C380D8FF"
+    android:padding="2dp"
     tools:ignore="MissingDefaultResource">
 
     <android.support.v7.widget.CardView

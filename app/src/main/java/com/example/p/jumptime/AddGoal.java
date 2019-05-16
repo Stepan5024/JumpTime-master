@@ -4,24 +4,14 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
-import android.support.annotation.NonNull;
-import android.util.Log;
-import android.widget.DatePicker;
-import android.widget.ListView;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -29,10 +19,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -45,9 +39,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class AddGoal extends Fragment implements TextView.OnEditorActionListener {
@@ -157,10 +155,26 @@ public class AddGoal extends Fragment implements TextView.OnEditorActionListener
 
 
                 if (position + 1 == mBook.size()) {
-                    Toast.makeText(getContext(), "добавить", Toast.LENGTH_SHORT).show();
-                    mBook.add("fff2");
+                    final android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
+                    final View uview = View.inflate(getContext(), R.layout.dialog_new_plan_task, null);
+                    builder.setView(uview);
+                    final android.support.v7.app.AlertDialog show = builder.show();
+
+                    Button ok = uview.findViewById(R.id.button6);
+                    final EditText ed_in_alertDialog = uview.findViewById(R.id.editText3);
+                    ok.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                           // indexMonth.add(saveInDataBase("month", ed_in_alertDialog.getText().toString()));
+                            mBook.set(mBook.size(), "+");
+                            mBook.add(ed_in_alertDialog.getText().toString());
+                            updateUI();
+                            show.dismiss();
+                        }
+                    });
                     updateUI();
                 } else {
+                    //диалог дополнительных шагов
                     final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                     final View uview = View.inflate(getContext(), R.layout.dialog_field_punkt, null);
                     builder.setView(uview);
@@ -204,7 +218,7 @@ public class AddGoal extends Fragment implements TextView.OnEditorActionListener
                 alert.show();
             }
         });
-        mBook.add("fff");
+        mBook.add("+");
         Button addButton = view.findViewById(R.id.button);
 
 
@@ -256,7 +270,7 @@ public class AddGoal extends Fragment implements TextView.OnEditorActionListener
                     items[i] = ((EditText) allEds.get(i).findViewById(R.id.editText)).getText().toString();
 
                     //ну и можно сразу же здесь вывести
-                    Log.d("TAG edit text ", ((EditText) allEds.get(i).findViewById(R.id.editText)).getText().toString());
+                   // Log.d("TAG edit text ", ((EditText) allEds.get(i).findViewById(R.id.editText)).getText().toString());
                 }
             }
         });
@@ -293,11 +307,7 @@ public class AddGoal extends Fragment implements TextView.OnEditorActionListener
                             myRef.child("users").child(user.getUid()).child("infoUser").child("trackGoal").child(""+i).setValue(mBook.get(i));
                         }
 
-              //  List team = dataSnapshot.child("users").child(user.getUid()).child("infoUser").child("achiv").getValue(List.class);
-                //heroInfo.setText("Информация о герое: " + dataSnapshot.child("team")/.child(team).child("case").child(number).child("infoOfPers").getValue(String.class));*/
-
                     }
-
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -306,32 +316,6 @@ public class AddGoal extends Fragment implements TextView.OnEditorActionListener
                 });
             }
         });
-       /* myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                myRef.child("users").child(user.getUid()).child("infoUser").child("goal").setValue(tv_goal.getText());
-                myRef.child("users").child(user.getUid()).child("infoUser").child("k").setValue(tv_k.getText());
-                myRef.child("users").child(user.getUid()).child("infoUser").child("i").setValue(tv_i.getText());
-                myRef.child("users").child(user.getUid()).child("infoUser").child("l").setValue(tv_l.getText());
-                myRef.child("users").child(user.getUid()).child("infoUser").child("o").setValue(tv_o.getText());
-                myRef.child("users").child(user.getUid()).child("infoUser").child("dataBegin").setValue(DataBegin);
-                myRef.child("users").child(user.getUid()).child("infoUser").child("dataEnd").setValue(DataEnd);
-                /*for (int i = 0; i < arrayEdit.size(); i++) {
-                    myRef.child("users").child(user.getUid()).child("infoUser").child("getAchiv").setValue(arrayEdit.get(i));
-                }*/
-
-                /*team = dataSnapshot.child("users").child(userId).child("team").getValue(String.class);
-                heroInfo.setText("Информация о герое: " + dataSnapshot.child("team")/.child(team).child("case").child(number).child("infoOfPers").getValue(String.class));*/
-
-           /* }
-
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
 
         return view;
 
@@ -344,6 +328,7 @@ public class AddGoal extends Fragment implements TextView.OnEditorActionListener
             //берем наш кастомный лейаут находим через него все наши кнопки и едит тексты, задаем нужные данные
             final View view = getLayoutInflater().inflate(R.layout.custome_edittext, null);
             EditText text = view.findViewById(R.id.editText);
+
             text.setText("Some text");
             //добавляем все что создаем в массив
             allEds.add(view);

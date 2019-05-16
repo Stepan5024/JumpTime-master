@@ -16,7 +16,7 @@ public class Skeleton extends Fragment {
     View view;
     String i;
     ImageView im;
-    ArrayList arrlist;
+    ArrayList arrlist = new ArrayList();
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_shedule, container, false);
@@ -24,15 +24,20 @@ public class Skeleton extends Fragment {
         im.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment = new TimeTable();
+                Fragment fragment = new Monday();
+                arrlist.add("name");
+                arrlist.add("data");
+                arrlist.add("time");
+                arrlist.add("1");
+                arrlist.add("23");
                 Bundle bundle = new Bundle();
                 bundle.putStringArrayList("arraylist", arrlist);
-
                 fragment.setArguments(bundle);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
             }
         });
+
         Bundle bundle = this.getArguments();
         if (bundle != null) {
              i = bundle.getString("key");

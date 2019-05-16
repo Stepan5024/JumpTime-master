@@ -1,15 +1,26 @@
 package com.example.p.jumptime;
 
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -17,17 +28,23 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class TasksForCurrentPerfomance extends Fragment {
-    ArrayList<TaskForRecyclerView> tasks;
-    FirebaseUser user;
+    public static ArrayList<TaskForRecyclerView> tasks;
     DataAdaptermy adapter;
     ArrayList sizeArray = new ArrayList();
     View rootView;
@@ -35,11 +52,12 @@ public class TasksForCurrentPerfomance extends Fragment {
     ArrayList images;
     RecyclerView recyclerView;
     CoordinatorLayout coordinatorLayout;
-    DatabaseReference myRef;
-    DatabaseReference myRef1;
     ArrayList arForAdapter;
     LinearLayoutManager layoutManager;
-    int[] image_priority = {R.mipmap.white, R.mipmap.yellow, R.mipmap.orange, R.mipmap.red};
+    static DataBase.DBHelper dbHelper;
+    // Идентификатор уведомления
+    public static final int NOTIFY_ID = 101;
+    static int[] image_priority = {R.mipmap.white, R.mipmap.yellow, R.mipmap.orange, R.mipmap.red};
 
     public TasksForCurrentPerfomance() {
         tasks = new ArrayList<>();
@@ -53,41 +71,168 @@ public class TasksForCurrentPerfomance extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.tab2, container, false);
-        //user = FirebaseAuth.getInstance().getCurrentUser();
+        rootView = inflater.inflate(R.layout.fragment_tasks_for_current, container, false);
         arForAdapter = new ArrayList();
-      /*  myRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
-        myRef1 = FirebaseDatabase.getInstance().getReference();*/
         coordinatorLayout = rootView.findViewById(R.id.coordinatorLayout);
         layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        Switch sw = rootView.findViewById(R.id.switchToCalendar);
+        dbHelper = new DataBase.DBHelper(getContext());
+        sw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new CalendarView_Test();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+            }
+        });
+
+        NotificationCompat.Builder builder =
+                new NotificationCompat.Builder(getContext())
+                        .setSmallIcon(android.R.drawable.ic_dialog_email)
+                        .setContentTitle("Title change")
+                        .setContentText("Notification text change");
+
+        Notification notification = builder.build();
+
+        NotificationManager notificationManager =
+                (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(1, notification);
         recyclerView = rootView.findViewById(R.id.list);
         recyclerView.setLayoutManager(layoutManager);
         /*setRef();
         setElement();*/
-
+        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new AddTask();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+            }
+        });
 
         sizeArray = GetListTask();
         getArray(sizeArray);
+
+        sortedArrayToDate();
+
         adapter = new DataAdaptermy(getContext(), tasks);
         // устанавливаем для списка адаптер
         recyclerView.setAdapter(adapter);
 
-
         enableSwipeToDeleteAndUndo();
-
-
+        dbHelper = new DataBase.DBHelper(getContext());
         return rootView;
 
     }
 
+    public void updateUI() {
+        if (getActivity() != null) {
+
+            DataAdaptermy adapter = new DataAdaptermy(getContext(), tasks);
+            recyclerView.setAdapter(adapter);
+
+        }
+    }
+
+    private void sortedArrayToDate() {
+
+
+        // Текущее время
+        Date currentDate = new Date();
+        // Форматирование времени как "день.месяц.год"
+        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+        String[] subDate;
+
+        ArrayList<TaskForRecyclerView> Last = new ArrayList();
+        ArrayList<TaskForRecyclerView> Future = new ArrayList();
+        ArrayList<TaskForRecyclerView> ToDay = new ArrayList();
+        String data = dateFormat.format(currentDate);
+        subDate = data.split("\\.");
+        for (int i = 0; i < tasks.size(); i++) {
+            String t = tasks.get(i).getTaskData();
+            Toast.makeText(getContext(), "data = " + t, Toast.LENGTH_SHORT).show();
+            String[] subStr;
+            subStr = t.split("\\."); // Разделения строки str с помощью метода split()
+            if (Integer.valueOf(subDate[2]) >= Integer.valueOf(subStr[2]) && Integer.valueOf(subDate[1]) >= Integer.valueOf(subStr[1]) && Integer.valueOf(subDate[0]) > Integer.valueOf(subStr[0])) {
+                Last.add(tasks.get(i));
+            } else if (Integer.valueOf(subDate[2]) == (Integer.valueOf(subStr[2])) && Integer.valueOf(subDate[1]) == (Integer.valueOf(subStr[1])) && Integer.valueOf(subDate[0]) == (Integer.valueOf(subStr[0]))) {
+                ToDay.add(tasks.get(i));
+            } else if (Integer.valueOf(subDate[2]) <= Integer.valueOf(subStr[2]) && Integer.valueOf(subDate[1]) <= Integer.valueOf(subStr[1]) && Integer.valueOf(subDate[0]) < Integer.valueOf(subStr[0]))
+                Future.add(tasks.get(i));
+            else {
+                ToDay.add(tasks.get(i));
+                Toast.makeText(getContext(), "ccc" + tasks.get(i).getTaskName(), Toast.LENGTH_SHORT).show();
+            }
+        }
+
+
+        tasks.clear();
+        for (int i = 0; i < Last.size(); i++) {
+            Toast.makeText(getContext(), "last " + Last.get(i).getTaskData(), Toast.LENGTH_SHORT).show();
+            tasks.add(Last.get(i));
+        }
+        for (int i = 0; i < ToDay.size(); i++) {
+            tasks.add(ToDay.get(i));
+        }
+        for (int i = 0; i < Future.size(); i++) {
+            tasks.add(Future.get(i));
+        }
+        updateUI();
+/*        for (int i = tasks.size()-1; i  > 0; i--) {
+            for (int j = 0; j < i; j++) {
+
+                if(BiggerNumber(tasks.get(j).getTaskData(), tasks.get(j+1).getTaskData())){
+                    ArrayList<TaskForRecyclerView> t = new ArrayList();
+                    t.add(tasks.get(j));
+                    tasks.add(j, tasks.get(j+1));
+                    tasks.add(j+1, (TaskForRecyclerView) t.get(0));
+                }
+
+            }
+        }*/
+        for (int i = 0; i < tasks.size(); i++) {
+            Log.d("TAG", tasks.get(i).getTaskData());
+        }
+
+
+    }
+
+    private boolean BiggerNumber(String s1, String s2) {
+
+
+        String[] subStr;
+        String[] subStr2;
+        subStr = s1.split("\\."); // Разделения строки str с помощью метода split()
+        subStr2 = s2.split("\\."); // Разделения строки str с помощью метода split()
+        if (Integer.valueOf(subStr[2]) >= Integer.valueOf(subStr2[2])) {
+
+            if (Integer.valueOf(subStr[1]) >= Integer.valueOf(subStr2[1])) {
+
+                if (Integer.valueOf(subStr[0]) >= Integer.valueOf(subStr2[0])) {
+                    return true;
+                } else {
+                    return false;
+                }
+
+            } else {
+                return false;
+            }
+
+        } else {
+            return false;
+        }
+
+    }
+
     //метод читает список задач из бд sqlite
-    private ArrayList GetListTask() {
+    public static ArrayList GetListTask() {
         // создаем объект для данных
         ContentValues cv = new ContentValues();
         // создаем объект для создания и управления версиями БД
-        DataBase.DBHelper dbHelper = new DataBase.DBHelper(getContext());
+
         // подключаемся к БД
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -137,93 +282,20 @@ public class TasksForCurrentPerfomance extends Fragment {
         return listtasks;
     }
 
-    private void getArray(ArrayList ar) {
+    public void getArray(ArrayList ar) {
         if (ar.isEmpty()) {
         } else {
             for (int i = 0; i < ar.size(); i++) {
                 ArrayList<ArrayList> temp = (ArrayList) ar.get(i);
                 Log.d("Tag", Integer.valueOf(String.valueOf(temp.get(8))).getClass() + "");
-               int index = Integer.valueOf(String.valueOf(temp.get(8)));
-                Toast.makeText(getContext(),"size =  "+temp.size()+" /" + temp.get(8)+"/",Toast.LENGTH_SHORT).show();
-                tasks.add(new TaskForRecyclerView(String.valueOf(temp.get(1)), String.valueOf(temp.get(2)), String.valueOf(temp.get(3)), image_priority[index],  Integer.valueOf(String.valueOf(temp.get(0))), getActivity()));
+                int index = Integer.valueOf(String.valueOf(temp.get(8)));
+                //Toast.makeText(getContext(), "size =  " + temp.size() + " /" + temp.get(8) + "/", Toast.LENGTH_SHORT).show();
+                tasks.add(new TaskForRecyclerView(String.valueOf(temp.get(1)), String.valueOf(temp.get(2)), String.valueOf(temp.get(3)), image_priority[index], Integer.valueOf(String.valueOf(temp.get(0))), getActivity()));
                 temp.clear();
             }
         }
     }
-   /* private void setRef() {
-       /* myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot childSbapshot : dataSnapshot.getChildren()) {
-                    images.add((childSbapshot.getValue()));
-                }
 
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
-     /*   myRef1.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (int i = 0; i < sizeArray.size(); i++) {
-                    String s = sizeArray.get(i).toString();
-
-                    // Toast.makeText(rootView.getContext(),s, Toast.LENGTH_SHORT).show();
-                    String name = "" + dataSnapshot.child("users").child(user.getUid()).child("tasks").child(s).child("name").getValue(String.class);
-                    String data = "" + dataSnapshot.child("users").child(user.getUid()).child("tasks").child(s).child("data").getValue(String.class);
-                    String time = "" + dataSnapshot.child("users").child(user.getUid()).child("tasks").child(s).child("time").getValue(String.class);
-                    String priority = dataSnapshot.child("users").child(user.getUid()).child("tasks").child(s).child("priority").getValue(String.class);
-                    String kilo = "" + dataSnapshot.child("users").child(user.getUid()).child("tasks").child(s).child("kilo").getValue(String.class);
-                    String project = "" + dataSnapshot.child("users").child(user.getUid()).child("tasks").child(s).child("project").getValue(String.class);
-
-
-                    String[] a = {name, data, kilo, time, project};
-                    array.add(a);
-
-                        tasks.add(new TaskForRecyclerView(s, a[1], a[3], image_priority[0], getActivity()));
-
-
-
-
-                }
-                recyclerView.setAdapter(adapter);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-    }*/
-
-   /* private void setElement() {
-
-        DatabaseReference info = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).child("tasks");
-        info.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    String child = ds.getKey();
-                    sizeArray.add(child);
-                    Log.d("TAG", child);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.i("w", "onCancelled", databaseError.toException());
-            }
-        });
-
-
-    }*/
 
     private void enableSwipeToDeleteAndUndo() {
         SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(getContext()) {

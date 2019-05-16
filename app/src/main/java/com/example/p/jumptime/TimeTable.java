@@ -1,19 +1,17 @@
 package com.example.p.jumptime;
 
-import android.media.Image;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-
 
 import java.util.ArrayList;
 
@@ -21,9 +19,9 @@ import java.util.ArrayList;
 public class TimeTable extends Fragment {
 
     View view;
-    ArrayList<TaskForRecyclerView> tasks;
+    ArrayList<TaskForSchedule> tasks;
     ArrayList ar;
-    int[] image_label = {R.drawable.bell_icon,R.drawable.plus};
+    int[] image_label = {R.drawable.bell_icon, R.drawable.plus};
 
     public TimeTable() {
         tasks = new ArrayList<>();
@@ -33,12 +31,52 @@ public class TimeTable extends Fragment {
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Bundle bundle = this.getArguments();
-        if (bundle != null) {
-             ar = bundle.getStringArrayList("arraylist");
-        }
-        view = inflater.inflate(R.layout.fragment_timetable, container, false);
-        setElementNull();
-        Button add1 = view.findViewById(R.id.button_monday);
+
+        view = inflater.inflate(R.layout.fragment_shedule_test, container, false);
+
+
+        TabLayout tabLayout = view.findViewById(R.id.sliding_tabs);
+        //Adding the tabs using addTab() method
+        tabLayout.addTab(tabLayout.newTab().setText(""));
+        tabLayout.addTab(tabLayout.newTab().setText(""));
+        tabLayout.addTab(tabLayout.newTab().setText(""));
+        tabLayout.addTab(tabLayout.newTab().setText(""));
+        tabLayout.addTab(tabLayout.newTab().setText(""));
+        tabLayout.addTab(tabLayout.newTab().setText(""));
+        tabLayout.addTab(tabLayout.newTab().setText(""));
+        //tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        tabLayout.setTabTextColors(Color.parseColor("#00FF00"), Color.parseColor("#f00f0f"));
+        //Initializing viewPager
+        final ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewpager);
+
+        //Creating our pager adapter
+        PagerTimeTable adapter = new PagerTimeTable(getActivity().getSupportFragmentManager(), tabLayout.getTabCount());
+
+        //Adding adapter to pager
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
+        //Adding onTabSelectedListener to swipe views
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+
+
+       // setElementNull();
+      /*  Button add1 = view.findViewById(R.id.button_monday);
         add1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,24 +131,25 @@ public class TimeTable extends Fragment {
                 addDelo("Воскресенье");
 
             }
-        });
-        CoordinatorLayout coordinatorLayoutMonday = view.findViewById(R.id.coordinatorLayout_monday);
+        });*/
+        /*CoordinatorLayout coordinatorLayoutMonday = view.findViewById(R.id.coordinatorLayout_monday);
         CoordinatorLayout coordinatorLayoutTuesday = view.findViewById(R.id.coordinatorLayout_tuesday);
         CoordinatorLayout coordinatorLayoutWednesday = view.findViewById(R.id.coordinatorLayout_wednesday);
         CoordinatorLayout coordinatorLayoutThursday = view.findViewById(R.id.coordinatorLayout_thursday);
         CoordinatorLayout coordinatorLayoutFriday = view.findViewById(R.id.coordinatorLayout_friday);
         CoordinatorLayout coordinatorLayoutSaturday = view.findViewById(R.id.coordinatorLayout_saturday);
-        CoordinatorLayout coordinatorLayoutSunday = view.findViewById(R.id.coordinatorLayout_sunday);
+        CoordinatorLayout coordinatorLayoutSunday = view.findViewById(R.id.coordinatorLayout_sunday);*/
 
 
-        initializeViews();
+      //  initializeViews();
 
 
 
         return view;
 
     }
-    private void TakeSizeNeighbour(){
+
+   /* private void TakeSizeNeighbour(){
         ArrayList time = new ArrayList();
 
         for (int i = 0; i < tasks.size(); i++) {
@@ -121,18 +160,14 @@ public class TimeTable extends Fragment {
         }
 
 
-    }
-    private void addItemIntoListView(){
+    }*/
+  /*  private void addItemIntoListView(){
         tasks.add(new TaskForRecyclerView(ar.get(0)+"", ar.get(1)+"", ar.get(2) + "", image_label[Integer.valueOf((Integer) ar.get(3))],0, getActivity()));
 
-
-
-
-    }
+    }*/
     private void addDelo(String day){
         Fragment fragment = new Skeleton();
         Bundle bundle = new Bundle();
-
         bundle.putString("key", day);
         fragment.setArguments(bundle);
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -177,7 +212,7 @@ private  void initializeViews(){
     recyclerViewSunday.setAdapter(adapter);
 
 }
-    public void setElementNull() {
+   /* public void setElementNull() {
 
         tasks.add(new TaskForRecyclerView("Добавьте дело", "укажите время", " ", R.drawable.plus,0, getActivity()));
 
@@ -185,5 +220,5 @@ private  void initializeViews(){
 
 
 
-    }
+    }*/
 }
