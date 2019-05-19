@@ -5,31 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
 
-    <Switch
-        android:id="@+id/switch1"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Списочный вид" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <CalendarView
-        android:id="@+id/calendarView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onClick" />
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/list2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp" />
-</LinearLayout>
+            android:text="Списочный вид" />
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp" />
+    </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

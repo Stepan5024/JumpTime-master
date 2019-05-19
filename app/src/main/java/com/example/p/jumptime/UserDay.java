@@ -22,13 +22,8 @@ public class UserDay extends Fragment {
         ImageButton v1 = view.findViewById(R.id.perfectDay);
         ImageButton v2 = view.findViewById(R.id.normalDay);
         ImageButton v3 = view.findViewById(R.id.badDay);
-        Button b = view.findViewById(R.id.button_history);
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
+
         v1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

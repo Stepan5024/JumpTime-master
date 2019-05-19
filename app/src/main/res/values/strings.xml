@@ -15,24 +15,9 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string-array name="names">
-        <item>Josh</item>
-        <item>Sara</item>
-        <item>Steve</item>
-        <item>Joe</item>
-        <item>Dave</item>
-        <item>Mike</item>
-        <item>Lisa</item>
-    </string-array>
 
-    <string-array name="dept_array">
-        <item>Vegetable</item>
-        <item>Fruits</item>
-        <item>Grocery</item>
-        <item>Electronics</item>
-        <item>Books</item>
-        <item>Language</item>
-    </string-array>
+
+
     <string-array name="list_for_repeat">
     <item>Рабочие дни</item>
     <item>Выходные</item>
@@ -59,11 +44,62 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
+    <string name="name_app">Навигатор: к мечте!</string>
+    <string name="new_step">Добавить ступень</string>
+    <string name="input_text_please">Введите название</string>
+    <string name="enterRemember">Введите напоминание</string>
+    <string name="save">Сохранить</string>
+    <string name="soon">Ожидается в обновлении</string>
+    <string name="registrationTo">Зарегистрироваться</string>
+    <string name="repeatPassword">Повторите пароль</string>
+    <string name="password">Придумайте пароль</string>
+    <string name="welcome">Добро пожаловать!</string>
+    <string name="registration">Регистрация</string>
+    <string name="email">Ваша электронная почта</string>
+    <string name="obrah">Как к вам можно обращаться:</string>
+    <string name="text1">&lt;&lt;</string>
+    <string name="text2">\>></string>
+    <string name="exite">X</string>
+    <string name="calendarView">Календарный вид</string>
+    <string name="ToWeek">К концу недели:</string>
+    <string name="ToMonth">К концу месяца:</string>
+    <string name="ToYear">К концу года:</string>
+    <string name="saveAndExit">Сохранить и закрыть</string>
+    <string name="newnav">чему научился</string>
+    <string name="mind">что запомнилось</string>
+    <string name="Dela">3 важных дела</string>
+    <string name="someAnswers">Ответьте на пару вопросов о вашем дне</string>
+    <string name="add">Добавить</string>
+    <string name="analizes">анализ</string>
+    <string name="my_goal">Моя цель:</string>
+    <string name="add_new_goal">добавить цель</string>
+    <string name="example1">Например: студент в топ ВУЗе</string>
+    <string name="OK">Ок</string>
+    <string name="K">К - </string>
+    <string name="I">И - </string>
+    <string name="L">Л - </string>
+    <string name="O">О - </string>
+    <string name="KILO">КИЛО</string>
+    <string name="input_goal">Введите цель</string>
+    <string name="deadline">DeadLine</string>
+    <string name="Name">Name</string>
+    <string name="Famile">Семья</string>
+    <string name="FamileLabel">Напоминание об общении, звонке, визите, дне рождении</string>
+    <string name="Health">Здоровье</string>
+    <string name="HealthLabel">Добавляйте знятия спортом, прогулки, пробежки, зарядки</string>
+    <string name="GrowUp">Самообразование</string>
+    <string name="GrowUpLabel">Чтение книг, духовный рост, приобретение новых навыков</string>
+    <string name="Buisness">Бизнес</string>
+    <string name="BuisnessLabel">То что Вам приносит доход или в начнет в ближайшем будущем, работа или учеба</string>
+    <string name="NameTask">Название дела</string>
+    <string name="End">Время конца занятия</string>
+    <string name="Start">Время начала занятия</string>
+    <string name="plan">План достижения</string>
+    <string name="image">Представьте, что ВЫ получите, достигнув своей цели. Запишите:</string>
+    <string name="info_about_step">Добавьте контрольные точки</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_sign_up">SignUp</string>
-    <string name="fragment_email_text">trqw</string>
-    <string name="tab_text">match_parent</string>
+
     <string name="input_text">Введите задачу</string>
+    <string name="newStep">Добавьте шаг</string>
 </resources>

@@ -33,9 +33,7 @@ public class DataBase extends Fragment implements OnClickListener {
     }
 
 
-    /**
-     * Called when the activity is first created.
-     */
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.base, container, false);
 
@@ -217,7 +215,7 @@ public class DataBase extends Fragment implements OnClickListener {
 
         DBHelper(Context context) {
             // конструктор суперкласса
-            super(context, "myDB", null, 1);// число отвечает за обновление
+            super(context, "myDB", null, 5);// число отвечает за обновление
 
         }
 
@@ -245,6 +243,13 @@ public class DataBase extends Fragment implements OnClickListener {
                     + "time text,"
                     + "active text"
                      + ");");
+            db.execSQL("create table table_steps ("
+                    + "id integer primary key autoincrement,"
+                    + "hp text,"
+                    + "name text,"
+                    + "time text,"
+                    + "active text"
+                    + ");");
             db.execSQL("create table table_user_day ("
                     + "id integer primary key autoincrement,"
                     + "whatday text,"
@@ -252,6 +257,13 @@ public class DataBase extends Fragment implements OnClickListener {
                     + "remember text,"
                     + "newexpereance text,"
                     + "time text"
+                    + ");");
+            db.execSQL("create table table_category ("
+                    + "id integer primary key autoincrement,"
+                    + "category text,"
+                    + "nametask text,"
+                    + "time text,"
+                    + "active text"
                     + ");");
         }
 

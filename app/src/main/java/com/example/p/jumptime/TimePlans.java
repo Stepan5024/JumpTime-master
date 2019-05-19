@@ -31,12 +31,12 @@ import java.util.Locale;
 public class TimePlans extends Fragment {
 
     View rootView;
-    // в этих листах храняться данные о каждом плне пользователя на неделю, месяц, год
+    // в этих листах храняться данные о каждом плане пользователя на неделю, месяц, год
     ArrayList<String> arWeek;
     ArrayList<String> arMonth;
     ArrayList<String> arYear;
 
-    // в этих листах хранятья индексы, теч дел читаемых из бд для их удаления и редактирования
+    // в этих листах хранятья индексы, тех дел читаемых из бд для их удаления и редактирования
     ArrayList indexWeek;
     ArrayList indexMonth;
     ArrayList indexYear;
@@ -97,6 +97,7 @@ public class TimePlans extends Fragment {
                 ok.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                          indexWeek.add(saveInDataBase("week", ed_in_alertDialog.getText().toString()));
 
                         arWeek.add(ed_in_alertDialog.getText().toString());
@@ -406,7 +407,7 @@ public class TimePlans extends Fragment {
         // вставляем запись и получаем ее ID
         long rowID = dbq.insert("table_plans", null, cvq);
 
-        Toast.makeText(getContext(), "row inserted, ID = " + rowID, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getContext(), "row inserted, ID = " + rowID, Toast.LENGTH_SHORT).show();
 
         return rowID;
     }

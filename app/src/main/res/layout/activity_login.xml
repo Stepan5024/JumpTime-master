@@ -22,18 +22,24 @@
             android:id="@+id/imageView2"
             android:layout_width="match_parent"
             android:layout_height="130dp"
-            app:srcCompat="@drawable/ic_icon6" />
+            app:srcCompat="@mipmap/ic_icon1" />
 
-        <TextView
-            android:id="@+id/textView2"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="87dp"
-            app:fontFamily="@font/maven_pro_bold"
-            android:layout_marginTop="10dp"
-            android:text="@string/auth"
-            android:textColor="@android:color/background_light"
-            android:textSize="26sp" />
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="87dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/auth"
+                android:textColor="@android:color/background_light"
+                android:textSize="26sp"
+                app:fontFamily="@font/maven_pro_bold" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/textView7"

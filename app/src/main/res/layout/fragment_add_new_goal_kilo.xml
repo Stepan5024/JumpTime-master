@@ -28,11 +28,11 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="40dp"
         android:gravity="center"
-        android:hint="Введите цель"
+        android:hint="@string/input_goal"
         android:textColorHint="#6221d8">
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/goalUser"
+            android:id="@+id/task_plan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_light"
@@ -66,6 +66,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="КИЛО"
+
             android:textSize="50sp"
             android:textStyle="bold" />
 

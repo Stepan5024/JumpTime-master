@@ -7,189 +7,204 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/imageFamile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_centerHorizontal="true"
-                app:srcCompat="@drawable/happy_famile" />
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/imageFamile"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/ubuntu_bold"
-                android:text="Семья" />
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="35dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="10dp"
-                android:layout_below="@+id/textView9"
-                android:fontFamily="@font/ubuntu_medium"
-                android:text="Напоминание об общении, звонке, визите, дне рождении" />
-        </RelativeLayout>
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-           >
-
-            <View
-                android:layout_width="5dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/good_text_view" />
-
-        </LinearLayout>
-        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/imageSport"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                app:srcCompat="@drawable/sport"
-                android:layout_centerHorizontal="true"/>
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/imageSport"
-                android:fontFamily="@font/ubuntu_bold"
-                android:layout_marginTop="10dp"
-                android:text="Здоровье" />
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="35dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="10dp"
-                android:layout_below="@+id/textView11"
-                android:fontFamily="@font/ubuntu_medium"
-                android:text="Добавляйте знятия спортом, прогулки, пробежки, зарядки" />
-        </RelativeLayout>
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="@drawable/good_text_view" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/imageStudy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                app:srcCompat="@drawable/grow_up" />
-
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/imageStudy"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/ubuntu_bold"
-                android:text="Самообразование" />
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="35dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="10dp"
-                android:layout_below="@+id/textView13"
-                android:fontFamily="@font/ubuntu_medium"
-                android:text="Чтение книг, духовный рост, приобретение новых навыков" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-            <View
-                android:layout_width="5dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/good_text_view" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
 
+                    <ImageView
+                        android:id="@+id/imageFamile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_centerHorizontal="true"
+                        app:srcCompat="@drawable/happy_famile" />
+
+                    <TextView
+                        android:id="@+id/textView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@+id/imageFamile"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="@string/Famile" />
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="35dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_below="@+id/textView9"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="@string/FamileLabel" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    >
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/good_text_view" />
+
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/imageSport"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        app:srcCompat="@drawable/sport"
+                        android:layout_centerHorizontal="true"/>
+                    <TextView
+                        android:id="@+id/textView11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@+id/imageSport"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/Health" />
+                    <TextView
+                        android:id="@+id/textView12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="35dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_below="@+id/textView11"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="@string/FamileLabel" />
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="@drawable/good_text_view" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/imageStudy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
+                        app:srcCompat="@drawable/grow_up" />
+
+                    <TextView
+                        android:id="@+id/textView13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@+id/imageStudy"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="@string/GrowUp" />
+                    <TextView
+                        android:id="@+id/textView14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="35dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_below="@+id/textView13"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="@string/GrowUpLabel" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/good_text_view" />
+
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/imageBusiness"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_centerHorizontal="true"
+                        app:srcCompat="@drawable/money" />
+                    <TextView
+                        android:id="@+id/textView15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@+id/imageBusiness"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:text="@string/Buisness" />
+                    <TextView
+                        android:id="@+id/textView16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="35dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_below="@+id/textView15"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="@string/BuisnessLabel" />
+                </RelativeLayout>
+
+
+            </LinearLayout>
         </LinearLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/imageBusiness"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_centerHorizontal="true"
-                app:srcCompat="@drawable/money" />
-            <TextView
-                android:id="@+id/textView15"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/imageBusiness"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/ubuntu_bold"
-                android:text="Бизнес" />
-            <TextView
-                android:id="@+id/textView16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="35dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="10dp"
-                android:layout_below="@+id/textView15"
-                android:fontFamily="@font/ubuntu_medium"
-                android:text="То что Вам приносит доход или в начнет в ближайшем будущем, работа или учеба" />
-        </RelativeLayout>
 
 
-    </LinearLayout>
+
+    </ScrollView>
+
+
 
 
 

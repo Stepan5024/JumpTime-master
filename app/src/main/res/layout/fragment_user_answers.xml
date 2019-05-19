@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorGray">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,21 +25,24 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:fontFamily="@font/ubuntu_medium"
-                    android:text="Ответьте на пару вопросов о вашем дне"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/someAnswers"
                     android:textSize="18sp" />
             </RelativeLayout>
             <ImageView
                 android:id="@+id/imageView6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 app:srcCompat="@drawable/dela" />
+
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_toRightOf="@+id/label_l"
-                android:hint="3 важных дела"
+                android:hint="@string/Dela"
                 android:textColorHint="#6221d8">
 
                 <android.support.design.widget.TextInputEditText
@@ -63,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/label_l"
                 android:layout_marginLeft="30dp"
-                android:hint="что запомнилось"
+                android:hint="@string/mind"
                 android:textColorHint="#6221d8">
 
                 <android.support.design.widget.TextInputEditText
@@ -88,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/label_l"
                 android:layout_marginLeft="30dp"
-                android:hint="чему научился"
+                android:hint="@string/newnav"
                 android:textColorHint="#6221d8">
 
                 <android.support.design.widget.TextInputEditText
@@ -105,20 +109,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
-                <Button
-                    android:id="@+id/button_end"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:text="Сохранить и закрыть" />
 
                 <Button
-                    android:id="@+id/button8"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/button_end"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/button_end"
                     android:layout_centerHorizontal="true"
-                    android:text="Создать историю" />
+                    android:background="@drawable/button_default_green"
+                    android:text="@string/saveAndExit"
+                    android:textColor="#FFF" />
+
+
             </RelativeLayout>
 
 

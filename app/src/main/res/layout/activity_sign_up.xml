@@ -7,140 +7,146 @@
     tools:context=".SignUpActivity"
     android:background="@drawable/bg_default">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginRight="32dp"
-        android:windowSoftInputMode="adjustResize"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="96dp"
-            app:fontFamily="@font/maven_pro_bold"
-            android:text="Регистрация"
-            android:textColor="@android:color/background_light"
-            android:textSize="26sp" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="20dp"
-            android:text="Как к вам можно обращаться:"
-            app:fontFamily="@font/maven_pro_bold"
-            android:textColor="@android:color/background_light"
-            android:textSize="20sp"/>
-
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginRight="32dp"
+            android:orientation="vertical"
+            android:windowSoftInputMode="adjustResize">
 
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:srcCompat="@android:drawable/btn_dialog" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/nikname"
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/registration"
+
+                    android:textColor="@android:color/background_light"
+                    android:textSize="26sp"
+                    app:fontFamily="@font/maven_pro_bold" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:text="@string/obrah"
+                android:textColor="@android:color/background_light"
+                android:textSize="20sp"
+                app:fontFamily="@font/maven_pro_bold" />
 
-                android:layout_marginTop="15dp"
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/nikname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginLeft="37dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="45dp"
+
+                    android:background="@drawable/input_default"
+                    android:ems="10"
+                    android:inputType="textEmailAddress"
+                    android:padding="16dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/maven_pro_bold"
+                android:text="@string/email"
+                android:textColor="@android:color/background_light"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/Login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="37dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="45dp"
-
                 android:background="@drawable/input_default"
                 android:ems="10"
                 android:inputType="textEmailAddress"
                 android:padding="16dp" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/password"
+                android:textColor="@android:color/background_light"
+                android:textSize="20sp"
+                app:fontFamily="@font/maven_pro_bold" />
+
+            <EditText
+                android:id="@+id/Password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="37dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="45dp"
+                android:background="@drawable/input_default"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:padding="16dp" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/maven_pro_bold"
+                android:text="@string/repeatPassword"
+                android:textColor="@android:color/background_light"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/RepeatPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="37dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="45dp"
+                android:background="@drawable/input_default"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:padding="16dp" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="65dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="65dp"
+                android:background="@drawable/button_default"
+                android:text="@string/registrationTo" />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
-            android:text="Ваша электронная почта"
-            android:fontFamily="@font/maven_pro_bold"
-            android:textColor="@android:color/background_light"
-            android:textSize="20sp"/>
-
-        <EditText
-            android:id="@+id/Login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="37dp"
-            android:layout_marginRight="45dp"
-            android:background="@drawable/input_default"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            android:padding="16dp" />
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
-            android:text="Придумайте пароль"
-            app:fontFamily="@font/maven_pro_bold"
-            android:textColor="@android:color/background_light"
-            android:textSize="20sp"/>
-
-        <EditText
-            android:id="@+id/Password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="37dp"
-            android:layout_marginRight="45dp"
-            android:background="@drawable/input_default"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            android:padding="16dp" />
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
-            android:text="Повторите пароль"
-            android:fontFamily="@font/maven_pro_bold"
-            android:textColor="@android:color/background_light"
-            android:textSize="20sp"/>
-        <EditText
-            android:id="@+id/RepeatPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="37dp"
-            android:layout_marginRight="45dp"
-            android:background="@drawable/input_default"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            android:padding="16dp"/>
-
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="65dp"
-            android:layout_marginRight="65dp"
-            android:background="@drawable/button_default"
-            android:text="Зарегистрироваться" />
-    </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>

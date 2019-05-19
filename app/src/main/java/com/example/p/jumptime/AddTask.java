@@ -79,9 +79,7 @@ public class AddTask extends Fragment {
 
                 String[] choose = getResources().getStringArray(R.array.list_for_remind);
                 selected_remind = choose[selectedItemPosition];
-                Toast toast = Toast.makeText(getContext(),
-                        "Ваш выбор: " + choose[selectedItemPosition], Toast.LENGTH_SHORT);
-                toast.show();
+
             }
 
             public void onNothingSelected(AdapterView<?> parent) {
@@ -105,10 +103,7 @@ public class AddTask extends Fragment {
                     selected_priority = 3;
                 }
 
-                Toast toast = Toast.makeText(getContext(),
-                        "Ваш выбор: " + choose[selectedItemPosition], Toast.LENGTH_SHORT);
 
-                toast.show();
             }
 
             public void onNothingSelected(AdapterView<?> parent) {

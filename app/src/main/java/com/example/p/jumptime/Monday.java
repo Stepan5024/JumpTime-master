@@ -41,8 +41,15 @@ public class Monday extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_monday, container, false);
         recyclerViewMonday = view.findViewById(R.id.list_monday);
-        tasks.add(0, new TaskForSchedule("Добавьте дело", "укажите время", "в понедельник", R.drawable.plus, getActivity()));
 
+
+        tasks.add(0, new TaskForSchedule("Зарядка", "7:10", "7:00", R.drawable.zaraydka, getActivity()));
+        tasks.add(1, new TaskForSchedule("Школа", "15:15", "7:50", R.drawable.school, getActivity()));
+        tasks.add(2, new TaskForSchedule("IT школа Samsung", "15:30", "17:00", R.drawable.ic_samsung, getActivity()));
+        tasks.add(3, new TaskForSchedule("Домашняя работа", "16:00", "15:30", R.drawable.dz, getActivity()));
+        tasks.add(4, new TaskForSchedule("ФМШ МАИ", "19:30", "17:00", R.drawable.phisics, getActivity()));
+        tasks.add(5, new TaskForSchedule("Дорога", "20:00", "19:40", R.drawable.avto, getActivity()));
+        tasks.add(6, new TaskForSchedule("Сон", "7:00", "22:30", R.drawable.sleep, getActivity()));
 
         //tasks.add(new TaskForSchedule("test", "test", "test", R.drawable.plus_big, getActivity()));
 

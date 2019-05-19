@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text="К концу недели:"
+                android:text="@string/ToWeek"
 
                 android:textSize="20sp" />
 
@@ -66,7 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text="К концу месяца:"
+                android:text="@string/ToMonth"
 
                 android:textSize="20sp" />
 
@@ -110,7 +110,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text="К концу года:"
+                android:text="@string/ToYear"
 
                 android:textSize="20sp" />
 

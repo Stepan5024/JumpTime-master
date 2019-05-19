@@ -3,14 +3,10 @@ package com.example.p.jumptime;
 
 import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,7 +16,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -29,22 +24,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Switch;
-import android.widget.Toast;
-
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
-import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class TasksForCurrentPerfomance extends Fragment {
-    public static ArrayList<TaskForRecyclerView> tasks;
+    public static ArrayList<TaskForRecyclerView> tasks = new ArrayList<>();
     DataAdaptermy adapter;
     ArrayList sizeArray = new ArrayList();
     View rootView;
@@ -82,7 +74,7 @@ public class TasksForCurrentPerfomance extends Fragment {
         sw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment = new CalendarView_Test();
+                Fragment fragment = new MyCalendarView();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
             }
@@ -101,8 +93,7 @@ public class TasksForCurrentPerfomance extends Fragment {
         notificationManager.notify(1, notification);
         recyclerView = rootView.findViewById(R.id.list);
         recyclerView.setLayoutManager(layoutManager);
-        /*setRef();
-        setElement();*/
+
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,11 +106,10 @@ public class TasksForCurrentPerfomance extends Fragment {
 
         sizeArray = GetListTask();
         getArray(sizeArray);
-
         sortedArrayToDate();
-
+        sortedByDate();
         adapter = new DataAdaptermy(getContext(), tasks);
-        // устанавливаем для списка адаптер
+
         recyclerView.setAdapter(adapter);
 
         enableSwipeToDeleteAndUndo();
@@ -136,7 +126,36 @@ public class TasksForCurrentPerfomance extends Fragment {
 
         }
     }
+    private  void sortedByDate(){
+        Calendar c = new GregorianCalendar();
+        int cMinute = c.get(Calendar.MINUTE);
+        int cHour = c.get(Calendar.HOUR_OF_DAY);
+        ArrayList<TaskForRecyclerView> Last = new ArrayList<>();
+        ArrayList<TaskForRecyclerView> Future = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            String[] sub = tasks.get(i).getTaskTime().split(":");
 
+            if(Integer.valueOf(sub[0]) <(cHour)  ){
+
+
+                Last.add(tasks.get(i));
+            }
+            else if (Integer.valueOf(sub[0]) == (cHour)  && Integer.valueOf(sub[1]) <= cMinute){
+                Last.add(tasks.get(i));
+            }
+            else
+
+            {    Future.add(tasks.get(i));}
+        }
+        tasks.clear();
+        for (int i = 0; i < Last.size(); i++) {
+            tasks.add(Last.get(i));
+        }
+        for (int i = 0; i < Future.size(); i++) {
+            tasks.add(Future.get(i));
+        }
+        updateUI();
+    }
     private void sortedArrayToDate() {
 
 
@@ -153,7 +172,7 @@ public class TasksForCurrentPerfomance extends Fragment {
         subDate = data.split("\\.");
         for (int i = 0; i < tasks.size(); i++) {
             String t = tasks.get(i).getTaskData();
-            Toast.makeText(getContext(), "data = " + t, Toast.LENGTH_SHORT).show();
+
             String[] subStr;
             subStr = t.split("\\."); // Разделения строки str с помощью метода split()
             if (Integer.valueOf(subDate[2]) >= Integer.valueOf(subStr[2]) && Integer.valueOf(subDate[1]) >= Integer.valueOf(subStr[1]) && Integer.valueOf(subDate[0]) > Integer.valueOf(subStr[0])) {
@@ -164,14 +183,13 @@ public class TasksForCurrentPerfomance extends Fragment {
                 Future.add(tasks.get(i));
             else {
                 ToDay.add(tasks.get(i));
-                Toast.makeText(getContext(), "ccc" + tasks.get(i).getTaskName(), Toast.LENGTH_SHORT).show();
             }
         }
 
 
         tasks.clear();
         for (int i = 0; i < Last.size(); i++) {
-            Toast.makeText(getContext(), "last " + Last.get(i).getTaskData(), Toast.LENGTH_SHORT).show();
+
             tasks.add(Last.get(i));
         }
         for (int i = 0; i < ToDay.size(); i++) {
@@ -181,66 +199,24 @@ public class TasksForCurrentPerfomance extends Fragment {
             tasks.add(Future.get(i));
         }
         updateUI();
-/*        for (int i = tasks.size()-1; i  > 0; i--) {
-            for (int j = 0; j < i; j++) {
-
-                if(BiggerNumber(tasks.get(j).getTaskData(), tasks.get(j+1).getTaskData())){
-                    ArrayList<TaskForRecyclerView> t = new ArrayList();
-                    t.add(tasks.get(j));
-                    tasks.add(j, tasks.get(j+1));
-                    tasks.add(j+1, (TaskForRecyclerView) t.get(0));
-                }
-
-            }
-        }*/
-        for (int i = 0; i < tasks.size(); i++) {
-            Log.d("TAG", tasks.get(i).getTaskData());
-        }
 
 
     }
 
-    private boolean BiggerNumber(String s1, String s2) {
 
-
-        String[] subStr;
-        String[] subStr2;
-        subStr = s1.split("\\."); // Разделения строки str с помощью метода split()
-        subStr2 = s2.split("\\."); // Разделения строки str с помощью метода split()
-        if (Integer.valueOf(subStr[2]) >= Integer.valueOf(subStr2[2])) {
-
-            if (Integer.valueOf(subStr[1]) >= Integer.valueOf(subStr2[1])) {
-
-                if (Integer.valueOf(subStr[0]) >= Integer.valueOf(subStr2[0])) {
-                    return true;
-                } else {
-                    return false;
-                }
-
-            } else {
-                return false;
-            }
-
-        } else {
-            return false;
-        }
-
-    }
 
     //метод читает список задач из бд sqlite
     public static ArrayList GetListTask() {
-        // создаем объект для данных
+        //  объект для данных
         ContentValues cv = new ContentValues();
-        // создаем объект для создания и управления версиями БД
+        // объект для создания и управления версиями БД
 
-        // подключаемся к БД
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        // делаем запрос всех данных из таблицы mytable, получаем Cursor
+        // делаем запрос всех данных из таблицы mytable
         Cursor c = db.query("mytable", null, null, null, null, null, null);
         ArrayList listtasks = new ArrayList();
-        // ставим позицию курсора на первую строку выборки
-        // если в выборке нет строк, вернется false
+
         if (c.moveToFirst()) {
 
             // определяем номера столбцов по имени в выборке
@@ -271,8 +247,8 @@ public class TasksForCurrentPerfomance extends Fragment {
                 temp.add(c.getString(projectColIndex));
                 temp.add(c.getString(activeColIndex));
                 listtasks.add(temp);
-                // переход на следующую строку
-                // а если следующей нет (текущая - последняя), то false -
+
+                // текущая - последняя, то false -
                 // выходим из цикла
             } while (c.moveToNext());
         } else
@@ -282,7 +258,7 @@ public class TasksForCurrentPerfomance extends Fragment {
         return listtasks;
     }
 
-    public void getArray(ArrayList ar) {
+    public  void getArray(ArrayList ar) {
         if (ar.isEmpty()) {
         } else {
             for (int i = 0; i < ar.size(); i++) {

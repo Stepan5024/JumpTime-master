@@ -3,171 +3,185 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-    <RelativeLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tx"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="КИЛО"
-            android:textSize="50sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/helpAdmin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/tx"
-            android:paddingLeft="10dp"
-            android:paddingTop="15dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="15dp"
-            android:src="@drawable/info22" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp">
-
-        <TextView
-            android:id="@+id/label_k"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="К - "
-            android:textSize="50dp"
-            android:textStyle="bold"
-            android:layout_centerVertical="true"/>
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/label_k"
-            android:layout_marginLeft="30dp"
-            android:layout_centerVertical="true"
-           >
+            android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/goal_k"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_light"
-                android:maxLines="1"
-                android:textColor="#6221d8"
-                android:textColorHint="#6221d8" />
+                android:layout_marginTop="15dp">
 
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/tx"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/KILO"
+                    android:textSize="50sp"
+                    android:textStyle="bold" />
 
-    </RelativeLayout>
+                <ImageView
+                    android:id="@+id/helpAdmin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/tx"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="15dp"
+                    android:src="@drawable/info22" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp">
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/label_i"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="И - "
-            android:textSize="50dp"
-            android:textStyle="bold"
-            android:layout_centerVertical="true"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/label_i"
-            android:layout_marginLeft="30dp"
-            android:layout_centerVertical="true"
-            >
-
-            <TextView
-                android:id="@+id/goal_i"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_light"
-                android:maxLines="1"
-                android:textColor="#6221d8"
-                android:textColorHint="#6221d8" />
+                android:layout_marginLeft="50dp">
 
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/label_k"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/K"
+                    android:textSize="50dp"
+                    android:textStyle="bold" />
 
-    </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_toRightOf="@+id/label_k">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp">
+                    <TextView
+                        android:id="@+id/goal_k"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_light"
+                        android:maxLines="1"
+                        android:textColor="#6221d8"
+                        android:textColorHint="#6221d8" />
 
-        <TextView
-            android:id="@+id/label_l"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Л - "
-            android:textSize="50dp"
-            android:textStyle="bold"
-            android:layout_centerVertical="true"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/label_l"
-            android:layout_marginLeft="30dp"
-            android:layout_centerVertical="true"
-            >
+                </RelativeLayout>
 
-            <TextView
-                android:id="@+id/goal_l"
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_light"
-                android:maxLines="1"
+                android:layout_marginLeft="50dp">
 
-                android:textColor="#6221d8"
-                android:textColorHint="#6221d8" />
+                <TextView
+                    android:id="@+id/label_i"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/I"
+                    android:textSize="50dp"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/label_i"
+                    android:layout_marginLeft="30dp"
+                    android:layout_centerVertical="true"
+                    >
 
-        </RelativeLayout>
+                    <TextView
+                        android:id="@+id/goal_i"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_light"
+                        android:maxLines="1"
+                        android:textColor="#6221d8"
+                        android:textColorHint="#6221d8" />
 
-    </RelativeLayout>
+                </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp">
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/label_o"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="О - "
-            android:textSize="50dp"
-            android:textStyle="bold"
-            android:layout_centerVertical="true"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/label_o"
-            android:layout_marginLeft="30dp"
-            android:layout_centerVertical="true"
-            >
-
-            <TextView
-                android:id="@+id/goal_o"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_light"
-                android:maxLines="1"
+                android:layout_marginLeft="50dp">
 
-                android:textColor="#6221d8"
-                android:textColorHint="#6221d8" />
+                <TextView
+                    android:id="@+id/label_l"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/L"
+                    android:textSize="50dp"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/label_l"
+                    android:layout_marginLeft="30dp"
+                    android:layout_centerVertical="true"
+                    >
 
-        </RelativeLayout>
+                    <TextView
+                        android:id="@+id/goal_l"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_light"
+                        android:maxLines="1"
+
+                        android:textColor="#6221d8"
+                        android:textColorHint="#6221d8" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp">
+
+                <TextView
+                    android:id="@+id/label_o"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/O"
+                    android:textSize="50sp"
+                    android:textStyle="bold"
+                    android:layout_centerVertical="true"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/label_o"
+                    android:layout_marginLeft="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="30dp"
+                    android:layout_toEndOf="@+id/label_o">
+
+                    <TextView
+                        android:id="@+id/goal_o"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_light"
+                        android:maxLines="1"
+                        android:textColor="#6221d8"
+                        android:textColorHint="#6221d8" />
+
+                </RelativeLayout>
 
 
-    </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
 </LinearLayout>

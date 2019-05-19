@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 public class Pager extends FragmentStatePagerAdapter {
-    private String tabTitles[] = new String[] { "КИЛО", "УСПЕХИ", "ГРАФИК","4 КОЛЕСА"};
+    private String tabTitles[] = new String[] { "КИЛО", "ШАГИ", "ГРАФИК"};
     //integer to count number of tabs
     int tabCount;
 
@@ -25,14 +25,12 @@ public class Pager extends FragmentStatePagerAdapter {
                 KILO tab1 = new KILO();
                 return tab1;
             case 1:
-                Tab1 tab2 = new Tab1();
+                Step tab2 = new Step();
                 return tab2;
             case 2:
-                Tab1 tab3 = new Tab1();
+                Graph tab3 = new Graph();
                 return tab3;
-            case 3:
-                Tab1 tab4 = new Tab1();
-                return tab4;
+
             default:
                 return null;
         }

@@ -1,0 +1,59 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:background="@drawable/gradient"
+    android:padding="2dp"
+    tools:ignore="MissingDefaultResource">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/colorHeaderLight"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/DataTask"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="25sp"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/maven_pro"
+                    android:text="@string/Name" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/TimeTask"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="25sp"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="@string/deadline" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

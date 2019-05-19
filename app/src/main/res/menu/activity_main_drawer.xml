@@ -49,7 +49,7 @@
                 android:icon="@drawable/ic_motivation"
                 android:title="Мотивация" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_time_manadgment"
                 android:icon="@drawable/ic_time_menedgment"
                 android:title="Тайм-менеджмент" />
         </menu>

@@ -21,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,9 +40,8 @@ import java.util.ArrayList;
 
 public class Goal2 extends Fragment {
     View view;
-    private SlidingUpPanelLayout slidingLayout;
-    private Button btnShow;
-    private ImageView btnHide;
+
+
     private TextView textView;
     private Button newGoal;
     String goal;
@@ -49,23 +49,21 @@ public class Goal2 extends Fragment {
     String i;
     String l;
     String dataEnd;
-    ListView lastBook;
     ArrayList achiv = new ArrayList();
     ArrayList step = new ArrayList();
-
-    //integer to count number of tabs
-    int tabCount;
+    ArrayAdapter adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.test_pane, container, false);
-        btnShow = view.findViewById(R.id.btn_show);
-        btnHide = view.findViewById(R.id.btn_hide);
+        view = inflater.inflate(R.layout.fragment_goal2, container, false);
+
         textView = view.findViewById(R.id.text);
         final TextView tv_goal = view.findViewById(R.id.textView23);
-        lastBook = view.findViewById(R.id.recycler_step);
-        Button addStep = view.findViewById(R.id.butn_add);
-        addStep.setOnClickListener(new View.OnClickListener() {
+
+
+        // lastBook.setAdapter(adapter);
+
+       /* addStep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getContext());
@@ -78,16 +76,19 @@ public class Goal2 extends Fragment {
                 ok.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                      //  indexMonth.add(saveInDataBase("month", ed_in_alertDialog.getText().toString()));
+                        //  indexMonth.add(saveInDataBase("month", ed_in_alertDialog.getText().toString()));
                         step.add(ed_in_alertDialog.getText().toString());
-                        updateUI();
+                        adapter.clear();
+                        //adapter.addAll(step);
+                        adapter.notifyDataSetChanged();
+
                         show.dismiss();
                     }
                 });
             }
         });
-        updateUI();
-        lastBook.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+*/
+      /*  lastBook.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position, long id) {
@@ -104,7 +105,7 @@ public class Goal2 extends Fragment {
                     ok.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                           // indexMonth.add(saveInDataBase("month", ed_in_alertDialog.getText().toString()));
+                            // indexMonth.add(saveInDataBase("month", ed_in_alertDialog.getText().toString()));
                             step.add(ed_in_alertDialog.getText().toString());
                             updateUI();
                             show.dismiss();
@@ -128,36 +129,28 @@ public class Goal2 extends Fragment {
                     });
                 }
 
-              /*  Fragment fragment = new Home();
-                FragmentManager fragmentManager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
-                fragmentIs = a10;*/
+
             }
-        });
-        // Получаем ViewPager и устанавливаем в него адаптер
-       /*ViewPager viewPager = view.findViewById(R.id.viewpager);
-        viewPager.setAdapter(
-                new SampleFragmentPagerAdapter(getFragmentManager(), getContext()));
-        tabLayout.setupWithViewPager(viewPager);*/
+        });*/
+
         // Передаём ViewPager в TabLayout
         TabLayout tabLayout = view.findViewById(R.id.sliding_tabs);
-        //Adding the tabs using addTab() method
+
         tabLayout.addTab(tabLayout.newTab().setText(""));
         tabLayout.addTab(tabLayout.newTab().setText(""));
         tabLayout.addTab(tabLayout.newTab().setText(""));
-        tabLayout.addTab(tabLayout.newTab().setText(""));
-        //tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+
         tabLayout.setTabTextColors(Color.parseColor("#469232"), Color.parseColor("#B71C1C"));
-        //Initializing viewPager
-       final ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewpager);
 
-        //Creating our pager adapter
+        final ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewpager);
+
+
         Pager adapter = new Pager(getActivity().getSupportFragmentManager(), tabLayout.getTabCount());
-
-        //Adding adapter to pager
+        //установка adapter to pager
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-        //Adding onTabSelectedListener to swipe views
+        //метод прослушивания свайпа по view
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -190,8 +183,6 @@ public class Goal2 extends Fragment {
             }
         });
 
-        //set layout slide listener
-        slidingLayout = view.findViewById(R.id.sliding_layout);
 
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference myRef;
@@ -220,8 +211,8 @@ public class Goal2 extends Fragment {
                         i = dataSnapshot.child("users").child(user.getUid()).child("infoUser").child("i").getValue(String.class);
                         l = dataSnapshot.child("users").child(user.getUid()).child("infoUser").child("l").getValue(String.class);
                         tv_goal.setText(goal);
-                        updateUI();
-                    }catch (Exception e){
+
+                    } catch (Exception e) {
 
                     }
 
@@ -236,89 +227,7 @@ public class Goal2 extends Fragment {
             Toast.makeText(getContext(), "нет user", Toast.LENGTH_SHORT).show();
         }
 
-
-        //   goal = String.valueOf(DataBase.getData(ar,ar2).get(0));
-        slidingLayout.setPanelSlideListener(onSlideListener());
-        btnHide.setOnClickListener(onHideListener());
-        btnShow.setOnClickListener(onShowListener());
-
-
-
         return view;
-    }
-    //Overriding method getItem
-
-
-    private void updateUI() {
-        if (getActivity() != null) {
-            ArrayAdapter adapter = new ArrayAdapter<>(getActivity(), R.layout.list_text_view, step);
-            lastBook.setAdapter(adapter);
-
-        }
-    }
-    /**
-     * Request show sliding layout when clicked
-     *
-     * @return
-     */
-    private View.OnClickListener onShowListener() {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //show sliding layout in bottom of screen (not expand it)
-                slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
-                btnShow.setVisibility(View.GONE);
-            }
-        };
-    }
-
-    /**
-     * Hide sliding layout when click button
-     *
-     * @return
-     */
-    private View.OnClickListener onHideListener() {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //hide sliding layout
-                slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.HIDDEN);
-                btnShow.setVisibility(View.VISIBLE);
-            }
-        };
-    }
-
-
-    private SlidingUpPanelLayout.PanelSlideListener onSlideListener() {
-        return new SlidingUpPanelLayout.PanelSlideListener() {
-
-            @SuppressLint("SetTextI18n")
-            public void onPanelSlide(View view, float v) {
-                //  textView.setText("panel is sliding");
-            }
-
-            @SuppressLint("SetTextI18n")
-            public void onPanelCollapsed(View view) {
-                //  textView.setText("panel Collapse");
-            }
-
-            @SuppressLint("SetTextI18n")
-            public void onPanelExpanded(View view) {
-                //textView.setText("panel expand");
-            }
-
-
-            @SuppressLint("SetTextI18n")
-            public void onPanelAnchored(View view) {
-                //  textView.setText("panel anchored");
-            }
-
-
-            @SuppressLint("SetTextI18n")
-            public void onPanelHidden(View view) {
-                //textView.setText("panel is Hidden");
-            }
-        };
     }
 }
 

@@ -18,9 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-/**
- * A login screen that offers login via email/password.
- */
+
 public class LoginActivity extends AppCompatActivity {
 
     private String mLogin;

@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="onClick"
-                android:text="&lt;&lt;"/>
+                android:text="@string/text1"/>
 
             <Button
                 android:id="@+id/buttonForward"
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="onClick"
-                android:text=">>"/>
+                android:text="@string/text2"/>
         </LinearLayout>
 
         <ImageSwitcher

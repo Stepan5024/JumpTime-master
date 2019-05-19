@@ -1,8 +1,11 @@
 package com.example.p.jumptime;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +36,78 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         user = FirebaseAuth.getInstance().getCurrentUser();
         setContentView(R.layout.activity_sign_up);
+        EditText nick = (EditText) findViewById(R.id.nikname);
+        EditText mlogin = ((EditText) findViewById(R.id.Login));
+        EditText mpassword = ((EditText) findViewById(R.id.Password));
+        EditText mpasswordRepeat = ((EditText) findViewById(R.id.RepeatPassword));
+        mpasswordRepeat.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+                EditText editText = (EditText) view;
+
+                if (b) {
+                    editText.setBackground(getResources().getDrawable(R.drawable.input_selected));
+                    editText.setTextColor(Color.parseColor("#000000"));
+                } else {
+                    editText.setBackground(getResources().getDrawable(R.drawable.input_default));
+                    editText.setTextColor(Color.parseColor("#FFFFFF"));
+                }
+
+            }
+        });
+        nick.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+                EditText editText = (EditText) view;
+
+                if (b) {
+                    editText.setBackground(getResources().getDrawable(R.drawable.input_selected));
+                    editText.setTextColor(Color.parseColor("#000000"));
+                } else {
+                    editText.setBackground(getResources().getDrawable(R.drawable.input_default));
+                    editText.setTextColor(Color.parseColor("#FFFFFF"));
+                }
+
+            }
+        });
+        mpassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+                EditText editText = (EditText) view;
+
+                if (b) {
+                    editText.setBackground(getResources().getDrawable(R.drawable.input_selected));
+                    editText.setTextColor(Color.parseColor("#000000"));
+                } else {
+                    editText.setBackground(getResources().getDrawable(R.drawable.input_default));
+                    editText.setTextColor(Color.parseColor("#FFFFFF"));
+                }
+
+            }
+        });
+        mlogin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+                EditText editText = (EditText) view;
+
+                if (b) {
+                    editText.setBackground(getResources().getDrawable(R.drawable.input_selected));
+                    editText.setTextColor(Color.parseColor("#000000"));
+                } else {
+                    editText.setBackground(getResources().getDrawable(R.drawable.input_default));
+                    editText.setTextColor(Color.parseColor("#FFFFFF"));
+                }
+
+            }
+        });
         Button reg = (Button) findViewById(R.id.button4); // кнопка регистрации
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,9 +158,9 @@ public class SignUpActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "Регистрация провалена", Toast.LENGTH_LONG).show();
                 }
-        }
-    });
-}
+            }
+        });
+    }
 }
 
 

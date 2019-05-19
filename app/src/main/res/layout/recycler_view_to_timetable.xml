@@ -40,14 +40,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
-                        android:text="Название дела" />
+                        android:text="@string/NameTask" />
 
                     <TextView
                         android:id="@+id/TaskLong"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="время конца занятия" />
+                        android:text="@string/End" />
 
                 </LinearLayout>
 
@@ -73,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="7dp"
                     android:layout_toLeftOf="@+id/image_bell"
-                    android:text="время начала занятия" />
+                    android:text="@string/Start" />
             </RelativeLayout>
 
         </RelativeLayout>

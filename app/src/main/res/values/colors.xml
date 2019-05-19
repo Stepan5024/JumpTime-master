@@ -4,6 +4,7 @@
     <color name="colorPrimary">#4660AB</color>
     <color name="colorPrimaryDark">#434A5E</color>
     <color name="colorHeader">#D8FFF7</color>
+    <color name="colorHeaderLight">#46A7FFEB</color>
     <color name="colorAccent">#27355e</color>
     <color name="bgStartColor">#5C7EE1</color>
     <color name="bgEndColor">#5CE1E1</color>
@@ -14,4 +15,6 @@
     <color name="transparent">#FF22EDCC</color>
     <color name="red">#FF0000</color>
     <color name="green">#64DD17</color>
+    <color name="sea">#9196B3</color>
+    <color name="pink">#B0FF80AB</color>
 </resources>

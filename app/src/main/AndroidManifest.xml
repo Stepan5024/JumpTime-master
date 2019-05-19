@@ -15,13 +15,20 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Permission to start Alarm on device reboot -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <application
-        android:allowBackup="true"
-        android:icon="@drawable/ic_icon5"
-        android:label="К мечте!"
+
+        android:icon="@mipmap/ic_icon1"
+        android:label="К цели!"
         android:roundIcon="@drawable/ic_icon5"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <receiver android:name=".AlarmReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
         <activity
             android:name=".SignUpActivity"
             android:label="@string/title_activity_sign_up"
@@ -34,9 +41,11 @@
 
         <activity
             android:name=".MainActivity"
-            android:label="Навигатор: к мечте"
+            android:label="К цели!"
             android:theme="@style/AppTheme.NoActionBar">
+
             <intent-filter>
+
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
