@@ -13,9 +13,7 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_marginTop="10dp"
-
             android:layout_weight="2"
             android:gravity="center"
             android:hint="@string/enterRemember"
@@ -25,7 +23,6 @@
                 android:id="@+id/task_plan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:fontFamily="@font/roboto_light"
                 android:textColor="#000000"
                 android:textColorHint="#6221d8" />
@@ -35,12 +32,12 @@
         <Button
             android:id="@+id/button7"
             android:layout_width="170dp"
-            android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:background="@drawable/button_default_green"
-            android:text="@string/save" />
+            android:text="@string/save"
+            android:textColor="#FFFFFF" />
     </LinearLayout>
 
 
@@ -52,11 +49,10 @@
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp" >
-
-
+        android:layout_marginBottom="8dp">
 
     </android.support.v7.widget.RecyclerView>
+
     <ListView
         android:id="@+id/listTask"
         android:layout_width="match_parent"

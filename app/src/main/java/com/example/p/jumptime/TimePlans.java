@@ -37,9 +37,9 @@ public class TimePlans extends Fragment {
     ArrayList<String> arYear;
 
     // в этих листах хранятья индексы, тех дел читаемых из бд для их удаления и редактирования
-    ArrayList indexWeek;
-    ArrayList indexMonth;
-    ArrayList indexYear;
+    ArrayList<Long> indexWeek;
+    ArrayList<Long> indexMonth;
+    ArrayList<Long> indexYear;
 
 
     ListView week;
@@ -97,12 +97,15 @@ public class TimePlans extends Fragment {
                 ok.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        if (ed_in_alertDialog.getText().toString().compareTo("") == 0) {
+                            Toast.makeText(getContext(), "Введите задачу", Toast.LENGTH_SHORT).show();
+                        } else {
+                            indexWeek.add(saveInDataBase("week", ed_in_alertDialog.getText().toString()));
 
-                         indexWeek.add(saveInDataBase("week", ed_in_alertDialog.getText().toString()));
-
-                        arWeek.add(ed_in_alertDialog.getText().toString());
-                        updateUI();
-                        show.dismiss();
+                            arWeek.add(ed_in_alertDialog.getText().toString());
+                            updateUI();
+                            show.dismiss();
+                        }
                     }
                 });
 
@@ -121,10 +124,14 @@ public class TimePlans extends Fragment {
                 ok.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        indexMonth.add(saveInDataBase("month", ed_in_alertDialog.getText().toString()));
-                        arMonth.add(ed_in_alertDialog.getText().toString());
-                        updateUI();
-                        show.dismiss();
+                        if (ed_in_alertDialog.getText().toString().compareTo("") == 0) {
+                            Toast.makeText(getContext(), "Введите задачу", Toast.LENGTH_SHORT).show();
+                        } else {
+                            indexMonth.add(saveInDataBase("month", ed_in_alertDialog.getText().toString()));
+                            arMonth.add(ed_in_alertDialog.getText().toString());
+                            updateUI();
+                            show.dismiss();
+                        }
                     }
                 });
             }
@@ -142,10 +149,14 @@ public class TimePlans extends Fragment {
                 ok.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        indexYear.add(saveInDataBase("year", ed_in_alertDialog.getText().toString()));
-                        arYear.add(ed_in_alertDialog.getText().toString());
-                        updateUI();
-                        show.dismiss();
+                        if (ed_in_alertDialog.getText().toString().compareTo("") == 0) {
+                            Toast.makeText(getContext(), "Введите задачу", Toast.LENGTH_SHORT).show();
+                        } else {
+                            indexYear.add(saveInDataBase("year", ed_in_alertDialog.getText().toString()));
+                            arYear.add(ed_in_alertDialog.getText().toString());
+                            updateUI();
+                            show.dismiss();
+                        }
                     }
                 });
             }
@@ -166,13 +177,13 @@ public class TimePlans extends Fragment {
         }
     }
 
-    private void DeleteIndexFromSQLite(int index) {
+    private void DeleteIndexFromSQLite(long index) {
 
 
         DataBase.DBHelper dbHelper = new DataBase.DBHelper(getContext());
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         int delCount = db.delete("table_plans", "id = " + index, null);
-        Toast.makeText(getContext(), "dalete " + delCount, Toast.LENGTH_SHORT).show();
+
         updateUI();
 
 
@@ -202,16 +213,23 @@ public class TimePlans extends Fragment {
                             @Override
                             public void onClick(View view) {
                                 // происходит удаление из бд
-                                Toast.makeText(getContext(), "index = " + i, Toast.LENGTH_SHORT).show();
-                                DeleteIndexFromSQLite((Integer) indexWeek.get(i));
-                                arWeek.remove(i);
-                                indexWeek.remove(i);
+                                if (ed_in_alertDialog.getText().toString().compareTo("") == 0) {
+                                    Toast.makeText(getContext(), "Введите задачу", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    try {
+                                        DeleteIndexFromSQLite(indexWeek.get(i));
+                                    } catch (IndexOutOfBoundsException e) {
+                                    }
 
-                                saveInDataBase("week", ed_in_alertDialog.getText().toString());
+                                    arWeek.remove(i);
+                                    indexWeek.remove(i);
 
-                                arWeek.add(ed_in_alertDialog.getText().toString());
-                                updateUI();
-                                show.dismiss();
+                                    saveInDataBase("week", ed_in_alertDialog.getText().toString());
+
+                                    arWeek.add(ed_in_alertDialog.getText().toString());
+                                    updateUI();
+                                    show.dismiss();
+                                }
                             }
                         });
                     }
@@ -219,8 +237,11 @@ public class TimePlans extends Fragment {
                 ad.setNegativeButton(button2String, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int arg1) {
                         // происходит удаление из бд
-                        Toast.makeText(getContext(), "index = " + i, Toast.LENGTH_SHORT).show();
-                        DeleteIndexFromSQLite((Integer) indexWeek.get(i));
+
+                        try {
+                            DeleteIndexFromSQLite(indexWeek.get(i));
+                        } catch (IndexOutOfBoundsException e) {
+                        }
                         arWeek.remove(i);
                         indexWeek.remove(i);
 
@@ -257,16 +278,22 @@ public class TimePlans extends Fragment {
                             @Override
                             public void onClick(View view) {
                                 // происходит удаление из бд
-                                Toast.makeText(getContext(), "index = " + i, Toast.LENGTH_SHORT).show();
-                                DeleteIndexFromSQLite((Integer) indexMonth.get(i));
-                                arMonth.remove(i);
-                                indexMonth.remove(i);
-                                saveInDataBase("month", ed_in_alertDialog.getText().toString());
+                                if (ed_in_alertDialog.getText().toString().compareTo("") == 0) {
+                                    Toast.makeText(getContext(), "Введите задачу", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    try {
+                                        DeleteIndexFromSQLite(indexMonth.get(i));
+                                    } catch (IndexOutOfBoundsException e) {
+                                    }
+                                    arMonth.remove(i);
+                                    indexMonth.remove(i);
+                                    saveInDataBase("month", ed_in_alertDialog.getText().toString());
 
-                                arMonth.add(ed_in_alertDialog.getText().toString());
+                                    arMonth.add(ed_in_alertDialog.getText().toString());
 
-                                updateUI();
-                                show.dismiss();
+                                    updateUI();
+                                    show.dismiss();
+                                }
                             }
                         });
                     }
@@ -275,7 +302,10 @@ public class TimePlans extends Fragment {
                     public void onClick(DialogInterface dialog, int arg1) {
 
                         // происходит удаление из бд
-                        DeleteIndexFromSQLite((Integer) indexMonth.get(i));
+                        try {
+                            DeleteIndexFromSQLite(indexMonth.get(i));
+                        } catch (IndexOutOfBoundsException e) {
+                        }
                         arMonth.remove(i);
                         updateUI();
                     }
@@ -311,15 +341,22 @@ public class TimePlans extends Fragment {
                             @Override
                             public void onClick(View view) {
                                 // происходит удаление из бд
-                                Toast.makeText(getContext(), "index = " + i, Toast.LENGTH_SHORT).show();
-                                DeleteIndexFromSQLite((Integer) indexYear.get(i));
-                                arYear.remove(i);
-                                indexYear.remove(i);
-                                saveInDataBase("year", ed_in_alertDialog.getText().toString());
+                                if (ed_in_alertDialog.getText().toString().compareTo("") == 0) {
+                                    Toast.makeText(getContext(), "Введите задачу", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    try {
+                                        DeleteIndexFromSQLite(indexYear.get(i));
+                                    } catch (IndexOutOfBoundsException e) {
+                                    }
+                                    arYear.remove(i);
+                                    indexYear.remove(i);
+                                    saveInDataBase("year", ed_in_alertDialog.getText().toString());
 
-                                arYear.add(ed_in_alertDialog.getText().toString());
-                                updateUI();
-                                show.dismiss();
+                                    arYear.add(ed_in_alertDialog.getText().toString());
+                                    updateUI();
+
+                                    show.dismiss();
+                                }
                             }
                         });
                     }
@@ -328,7 +365,10 @@ public class TimePlans extends Fragment {
                     public void onClick(DialogInterface dialog, int arg1) {
                         final int position = adapterView.getSelectedItemPosition();
                         // происходит удаление из бд
-                        DeleteIndexFromSQLite((Integer) indexYear.get(i));
+                        try {
+                            DeleteIndexFromSQLite(indexYear.get(i));
+                        } catch (IndexOutOfBoundsException e) {
+                        }
                         arYear.remove(i);
                     }
                 });
@@ -371,13 +411,13 @@ public class TimePlans extends Fragment {
 
                 if (c.getString(categoryColIndex).compareTo("week") == 0) {
                     arWeek.add(c.getString(nameColIndex));
-                    indexWeek.add(c.getInt(idColIndex));
+                    indexWeek.add(c.getLong(idColIndex));
                 } else if (c.getString(categoryColIndex).compareTo("month") == 0) {
                     arMonth.add(c.getString(nameColIndex));
-                    indexMonth.add(c.getInt(idColIndex));
+                    indexMonth.add(c.getLong(idColIndex));
                 } else if (c.getString(categoryColIndex).compareTo("year") == 0) {
                     arYear.add(c.getString(nameColIndex));
-                    indexYear.add(c.getInt(idColIndex));
+                    indexYear.add(c.getLong(idColIndex));
                 }
 
                 // переход на следующую строку, а если следующей нет (текущая - последняя), то false - выходим из цикла
@@ -407,7 +447,7 @@ public class TimePlans extends Fragment {
         // вставляем запись и получаем ее ID
         long rowID = dbq.insert("table_plans", null, cvq);
 
-       // Toast.makeText(getContext(), "row inserted, ID = " + rowID, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(getContext(), "row inserted, ID = " + rowID, Toast.LENGTH_SHORT).show();
 
         return rowID;
     }

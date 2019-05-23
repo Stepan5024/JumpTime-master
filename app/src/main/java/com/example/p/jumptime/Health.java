@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -36,10 +37,10 @@ import java.util.List;
 import java.util.Locale;
 
 public class Health extends Fragment {
-    List<FastItemForRecycler> item = new ArrayList<>();
+    List<FastItemForRecycler> item;
     public static EditText ed;
-    ArrayList<String> tasks = new ArrayList<String>();
-    ArrayList<Integer> indexTasks = new ArrayList<Integer>();
+    ArrayList<String> tasks;
+    ArrayList<Integer> indexTasks;
     ListView list;
     String title = "Редактирование";
     String message = "Выбери нужное действие";
@@ -56,10 +57,14 @@ public class Health extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_health, container, false);
-       // LinearLayout lin = (LinearLayout) view.findViewById(R.id.Layout_health);
-       // lin.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.well_done_tasks));
+
         ed = view.findViewById(R.id.task_plan);
         list = view.findViewById(R.id.listTask);
+
+
+        item = new ArrayList();
+        tasks = new ArrayList();
+        indexTasks = new ArrayList();
 
         readDataFromSQLite();
 
@@ -68,6 +73,7 @@ public class Health extends Fragment {
             @Override
             public void onClick(View view) {
                 if (ed.getText().toString().compareTo("") == 0) {
+                    Toast.makeText(getContext(), "Введите задачу", Toast.LENGTH_SHORT).show();
                 } else {
 
                     tasks.add(ed.getText().toString());
@@ -102,8 +108,10 @@ public class Health extends Fragment {
                             public void onClick(View view) {
                                 // происходит удаление из бд
 
-                                try{  DeleteIndexFromSQLite((Integer) indexTasks.get(i));}
-                                catch(IndexOutOfBoundsException e ){}
+                                try {
+                                    DeleteIndexFromSQLite((Integer) indexTasks.get(i));
+                                } catch (IndexOutOfBoundsException e) {
+                                }
                                 tasks.remove(i);
                                 indexTasks.remove(i);
 
@@ -120,8 +128,10 @@ public class Health extends Fragment {
                     public void onClick(DialogInterface dialog, int arg1) {
                         // происходит удаление из бд
 
-                        try{  DeleteIndexFromSQLite((Integer) indexTasks.get(i));}
-                        catch(IndexOutOfBoundsException e ){}
+                        try {
+                            DeleteIndexFromSQLite((Integer) indexTasks.get(i));
+                        } catch (IndexOutOfBoundsException e) {
+                        }
                         tasks.remove(i);
                         updateUI();
 
@@ -140,9 +150,9 @@ public class Health extends Fragment {
         setInitialData();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.list);
         recyclerView.setLayoutManager(layoutManager);
-        // создаем адаптер
+        //адаптер
         DataAdapterHealth adapter = new DataAdapterHealth(getContext(), item);
-        // устанавливаем для списка адаптер
+        // устанавка для списка адаптер
         recyclerView.setAdapter(adapter);
         return view;
 
@@ -204,13 +214,10 @@ public class Health extends Fragment {
 
             do {
                 if (c.getString(nameColIndex).compareTo("Здоровье") == 0) {
-                    //     Toast.makeText(getContext(),"! "+ c.getString(dataColIndex), Toast.LENGTH_SHORT).show();
                     tasks.add(c.getString(dataColIndex));
                     indexTasks.add(c.getInt(idColIndex));
                 }
 
-
-                // переход на следующую строку, а если следующей нет (текущая - последняя), то false - выходим из цикла
             } while (c.moveToNext());
         } else
             Log.d("Tah", "0 rows");
@@ -238,14 +245,14 @@ public class Health extends Fragment {
         long rowID = dbq.insert("table_plans", null, cvq);
 
 
-
         return rowID;
     }
+
     class DataAdapterHealth extends RecyclerView.Adapter<DataAdapterHealth.ViewHolder> {
 
         private LayoutInflater inflater;
         private List<FastItemForRecycler> arr;
-        public  String activeString = "";
+        public String activeString = "";
 
         DataAdapterHealth(Context context, List<FastItemForRecycler> list) {
             this.arr = list;
@@ -270,8 +277,9 @@ public class Health extends Fragment {
                 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                 @Override
                 public void onClick(View v) {
+
                     activeString = new1.getName();
-                    //  Health.ed.setText(activeString);
+                    Health.ed.setText(activeString);
                 }
             });
         }

@@ -12,12 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-public class Categories  extends Fragment {
+public class Categories extends Fragment {
     View view;
     ImageView v1;
     ImageView v2;
     ImageView v3;
     ImageView v4;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

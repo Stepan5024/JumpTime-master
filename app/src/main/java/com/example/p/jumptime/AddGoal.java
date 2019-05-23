@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -46,7 +47,8 @@ import java.util.Locale;
 import java.util.Objects;
 
 public class AddGoal extends Fragment implements TextView.OnEditorActionListener {
-    ArrayList arrayStep = new ArrayList();
+
+    ArrayList<String> arrayStep;
     float fromPosition;
     ViewFlipper flipper;
     EditText editGo;
@@ -57,17 +59,13 @@ public class AddGoal extends Fragment implements TextView.OnEditorActionListener
     TextView tv_o;
     String DataEnd;
     String DataBegin;
-    Calendar dateAndTime = Calendar.getInstance();
+    Calendar dateAndTime;
     LinearLayout linear;
     private List<View> allEds;
     private ListView mylist;
     private FirebaseUser user;
     private DatabaseReference myRef;
-    private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    String title = "Редактирование";
-    String message = "Выбери нужное действие";
-    String button1String = "Редактировать";
-    String button2String = "Выполнено!";
+    private FirebaseDatabase database;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @SuppressLint("ClickableViewAccessibility")
@@ -75,7 +73,10 @@ public class AddGoal extends Fragment implements TextView.OnEditorActionListener
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_new_goal, container, false);
 
-
+        arrayStep = new ArrayList();
+        database = FirebaseDatabase.getInstance();
+        dateAndTime = Calendar.getInstance();
+        DataEnd = "";
         //анимированное перелистование, перехвата жестов
         LinearLayout mainLayout = view.findViewById(R.id.main_layout);
         mainLayout.setOnTouchListener(new View.OnTouchListener() {
@@ -89,10 +90,12 @@ public class AddGoal extends Fragment implements TextView.OnEditorActionListener
                     case MotionEvent.ACTION_UP: // Пользователь отпустил экран, т.е. окончание движения
                         float toPosition = event.getX();
                         if (fromPosition > toPosition) {
+                            //подключение анимации, плавного перехода
                             flipper.setInAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.go_next_in));
                             flipper.setOutAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.go_next_out));
                             flipper.showNext();
                         } else if (fromPosition < toPosition) {
+                            //подключение анимации, плавного перехода
                             flipper.setInAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.go_prev_in));
                             flipper.setOutAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.go_prev_out));
                             flipper.showPrevious();
@@ -172,11 +175,9 @@ public class AddGoal extends Fragment implements TextView.OnEditorActionListener
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getContext()));
                 builder.setTitle("Что такое КИЛО?")
-                        .setMessage("Для того, чтобы мечты сбывались, их необходимо перевести в форму целей, " +
-                                "и упорно трудиться на пути к их достижению." +
-                                "Цель – это определенный результат, который необходимо достичь. Либо вы выбираете цели, либо цели других выбирают вас. За свою практику, мне удалось насобирать разные методы достижения целей, они разные по произношению, но очень близки по смыслу.")
+                        .setMessage("Для того, чтобы мечты сбывались, их необходимо перевести в форму целей, и упорно трудиться на пути к их достижению. Цель – это определенный результат, который необходимо достичь. Либо вы выбираете цели, либо цели других выбирают вас. Сформулируйте краткую позитивную формулировку цели: ответив на вопросы: что?, сколько?, где?, когда?")
                         .setCancelable(false)
-                        .setNegativeButton("Ок, закрыть",
+                        .setPositiveButton("закрыть",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
                                         dialog.cancel();
@@ -192,6 +193,7 @@ public class AddGoal extends Fragment implements TextView.OnEditorActionListener
 
         //инициализирован массив с edittext
         allEds = new ArrayList<View>();
+
 
 
         final LinearLayout linear = view.findViewById(R.id.linear);
@@ -228,7 +230,6 @@ public class AddGoal extends Fragment implements TextView.OnEditorActionListener
                 ok.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        // indexMonth.add(saveInDataBase("month", ed_in_alertDialog.getText().toString()));
 
                         text.setText(ed_in_alertDialog.getText().toString());
                         show.dismiss();
@@ -243,23 +244,6 @@ public class AddGoal extends Fragment implements TextView.OnEditorActionListener
             }
         });
 
-        Button showDataBtn = (Button) view.findViewById(R.id.button3);
-        showDataBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                //преобразование ArrayList String Array
-                String[] items = new String[allEds.size()];
-                //чтение всех елементов этого списка и запись в массив
-                for (int i = 0; i < allEds.size(); i++) {
-                    items[i] = ((EditText) allEds.get(i).findViewById(R.id.editText)).getText().toString();
-
-
-                    // Log.d("TAG", ((EditText) allEds.get(i).findViewById(R.id.editText)).getText().toString());
-                }
-            }
-        });
         user = FirebaseAuth.getInstance().getCurrentUser();
         myRef = database.getReference();
         Button butsav = view.findViewById(R.id.button_save);
@@ -292,6 +276,9 @@ public class AddGoal extends Fragment implements TextView.OnEditorActionListener
                         for (int i = 0; i < arrayStep.size(); i++) {
                             myRef.child("users").child(user.getUid()).child("infoUser").child("trackGoal").child("" + i).setValue(arrayStep.get(i));
                         }
+                        Fragment fragment = new Health();
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
 
                     }
 

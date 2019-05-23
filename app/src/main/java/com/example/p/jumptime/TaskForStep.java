@@ -7,7 +7,6 @@ public class TaskForStep {
 
     private String taskName;
     private String taskData;
-
     private int id;
     public FragmentActivity activity;
 

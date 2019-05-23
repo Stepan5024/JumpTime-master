@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-         mUser = FirebaseAuth.getInstance().getCurrentUser();
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
         if (mUser != null) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
@@ -101,9 +101,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-
-
-
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void singInUser() {
         mAuth = FirebaseAuth.getInstance();
@@ -121,22 +118,15 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
 
-        mAuth.signInWithEmailAndPassword(mLogin, mPassword).addOnCompleteListener(this, new OnCompleteListener<AuthResult>()  {
+        mAuth.signInWithEmailAndPassword(mLogin, mPassword).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    //Toast.makeText(getApplicationContext(), "Авторизация успешна", Toast.LENGTH_LONG).show();
+
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-
                     intent.putExtra("PARAM", 1);
-
                     startActivity(intent);
                     finish();
-                    /*Fragment fragment = new Tasks();
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
-                    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-                    drawer.closeDrawer(GravityCompat.START);*/
 
                 } else {
                     Toast.makeText(getApplicationContext(), "Авторизация провалена", Toast.LENGTH_LONG).show();

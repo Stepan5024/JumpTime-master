@@ -26,7 +26,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -36,10 +35,11 @@ import java.util.List;
 import java.util.Locale;
 
 public class Famile extends Fragment {
-    List<FastItemForRecycler> item = new ArrayList<>();
+
+    List<FastItemForRecycler> item;
     public static EditText ed;
-    ArrayList<String> tasks = new ArrayList<String>();
-    ArrayList<Integer> indexTasks = new ArrayList<Integer>();
+    ArrayList<String> tasks;
+    ArrayList<Integer> indexTasks;
     ListView list;
     String title = "Редактирование";
     String message = "Выбери нужное действие";
@@ -58,7 +58,12 @@ public class Famile extends Fragment {
         ed = view.findViewById(R.id.task_plan);
         list = view.findViewById(R.id.listTask);
 
+        item = new ArrayList<>();
+        tasks = new ArrayList();
+        indexTasks = new ArrayList();
         readDataFromSQLite();
+
+
 
         Button butAdd = view.findViewById(R.id.button7);
         butAdd.setOnClickListener(new View.OnClickListener() {
@@ -99,8 +104,10 @@ public class Famile extends Fragment {
                             public void onClick(View view) {
                                 // происходит удаление из бд
 
-                                try{  DeleteIndexFromSQLite((Integer) indexTasks.get(i));}
-                                catch(IndexOutOfBoundsException e ){}
+                                try {
+                                    DeleteIndexFromSQLite((Integer) indexTasks.get(i));
+                                } catch (IndexOutOfBoundsException e) {
+                                }
                                 tasks.remove(i);
                                 indexTasks.remove(i);
 
@@ -117,8 +124,10 @@ public class Famile extends Fragment {
                     public void onClick(DialogInterface dialog, int arg1) {
                         // происходит удаление из бд
 
-                        try{  DeleteIndexFromSQLite((Integer) indexTasks.get(i));}
-                        catch(IndexOutOfBoundsException e ){}
+                        try {
+                            DeleteIndexFromSQLite((Integer) indexTasks.get(i));
+                        } catch (IndexOutOfBoundsException e) {
+                        }
                         tasks.remove(i);
                         updateUI();
 
@@ -159,7 +168,7 @@ public class Famile extends Fragment {
 
     private void setInitialData() {
 
-        item.add(new FastItemForRecycler("Пообщаться ", R.drawable.call, getActivity()));
+        item.add(new FastItemForRecycler("Коммуникация ", R.drawable.call, getActivity()));
         item.add(new FastItemForRecycler("Встреча с ", R.drawable.visit, getActivity()));
         item.add(new FastItemForRecycler("День рождение ", R.drawable.birthday, getActivity()));
         item.add(new FastItemForRecycler("Собраться ", R.drawable.well_done_go_to, getActivity()));
@@ -202,13 +211,11 @@ public class Famile extends Fragment {
 
             do {
                 if (c.getString(nameColIndex).compareTo("Семья") == 0) {
-               //     Toast.makeText(getContext(),"! "+ c.getString(dataColIndex), Toast.LENGTH_SHORT).show();
+                    //     Toast.makeText(getContext(),"! "+ c.getString(dataColIndex), Toast.LENGTH_SHORT).show();
                     tasks.add(c.getString(dataColIndex));
                     indexTasks.add(c.getInt(idColIndex));
                 }
 
-
-                // переход на следующую строку, а если следующей нет (текущая - последняя), то false - выходим из цикла
             } while (c.moveToNext());
         } else
             Log.d("Tah", "0 rows");
@@ -236,9 +243,9 @@ public class Famile extends Fragment {
         long rowID = dbq.insert("table_plans", null, cvq);
 
 
-
         return rowID;
     }
+
     class DataAdapterTest extends RecyclerView.Adapter<DataAdapterTest.ViewHolder> {
 
         private LayoutInflater inflater;

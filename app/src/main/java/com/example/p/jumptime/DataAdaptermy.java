@@ -1,4 +1,5 @@
 package com.example.p.jumptime;
+
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -19,26 +20,43 @@ import java.util.List;
 class DataAdaptermy extends RecyclerView.Adapter<DataAdaptermy.ViewHolder> {
 
     private LayoutInflater inflater;
-    private ArrayList<TaskForRecyclerView> news;
+    private ArrayList<TaskForRecyclerView> tasks;
     View view;
 
+    class ViewHolder extends RecyclerView.ViewHolder {
+        final ImageView imageView;
+        final TextView tasksView;
+        final TextView ViewData;
+        final TextView ViewTime;
+        LinearLayout linearLayout;
+
+        ViewHolder(View view) {
+            super(view);
+            imageView = view.findViewById(R.id.image);
+            tasksView = view.findViewById(R.id.TaskName);
+            ViewData = view.findViewById(R.id.DataTask);
+            ViewTime = view.findViewById(R.id.TimeTask);
+            linearLayout = view.findViewById((R.id.linLayout));
+        }
+    }
+
     DataAdaptermy(Context context, ArrayList<TaskForRecyclerView> phones) {
-        this.news = phones;
+        this.tasks = phones;
         this.inflater = LayoutInflater.from(context);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @NonNull
     public DataAdaptermy.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-         view = inflater.inflate(R.layout.recycler_view, parent, false);
+        view = inflater.inflate(R.layout.recycler_view, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final DataAdaptermy.ViewHolder viewHolder, final int position) {
-        final TaskForRecyclerView new1 = news.get(position);
+        final TaskForRecyclerView new1 = tasks.get(position);
         viewHolder.imageView.setImageResource(new1.getImage());
-        viewHolder.newsView.setText(new1.getName());
+        viewHolder.tasksView.setText(new1.getName());
         viewHolder.ViewData.setText(new1.getTaskData());
         viewHolder.ViewTime.setText(new1.getTaskTime());
 
@@ -54,35 +72,25 @@ class DataAdaptermy extends RecyclerView.Adapter<DataAdaptermy.ViewHolder> {
             }
         });
     }
+
     public void restoreItem(TaskForRecyclerView task, int position) {
-        news.add(position, task);
+        tasks.add(position, task);
         notifyItemInserted(position);
     }
+
     public void removeItem(int position) {
-        news.remove(position);
+        tasks.remove(position);
         notifyItemRemoved(position);
     }
+
     public List<TaskForRecyclerView> getData() {
-        return news;
+        return tasks;
     }
+
     @Override
     public int getItemCount() {
-        return news.size();
+        return tasks.size();
     }
-    class ViewHolder extends RecyclerView.ViewHolder {
-        final ImageView imageView;
-        final TextView newsView;
-        final TextView ViewData;
-        final TextView ViewTime;
-        LinearLayout linearLayout;
-        ViewHolder(View view){
-            super(view);
-            imageView = view.findViewById(R.id.image);
-            newsView = view.findViewById(R.id.TaskName);
-            ViewData = view.findViewById(R.id.DataTask);
-            ViewTime = view.findViewById(R.id.TimeTask);
-            linearLayout = view.findViewById((R.id.linLayout));
-        }
-    }
+
 }
 

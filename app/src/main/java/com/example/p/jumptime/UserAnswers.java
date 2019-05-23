@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ import java.util.Locale;
 
 public class UserAnswers extends Fragment {
     Button b_exit;
-    String cat_day; // категория дня отличная, нормальная, плохая
+    String cat_day; // категория дня: отличная, нормальная, плохая
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,9 +48,8 @@ public class UserAnswers extends Fragment {
                 if (ed1.getText().toString().compareTo("") == 0 && ed2.getText().toString().compareTo("") == 0 && ed3.getText().toString().compareTo("") == 0) {
                 } else {
 
-                    // Текущее время
                     Date currentDate = new Date();
-                    // Форматирование времени как "день.месяц.год"
+
                     DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
                     String data_day = dateFormat.format(currentDate);
                     ContentValues cvq = new ContentValues();
@@ -65,11 +65,13 @@ public class UserAnswers extends Fragment {
 
                     // вставляем запись и получаем ее ID
                     long rowID = dbq.insert("table_user_day", null, cvq);
-                    Toast.makeText(getContext(), rowID + "", Toast.LENGTH_SHORT).show();
+
                     ed1.setText("");
                     ed2.setText("");
                     ed3.setText("");
-
+                    Fragment fragment = new Home();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
                 }
             }
         });

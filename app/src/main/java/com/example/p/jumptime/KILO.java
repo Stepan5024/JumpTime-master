@@ -33,6 +33,7 @@ public class KILO extends Fragment {
     String i;
     String l;
     String o;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,11 +50,9 @@ public class KILO extends Fragment {
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getContext()));
                 builder.setTitle("Что такое КИЛО?")
-                        .setMessage("Для того, чтобы мечты сбывались, их необходимо перевести в форму целей, " +
-                                "и упорно трудиться на пути к их достижению." +
-                                "Цель – . Либо вы выбираете цели, либо цели других выбирают вас. За свою практику, мне удалось насобирать разные методы достижения целей, они разные по произношению, но очень близки по смыслу.")
+                        .setMessage("Для того, чтобы мечты сбывались, их необходимо перевести в форму целей, и упорно трудиться на пути к их достижению. Цель – это определенный результат, который необходимо достичь. Либо вы выбираете цели, либо цели других выбирают вас. Сформулируйте краткую позитивную формулировку цели: ответив на вопросы: что?, сколько?, где?, когда?")
                         .setCancelable(false)
-                        .setNegativeButton("Ок, закрыть",
+                        .setPositiveButton("закрыть",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
                                         dialog.cancel();

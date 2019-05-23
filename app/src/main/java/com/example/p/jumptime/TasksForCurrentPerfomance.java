@@ -36,9 +36,9 @@ import java.util.Locale;
 
 
 public class TasksForCurrentPerfomance extends Fragment {
-    public static ArrayList<TaskForRecyclerView> tasks = new ArrayList<>();
+    public static ArrayList<TaskForRecyclerView> tasks;
     DataAdaptermy adapter;
-    ArrayList sizeArray = new ArrayList();
+    ArrayList sizeArray;
     View rootView;
     List<String[]> array;
     ArrayList images;
@@ -47,14 +47,14 @@ public class TasksForCurrentPerfomance extends Fragment {
     ArrayList arForAdapter;
     LinearLayoutManager layoutManager;
     static DataBase.DBHelper dbHelper;
-    // Идентификатор уведомления
-    public static final int NOTIFY_ID = 101;
     static int[] image_priority = {R.mipmap.white, R.mipmap.yellow, R.mipmap.orange, R.mipmap.red};
 
     public TasksForCurrentPerfomance() {
         tasks = new ArrayList<>();
         array = new ArrayList<>();
         images = new ArrayList();
+        tasks = new ArrayList<>();
+        sizeArray = new ArrayList();
     }
 
     @Override
@@ -71,6 +71,7 @@ public class TasksForCurrentPerfomance extends Fragment {
         layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         Switch sw = rootView.findViewById(R.id.switchToCalendar);
         dbHelper = new DataBase.DBHelper(getContext());
+
         sw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,17 +81,7 @@ public class TasksForCurrentPerfomance extends Fragment {
             }
         });
 
-        NotificationCompat.Builder builder =
-                new NotificationCompat.Builder(getContext())
-                        .setSmallIcon(android.R.drawable.ic_dialog_email)
-                        .setContentTitle("Title change")
-                        .setContentText("Notification text change");
 
-        Notification notification = builder.build();
-
-        NotificationManager notificationManager =
-                (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(1, notification);
         recyclerView = rootView.findViewById(R.id.list);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -113,6 +104,7 @@ public class TasksForCurrentPerfomance extends Fragment {
         recyclerView.setAdapter(adapter);
 
         enableSwipeToDeleteAndUndo();
+
         dbHelper = new DataBase.DBHelper(getContext());
         return rootView;
 
@@ -126,7 +118,8 @@ public class TasksForCurrentPerfomance extends Fragment {
 
         }
     }
-    private  void sortedByDate(){
+
+    private void sortedByDate() {
         Calendar c = new GregorianCalendar();
         int cMinute = c.get(Calendar.MINUTE);
         int cHour = c.get(Calendar.HOUR_OF_DAY);
@@ -135,17 +128,15 @@ public class TasksForCurrentPerfomance extends Fragment {
         for (int i = 0; i < tasks.size(); i++) {
             String[] sub = tasks.get(i).getTaskTime().split(":");
 
-            if(Integer.valueOf(sub[0]) <(cHour)  ){
+            if (Integer.valueOf(sub[0]) < (cHour)) {
 
 
                 Last.add(tasks.get(i));
-            }
-            else if (Integer.valueOf(sub[0]) == (cHour)  && Integer.valueOf(sub[1]) <= cMinute){
+            } else if (Integer.valueOf(sub[0]) == (cHour) && Integer.valueOf(sub[1]) <= cMinute) {
                 Last.add(tasks.get(i));
+            } else {
+                Future.add(tasks.get(i));
             }
-            else
-
-            {    Future.add(tasks.get(i));}
         }
         tasks.clear();
         for (int i = 0; i < Last.size(); i++) {
@@ -156,6 +147,7 @@ public class TasksForCurrentPerfomance extends Fragment {
         }
         updateUI();
     }
+
     private void sortedArrayToDate() {
 
 
@@ -204,22 +196,20 @@ public class TasksForCurrentPerfomance extends Fragment {
     }
 
 
-
     //метод читает список задач из бд sqlite
     public static ArrayList GetListTask() {
         //  объект для данных
         ContentValues cv = new ContentValues();
-        // объект для создания и управления версиями БД
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        // делаем запрос всех данных из таблицы mytable
+        //запрос всех данных из таблицы mytable
         Cursor c = db.query("mytable", null, null, null, null, null, null);
         ArrayList listtasks = new ArrayList();
 
         if (c.moveToFirst()) {
 
-            // определяем номера столбцов по имени в выборке
+            // определяется номера столбцов по имени в выборке
             int idColIndex = c.getColumnIndex("id");
             int nameColIndex = c.getColumnIndex("name");
             int dataColIndex = c.getColumnIndex("data");
@@ -248,8 +238,7 @@ public class TasksForCurrentPerfomance extends Fragment {
                 temp.add(c.getString(activeColIndex));
                 listtasks.add(temp);
 
-                // текущая - последняя, то false -
-                // выходим из цикла
+
             } while (c.moveToNext());
         } else
             Log.d("TAG", "0 rows");
@@ -258,14 +247,13 @@ public class TasksForCurrentPerfomance extends Fragment {
         return listtasks;
     }
 
-    public  void getArray(ArrayList ar) {
+    public void getArray(ArrayList ar) {
         if (ar.isEmpty()) {
         } else {
             for (int i = 0; i < ar.size(); i++) {
                 ArrayList<ArrayList> temp = (ArrayList) ar.get(i);
                 Log.d("Tag", Integer.valueOf(String.valueOf(temp.get(8))).getClass() + "");
                 int index = Integer.valueOf(String.valueOf(temp.get(8)));
-                //Toast.makeText(getContext(), "size =  " + temp.size() + " /" + temp.get(8) + "/", Toast.LENGTH_SHORT).show();
                 tasks.add(new TaskForRecyclerView(String.valueOf(temp.get(1)), String.valueOf(temp.get(2)), String.valueOf(temp.get(3)), image_priority[index], Integer.valueOf(String.valueOf(temp.get(0))), getActivity()));
                 temp.clear();
             }

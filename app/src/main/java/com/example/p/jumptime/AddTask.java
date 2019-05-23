@@ -22,23 +22,22 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Objects;
 
 
 public class AddTask extends Fragment {
-    Calendar dateAndTime = Calendar.getInstance();
+    Calendar dateAndTime;
     TextView priority;
     TextView reminder;
     View rootView;
-
-    String timeTask = "10:00"; // потом инициализировать текущим временем
+    String timeTask;
     Button add;
     TextView EndDateTime;
     EditText ValueView;
@@ -46,7 +45,7 @@ public class AddTask extends Fragment {
     Spinner spinner_priority;
     String selected_remind;
     int selected_priority = 0;
-    final String LOG_TAG = "myLogs";
+    final String LOG_TAG = "RESULT";
     String dataTask;
 
     @Override
@@ -60,7 +59,9 @@ public class AddTask extends Fragment {
 
         rootView = inflater.inflate(R.layout.fragment_add_task, container, false);
         priority = rootView.findViewById(R.id.priority);
-
+        Calendar c = new GregorianCalendar();
+        dateAndTime = Calendar.getInstance();
+        timeTask = c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE);
         reminder = rootView.findViewById(R.id.remind);
         EndDateTime = rootView.findViewById(R.id.time);
         ValueView = rootView.findViewById(R.id.ValueView);
@@ -90,16 +91,13 @@ public class AddTask extends Fragment {
                                        View itemSelected, int selectedItemPosition, long selectedId) {
 
                 String[] choose = getResources().getStringArray(R.array.list_for_priority);
-                if(choose[selectedItemPosition].compareTo("Не важно") == 0){
+                if (choose[selectedItemPosition].compareTo("Не важно") == 0) {
                     selected_priority = 0;
-                }
-                else if(choose[selectedItemPosition].compareTo("Среднее") == 0) {
+                } else if (choose[selectedItemPosition].compareTo("Среднее") == 0) {
                     selected_priority = 1;
-                }
-                else if(choose[selectedItemPosition].compareTo("Важно") == 0) {
+                } else if (choose[selectedItemPosition].compareTo("Важно") == 0) {
                     selected_priority = 2;
-                }
-                else {
+                } else {
                     selected_priority = 3;
                 }
 
@@ -111,31 +109,16 @@ public class AddTask extends Fragment {
         });
 
 
-                    /*final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-	                        final View uview = View.inflate(getContext(), R.layout.dialog_field_kilo, null);
-	                        builder.setView(uview);
-	                        final AlertDialog show = builder.show();
-
-	                        Button ok = uview.findViewById(R.id.good_day);
-	                        ok.setOnClickListener(new View.OnClickListener() {
-	                            @Override
-	                            public void onClick(View view) {
-
-
-	                                show.dismiss();
-	                            }
-	                        });*/
         add = (Button) rootView.findViewById(R.id.addBut);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (ValueView.getText().toString().compareTo("")!=0) {
+                if (ValueView.getText().toString().compareTo("") != 0) {
                     DataBase.DBHelper dbHelper = new DataBase.DBHelper(getContext());
                     // подключаемся к БД
 
                     SQLiteDatabase db = dbHelper.getWritableDatabase();
-                    // создаем объект для данных
 
                     ContentValues cv = new ContentValues();
                     Log.d(LOG_TAG, "--- Insert in mytable: ---");
@@ -143,7 +126,7 @@ public class AddTask extends Fragment {
                     // значение
                     cv.put("name", ValueView.getText().toString());
                     cv.put("data", dataTask);
-                    cv.put("time",timeTask);
+                    cv.put("time", timeTask);
                     cv.put("k", "k");
                     cv.put("i", "i");
                     cv.put("l", "l");
@@ -162,18 +145,14 @@ public class AddTask extends Fragment {
                 fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
 
 
-
-
             }
         });
-
 
 
         EndDateTime = rootView.findViewById(R.id.time);
         EndDateTime.setText(DateUtils.formatDateTime(getContext(),
                 dateAndTime.getTimeInMillis(),
                 DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR | DateUtils.FORMAT_SHOW_TIME));
-
 
 
         EndDateTime.setOnClickListener(new View.OnClickListener() {
@@ -207,7 +186,7 @@ public class AddTask extends Fragment {
                     dateAndTime.set(Calendar.MONTH, monthOfYear);
                     dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-                    dataTask = dayOfMonth + "." + (monthOfYear+1) + "." + year;
+                    dataTask = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
                     setInitialDateTime();
 
                 }

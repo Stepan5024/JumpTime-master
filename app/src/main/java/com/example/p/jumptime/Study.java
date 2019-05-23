@@ -36,10 +36,10 @@ import java.util.Locale;
 
 public class Study extends Fragment {
 
-    List<FastItemForRecycler> item = new ArrayList<>();
+    List<FastItemForRecycler> item;
     public static EditText ed;
     ArrayList<String> tasks = new ArrayList<String>();
-    ArrayList<Integer> indexTasks = new ArrayList<Integer>();
+    ArrayList<Integer> indexTasks;
     ListView list;
     String title = "Редактирование";
     String message = "Выбери нужное действие";
@@ -58,7 +58,8 @@ public class Study extends Fragment {
         ed = view.findViewById(R.id.task_plan);
         list = view.findViewById(R.id.listTask);
 
-       // readDataFromSQLite();
+        item = new ArrayList<>();
+        tasks = new ArrayList();
 
         Button butAdd = view.findViewById(R.id.button7);
         butAdd.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +76,7 @@ public class Study extends Fragment {
                 }
             }
         });
+
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
@@ -99,8 +101,10 @@ public class Study extends Fragment {
                             public void onClick(View view) {
                                 // происходит удаление из бд
 
-                              try{  DeleteIndexFromSQLite((Integer) indexTasks.get(i));}
-                              catch(IndexOutOfBoundsException e ){}
+                                try {
+                                    DeleteIndexFromSQLite((Integer) indexTasks.get(i));
+                                } catch (IndexOutOfBoundsException e) {
+                                }
                                 tasks.remove(i);
                                 indexTasks.remove(i);
 
@@ -117,8 +121,10 @@ public class Study extends Fragment {
                     public void onClick(DialogInterface dialog, int arg1) {
                         // происходит удаление из бд
 
-                      try{  DeleteIndexFromSQLite((Integer) indexTasks.get(i));}
-                      catch (IndexOutOfBoundsException e){}
+                        try {
+                            DeleteIndexFromSQLite((Integer) indexTasks.get(i));
+                        } catch (IndexOutOfBoundsException e) {
+                        }
                         tasks.remove(i);
                         updateUI();
 
@@ -159,8 +165,8 @@ public class Study extends Fragment {
 
     private void setInitialData() {
 
-        item.add(new FastItemForRecycler("Чтение ", R.drawable.read, getActivity()));
-        item.add(new FastItemForRecycler("Обдумать ", R.drawable.mozg, getActivity()));
+        item.add(new FastItemForRecycler("Прочитать ", R.drawable.read, getActivity()));
+        item.add(new FastItemForRecycler("Мысль ", R.drawable.mozg, getActivity()));
         item.add(new FastItemForRecycler("Новая тема ", R.drawable.newtema, getActivity()));
         item.add(new FastItemForRecycler("Анализ ", R.drawable.analiz, getActivity()));
         item.add(new FastItemForRecycler("Личное ", R.drawable.lich, getActivity()));
@@ -237,14 +243,14 @@ public class Study extends Fragment {
         long rowID = dbq.insert("table_plans", null, cvq);
 
 
-
         return rowID;
     }
+
     class DataAdapterStudy extends RecyclerView.Adapter<DataAdapterStudy.ViewHolder> {
 
         private LayoutInflater inflater;
         private List<FastItemForRecycler> arr;
-        public  String activeString = "";
+        public String activeString = "";
 
         DataAdapterStudy(Context context, List<FastItemForRecycler> list) {
             this.arr = list;

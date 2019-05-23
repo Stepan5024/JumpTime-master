@@ -15,9 +15,8 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="Моя цель:"
+            android:text="@string/MyGoal"
             android:textSize="140px"
-
             android:textStyle="bold" />
     </RelativeLayout>
 
@@ -44,8 +43,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="20dp">
+        android:layout_margin="20dp"
+        android:orientation="horizontal">
 
         <View
             android:layout_width="match_parent"
@@ -65,8 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="КИЛО"
-
+            android:text="@string/KILO"
             android:textSize="50sp"
             android:textStyle="bold" />
 
@@ -75,8 +73,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/tx"
+            android:paddingStart="10dp"
             android:paddingLeft="10dp"
             android:paddingTop="15dp"
+            android:paddingEnd="15dp"
             android:paddingRight="15dp"
             android:paddingBottom="15dp"
             android:src="@drawable/info22" />
@@ -92,16 +92,19 @@
             android:id="@+id/label_k"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="К - "
+            android:layout_centerVertical="true"
+            android:text="@string/K"
             android:textSize="50dp"
-            android:textStyle="bold"
-            android:layout_centerVertical="true"/>
+            android:textStyle="bold" />
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/label_k"
+            android:layout_marginStart="30dp"
             android:layout_marginLeft="30dp"
-            android:hint="что?"
+            android:layout_toEndOf="@+id/label_k"
+            android:layout_toRightOf="@+id/label_k"
+            android:hint="@string/what"
             android:textColorHint="#6221d8">
 
             <android.support.design.widget.TextInputEditText
@@ -125,16 +128,17 @@
             android:id="@+id/label_i"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="И - "
+            android:layout_centerVertical="true"
+            android:text="@string/I"
             android:textSize="50dp"
-            android:textStyle="bold"
-            android:layout_centerVertical="true"/>
+            android:textStyle="bold" />
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/label_i"
             android:layout_marginLeft="30dp"
-            android:hint="сколько?"
+            android:layout_toRightOf="@+id/label_i"
+            android:hint="@string/howMach"
             android:textColorHint="#6221d8">
 
             <android.support.design.widget.TextInputEditText
@@ -152,22 +156,26 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
         android:layout_marginLeft="50dp">
 
         <TextView
             android:id="@+id/label_l"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Л - "
+            android:layout_centerVertical="true"
+            android:text="@string/L"
             android:textSize="50dp"
-            android:textStyle="bold"
-            android:layout_centerVertical="true"/>
+            android:textStyle="bold" />
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/label_l"
+            android:layout_marginStart="30dp"
             android:layout_marginLeft="30dp"
-            android:hint="где?"
+            android:layout_toEndOf="@+id/label_l"
+            android:layout_toRightOf="@+id/label_l"
+            android:hint="@string/where"
             android:textColorHint="#6221d8">
 
             <android.support.design.widget.TextInputEditText
@@ -185,27 +193,30 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp">
+        android:layout_marginLeft="50dp"
+        android:layout_marginStart="50dp">
 
         <TextView
             android:id="@+id/label_o"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="О - "
+            android:layout_centerVertical="true"
+            android:text="@string/O"
             android:textSize="50dp"
-            android:textStyle="bold"
-            android:layout_centerVertical="true"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/goal_o"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="Коснитесь, чтобы ввести дату"
-            android:layout_toRightOf="@+id/label_o"
             android:layout_marginLeft="30dp"
+            android:layout_toRightOf="@+id/label_o"
+            android:text="@string/data"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:layout_marginStart="30dp"
+            android:layout_toEndOf="@+id/label_o" />
 
 
     </RelativeLayout>

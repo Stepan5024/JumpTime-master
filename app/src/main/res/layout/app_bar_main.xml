@@ -22,8 +22,6 @@
 
     <include
         layout="@layout/content_main"
-
-
         android:layout_height="wrap_content" />
 
 </android.support.design.widget.CoordinatorLayout>

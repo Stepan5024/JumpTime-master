@@ -8,13 +8,16 @@ public class FastItemForRecycler {
     private int image;
     public FragmentActivity activity;
 
-    public FastItemForRecycler(String itemText, int image, FragmentActivity activity){
+    public FastItemForRecycler(String itemText, int image, FragmentActivity activity) {
 
-        this.itemText=itemText;
+        this.itemText = itemText;
         this.image = image;
         this.activity = activity;
     }
-    public FragmentActivity getActivity(){return activity;}
+
+    public FragmentActivity getActivity() {
+        return activity;
+    }
 
     public String getName() {
         return this.itemText;

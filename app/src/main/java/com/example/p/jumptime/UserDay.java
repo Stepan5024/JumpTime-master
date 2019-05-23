@@ -11,8 +11,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 public class UserDay extends Fragment {
-    View view;
 
+    View view;
 
 
     public View onCreateView(LayoutInflater inflater,

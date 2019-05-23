@@ -50,20 +50,20 @@
                     android:text=""
                     android:textSize="16sp" />
             </RelativeLayout>
+
             <android.support.design.widget.TabLayout
                 android:id="@+id/sliding_tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorHeader"
-                />
+                android:background="@color/colorHeader" />
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="0px"
                 android:layout_weight="1"
-                android:background="@android:color/white"
-                />
+                android:background="@android:color/white" />
+
             <Button
                 android:id="@+id/btn_show"
                 android:layout_width="match_parent"
@@ -76,7 +76,6 @@
                 android:id="@+id/butn_new_goal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:text="@string/add_new_goal" />
 
 
@@ -120,10 +119,10 @@
             </LinearLayout>
 
             <RelativeLayout
+                android:id="@+id/main_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FFCCCC"
-                android:id="@+id/main_layout">
+                android:background="#FFCCCC">
 
                 <ListView
                     android:id="@+id/recycler_step"
@@ -135,24 +134,25 @@
                     android:layout_marginRight="2dp"
                     android:layout_marginBottom="8dp"
                     android:fontFamily="@font/roboto_light" />
+
                 <LinearLayout
-                    android:layout_height="wrap_content"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <Button
                         android:id="@+id/butn_analiz"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/analizes" />
+
                     <Button
                         android:id="@+id/butn_add"
-                        android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
-                        android:text="@string/new_step"
-                        />
+                        android:layout_weight="1"
+                        android:text="@string/new_step" />
 
                 </LinearLayout>
             </RelativeLayout>

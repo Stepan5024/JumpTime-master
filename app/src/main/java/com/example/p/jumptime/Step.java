@@ -1,8 +1,7 @@
 package com.example.p.jumptime;
 
-import android.app.AlertDialog;
+
 import android.content.Context;
-import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,9 +20,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Step extends Fragment {
 
@@ -31,6 +37,8 @@ public class Step extends Fragment {
     public static ArrayList<TaskForStep> tasks;
     LinearLayoutManager layoutManager;
     RecyclerView rec;
+    FirebaseDatabase database;
+    private DatabaseReference myRef;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,6 +51,7 @@ public class Step extends Fragment {
         View view = inflater.inflate(R.layout.fragment_step, container, false);
         rec = view.findViewById(R.id.recycler_step);
         Button button = view.findViewById(R.id.button9);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,6 +60,11 @@ public class Step extends Fragment {
                 builder.setView(uview);
                 final android.support.v7.app.AlertDialog show = builder.show();
                 final String[] date = new String[1];
+                Date currentDate = new Date();
+                // Форматирование времени как "день.месяц.год"
+                DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+
+                date[0] = dateFormat.format(currentDate);
                 DatePicker mDatePicker = (DatePicker) uview.findViewById(R.id.datePicker);
                 Calendar today = Calendar.getInstance();
                 mDatePicker.init(today.get(Calendar.YEAR), today.get(Calendar.MONTH),
@@ -59,8 +73,7 @@ public class Step extends Fragment {
                             @Override
                             public void onDateChanged(DatePicker view, int year,
                                                       int monthOfYear, int dayOfMonth) {
-                                Toast.makeText(uview.getContext(),
-                                        "onDateChanged", Toast.LENGTH_SHORT).show();
+
                                 date[0] = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
 
                             }
@@ -73,14 +86,17 @@ public class Step extends Fragment {
 
                         tasks.add(new TaskForStep(ed_in_alertDialog.getText().toString(), date[0], 1, getActivity()));
                         updateUI();
-                        show.dismiss();
+                        if (ed_in_alertDialog.getText().toString().compareTo("") == 0 && date[0].compareTo("") == 0) {
+                            Toast.makeText(getContext(), "Введите название и дату", Toast.LENGTH_SHORT).show();
+                        } else show.dismiss();
 
                     }
                 });
             }
         });
         tasks = new ArrayList();
-        tasks.add(new TaskForStep("test", "18.05.2019", 1, getActivity()));
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference();
         layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         adapter = new DataAdapterStep(getContext(), tasks);
         rec.setAdapter(adapter);
@@ -98,15 +114,13 @@ public class Step extends Fragment {
 
         }
     }
+
     class DataAdapterStep extends RecyclerView.Adapter<com.example.p.jumptime.DataAdapterStep.ViewHolder> {
 
         private LayoutInflater inflater;
         private ArrayList<TaskForStep> news;
         View view;
-        String title = "Анализ";
-        String message = "Выбери нужное действие";
-        String button1String = "Редактировать";
-        String button2String = "Выполнено!";
+
         class ViewHolder extends RecyclerView.ViewHolder {
 
 
@@ -123,6 +137,7 @@ public class Step extends Fragment {
                 linearLayout = view.findViewById((R.id.linLayout));
             }
         }
+
         DataAdapterStep(Context context, ArrayList<TaskForStep> phones) {
             this.news = phones;
             this.inflater = LayoutInflater.from(context);
@@ -148,54 +163,7 @@ public class Step extends Fragment {
                 @Override
                 public void onClick(View v) {
 
-                    AlertDialog.Builder ad = new AlertDialog.Builder(new1.getActivity());
-                    ad.setTitle(title);  // заголовок
-                    ad.setMessage(message); // сообщение
-                    ad.setPositiveButton(button1String, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int arg1) {
-                            //происходит редактирование
-                            final android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(new1.getActivity());
-                            final View uview = View.inflate(new1.getActivity(), R.layout.dialog_new_plan_task, null);
-                            builder.setView(uview);
-                            final android.support.v7.app.AlertDialog show = builder.show();
 
-                            Button ok = uview.findViewById(R.id.button6);
-                            final EditText ed_in_alertDialog = uview.findViewById(R.id.editText3);
-                            // ed_in_alertDialog.setText(Step.tasks.get(position));
-                            ok.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                             /*   // происходит удаление из бд
-                                Toast.makeText(getContext(), "index = " + i, Toast.LENGTH_SHORT).show();
-                                DeleteIndexFromSQLite((Integer) indexMonth.get(i));
-                                arMonth.remove(i);
-                                indexMonth.remove(i);
-                                saveInDataBase("month", ed_in_alertDialog.getText().toString());
-
-                                arMonth.add(ed_in_alertDialog.getText().toString());
-
-                                updateUI();
-                                show.dismiss();*/
-                                }
-                            });
-                        }
-                    });
-                    ad.setNegativeButton(button2String, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int arg1) {
-
-                            // происходит удаление из бд
-                            DeleteIndexFromSQLite(0);
-                            tasks.remove(position);
-                            updateUI();
-                        }
-                    });
-                    ad.setCancelable(true);
-                    ad.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                        public void onCancel(DialogInterface dialog) {
-                            //пользователь ничего не выбрал
-                        }
-                    });
-                    ad.show();
                 }
             });
         }
@@ -218,13 +186,13 @@ public class Step extends Fragment {
         public int getItemCount() {
             return news.size();
         }
+
         private void DeleteIndexFromSQLite(int index) {
 
 
             DataBase.DBHelper dbHelper = new DataBase.DBHelper(getContext());
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             int delCount = db.delete("table_steps", "id = " + index, null);
-            Toast.makeText(getContext(), "dalete " + delCount, Toast.LENGTH_SHORT).show();
             updateUI();
 
 

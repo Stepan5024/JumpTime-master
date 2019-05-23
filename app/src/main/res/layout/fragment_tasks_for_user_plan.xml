@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:orientation="vertical">
 
     <LinearLayout
@@ -33,10 +32,12 @@
                 android:layout_alignParentRight="true"
                 app:srcCompat="@drawable/add" />
         </RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <ListView
                 android:id="@+id/recycler_week"
                 android:layout_width="match_parent"
@@ -77,10 +78,12 @@
                 android:layout_alignParentRight="true"
                 app:srcCompat="@drawable/add" />
         </RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <ListView
                 android:id="@+id/recycler_month"
                 android:layout_width="match_parent"
@@ -111,7 +114,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:text="@string/ToYear"
-
                 android:textSize="20sp" />
 
             <ImageView
@@ -121,10 +123,12 @@
                 android:layout_alignParentRight="true"
                 app:srcCompat="@drawable/add" />
         </RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <ListView
                 android:id="@+id/recycler_year"
                 android:layout_width="match_parent"

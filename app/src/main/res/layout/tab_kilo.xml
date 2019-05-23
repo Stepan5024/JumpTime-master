@@ -11,7 +11,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -32,9 +32,12 @@
                     android:id="@+id/helpAdmin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/tx"
                     android:layout_toRightOf="@+id/tx"
+                    android:paddingStart="10dp"
                     android:paddingLeft="10dp"
                     android:paddingTop="15dp"
+                    android:paddingEnd="15dp"
                     android:paddingRight="15dp"
                     android:paddingBottom="15dp"
                     android:src="@drawable/info22" />
@@ -44,6 +47,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
                 android:layout_marginLeft="50dp">
 
                 <TextView
@@ -59,7 +63,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:layout_marginStart="30dp"
                     android:layout_marginLeft="30dp"
+                    android:layout_toEndOf="@+id/label_k"
                     android:layout_toRightOf="@+id/label_k">
 
                     <TextView
@@ -78,23 +84,26 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
                 android:layout_marginLeft="50dp">
 
                 <TextView
                     android:id="@+id/label_i"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:text="@string/I"
                     android:textSize="50dp"
-                    android:textStyle="bold"
-                    android:layout_centerVertical="true"/>
+                    android:textStyle="bold" />
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/label_i"
-                    android:layout_marginLeft="30dp"
                     android:layout_centerVertical="true"
-                    >
+                    android:layout_marginStart="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_toEndOf="@+id/label_i"
+                    android:layout_toRightOf="@+id/label_i">
 
                     <TextView
                         android:id="@+id/goal_i"
@@ -118,17 +127,19 @@
                     android:id="@+id/label_l"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:text="@string/L"
                     android:textSize="50dp"
-                    android:textStyle="bold"
-                    android:layout_centerVertical="true"/>
+                    android:textStyle="bold" />
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/label_l"
-                    android:layout_marginLeft="30dp"
                     android:layout_centerVertical="true"
-                    >
+                    android:layout_marginStart="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_toEndOf="@+id/label_l"
+                    android:layout_toRightOf="@+id/label_l">
 
                     <TextView
                         android:id="@+id/goal_l"
@@ -136,10 +147,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_light"
                         android:maxLines="1"
-
                         android:textColor="#6221d8"
                         android:textColorHint="#6221d8" />
-
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -147,25 +156,26 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
                 android:layout_marginLeft="50dp">
 
                 <TextView
                     android:id="@+id/label_o"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:text="@string/O"
                     android:textSize="50sp"
-                    android:textStyle="bold"
-                    android:layout_centerVertical="true"/>
+                    android:textStyle="bold" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/label_o"
-                    android:layout_marginLeft="30dp"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="30dp"
-                    android:layout_toEndOf="@+id/label_o">
+                    android:layout_marginLeft="30dp"
+                    android:layout_toEndOf="@+id/label_o"
+                    android:layout_toRightOf="@+id/label_o">
 
                     <TextView
                         android:id="@+id/goal_o"
@@ -177,11 +187,7 @@
                         android:textColorHint="#6221d8" />
 
                 </RelativeLayout>
-
-
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>
-
-
 </LinearLayout>

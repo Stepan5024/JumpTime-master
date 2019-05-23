@@ -32,18 +32,18 @@
     </group>
     <item android:title="Инструменты">
         <menu>
-            <item
+           <!-- <item
                 android:id="@+id/nav_comand"
                 android:icon="@drawable/priv"
-                android:title="Привычка" />
+                android:title="Привычка" />-->
             <item
                 android:id="@+id/nav_my_day"
                 android:icon="@drawable/my_day"
                 android:title="Мой день такой..." />
-            <item
+           <!-- <item
                 android:id="@+id/nav_plan_day"
                 android:icon="@drawable/time_table"
-                android:title="Расписание" />
+                android:title="Расписание" />-->
             <item
                 android:id="@+id/nav_time"
                 android:icon="@drawable/ic_motivation"

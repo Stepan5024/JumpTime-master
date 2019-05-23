@@ -1,12 +1,9 @@
 package com.example.p.jumptime;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
@@ -17,20 +14,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ViewSwitcher;
 
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
+
+
 
 public class Motivation extends Fragment implements ViewSwitcher.ViewFactory {
     private ImageSwitcher mImageSwitcher;
 
     int position = 0;
     private int[] mImageIds = {R.drawable.ic_1, R.drawable.ic_2,
-            R.drawable.ic_3,R.drawable.ic_4,R.drawable.ic_5, R.drawable.ic_6,
-            R.drawable.ic_7,R.drawable.ic_8,R.drawable.ic_9,};
-    //String[] uri = {"gs://organiser4you.appspot.com/1.png", "gs://organiser4you.appspot.com/2.png", "gs://organiser4you.appspot.com/3.png"};
+            R.drawable.ic_3, R.drawable.ic_4, R.drawable.ic_5, R.drawable.ic_6,
+            R.drawable.ic_7, R.drawable.ic_8, R.drawable.ic_9, R.drawable.ic_10,};
+
     Button forward;
     Button previos;
 
@@ -46,20 +40,6 @@ public class Motivation extends Fragment implements ViewSwitcher.ViewFactory {
             @Override
             public void onClick(View view) {
                 setPositionNext();
-               /* int a = 0; //"от"
-                int b = 2; //"до"
-                int random_number = a + (int) (Math.random() * b);*/
-                //потом наладить
-                /*FirebaseStorage storage = FirebaseStorage.getInstance();
-                StorageReference storageRef = storage.getReferenceFromUrl(uri[random_number1]);
-                storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-
-                        Picasso.with(getContext()).load(uri).into((Target) mImageSwitcher);
-
-                    }
-                });*/
                 mImageSwitcher.setImageResource(mImageIds[position]);
             }
         });
@@ -67,17 +47,6 @@ public class Motivation extends Fragment implements ViewSwitcher.ViewFactory {
             @Override
             public void onClick(View view) {
                 setPositionPrev();
-                //потом наладить
-                 /*FirebaseStorage storage = FirebaseStorage.getInstance();
-                StorageReference storageRef = storage.getReferenceFromUrl(uri[random_number1]);
-                storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-
-                        Picasso.with(getContext()).load(uri).into((Target) mImageSwitcher);
-
-                    }
-                });*/
                 mImageSwitcher.setImageResource(mImageIds[position]);
             }
         });

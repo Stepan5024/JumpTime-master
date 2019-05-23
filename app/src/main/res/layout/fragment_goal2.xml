@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -35,20 +36,20 @@
                 android:text=""
                 android:textSize="16sp" />
         </RelativeLayout>
+
         <android.support.design.widget.TabLayout
             android:id="@+id/sliding_tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorHeader"
-            />
+            android:background="@color/colorHeader" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="0px"
             android:layout_weight="1"
-            android:background="@android:color/white"
-            />
+            android:background="@android:color/white" />
+
         <Button
             android:id="@+id/btn_show"
             android:layout_width="match_parent"
@@ -62,9 +63,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_default_pink"
-            android:textColor="#FFF"
-            android:text="@string/add_new_goal" />
-
+            android:text="@string/add_new_goal"
+            android:textColor="#FFF" />
 
     </LinearLayout>
 </LinearLayout>

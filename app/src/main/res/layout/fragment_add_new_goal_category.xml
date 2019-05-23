@@ -18,6 +18,7 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:text="@string/info_about_step"
+            android:padding="13dp"
             android:textSize="30sp"
             android:textStyle="bold" />
     </RelativeLayout>
@@ -36,22 +37,7 @@
             android:text="@string/new_step"
             android:textColor="#FFF" />
 
-        <ImageView
-            android:id="@+id/helpAdmin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            android:layout_toRightOf="@+id/button5"
-            android:paddingLeft="10dp"
-            android:paddingTop="25dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="15dp"
-            android:src="@drawable/info22"
-            android:layout_marginStart="3dp"
-            android:layout_toEndOf="@+id/button5"
-            android:paddingStart="10dp"
-            android:paddingEnd="15dp"
-             />
+
 
     </RelativeLayout>
 

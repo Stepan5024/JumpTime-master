@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,6 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -29,27 +30,28 @@
                         android:id="@+id/imageFamile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
                         android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp"
                         app:srcCompat="@drawable/happy_famile" />
 
                     <TextView
                         android:id="@+id/textView9"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
                         android:layout_below="@+id/imageFamile"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/ubuntu_bold"
                         android:text="@string/Famile" />
+
                     <TextView
                         android:id="@+id/textView10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView9"
                         android:layout_marginLeft="35dp"
                         android:layout_marginTop="15dp"
                         android:layout_marginBottom="10dp"
-                        android:layout_below="@+id/textView9"
                         android:fontFamily="@font/ubuntu_medium"
                         android:text="@string/FamileLabel" />
                 </RelativeLayout>
@@ -57,8 +59,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    >
+                    android:orientation="vertical">
 
                     <View
                         android:layout_width="5dp"
@@ -66,6 +67,7 @@
                         android:background="@drawable/good_text_view" />
 
                 </LinearLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -75,28 +77,31 @@
                         android:id="@+id/imageSport"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp"
-                        app:srcCompat="@drawable/sport"
-                        android:layout_centerHorizontal="true"/>
+                        app:srcCompat="@drawable/sport" />
+
                     <TextView
                         android:id="@+id/textView11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
                         android:layout_below="@+id/imageSport"
-                        android:fontFamily="@font/ubuntu_bold"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
+                        android:fontFamily="@font/ubuntu_bold"
                         android:text="@string/Health" />
+
                     <TextView
                         android:id="@+id/textView12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView11"
+                        android:layout_marginStart="35dp"
                         android:layout_marginLeft="35dp"
                         android:layout_marginTop="15dp"
                         android:layout_marginBottom="10dp"
-                        android:layout_below="@+id/textView11"
                         android:fontFamily="@font/ubuntu_medium"
-                        android:text="@string/FamileLabel" />
+                        android:text="@string/HealthLabel" />
                 </RelativeLayout>
 
 
@@ -113,6 +118,7 @@
                     android:background="@drawable/good_text_view" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -135,19 +141,21 @@
                         android:id="@+id/textView13"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
                         android:layout_below="@+id/imageStudy"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/ubuntu_bold"
                         android:text="@string/GrowUp" />
+
                     <TextView
                         android:id="@+id/textView14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView13"
+                        android:layout_marginStart="35dp"
                         android:layout_marginLeft="35dp"
                         android:layout_marginTop="15dp"
                         android:layout_marginBottom="10dp"
-                        android:layout_below="@+id/textView13"
                         android:fontFamily="@font/ubuntu_medium"
                         android:text="@string/GrowUpLabel" />
                 </RelativeLayout>
@@ -163,6 +171,7 @@
                         android:background="@drawable/good_text_view" />
 
                 </LinearLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -172,41 +181,35 @@
                         android:id="@+id/imageBusiness"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
                         android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
                         app:srcCompat="@drawable/money" />
+
                     <TextView
                         android:id="@+id/textView15"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
                         android:layout_below="@+id/imageBusiness"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/ubuntu_bold"
                         android:text="@string/Buisness" />
+
                     <TextView
                         android:id="@+id/textView16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView15"
+                        android:layout_marginStart="35dp"
                         android:layout_marginLeft="35dp"
                         android:layout_marginTop="15dp"
                         android:layout_marginBottom="10dp"
-                        android:layout_below="@+id/textView15"
                         android:fontFamily="@font/ubuntu_medium"
                         android:text="@string/BuisnessLabel" />
                 </RelativeLayout>
-
-
             </LinearLayout>
         </LinearLayout>
 
-
-
     </ScrollView>
-
-
-
-
-
 
 </LinearLayout>

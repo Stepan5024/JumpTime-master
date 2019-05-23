@@ -28,7 +28,7 @@ public class MyCalendarView extends Fragment {
 
     RecyclerView recyclerView;
     DataAdaptermy adapter;
-    ArrayList<TaskForRecyclerView> tasks = new ArrayList();
+    ArrayList<TaskForRecyclerView> tasks;
     CoordinatorLayout coordinatorLayout;
 
     int[] image_priority = {R.mipmap.white, R.mipmap.yellow, R.mipmap.orange, R.mipmap.red};
@@ -44,11 +44,15 @@ public class MyCalendarView extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_calendar_view, container, false);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+
         recyclerView = view.findViewById(R.id.list2);
         recyclerView.setLayoutManager(layoutManager);
+        tasks = new ArrayList();
+
         coordinatorLayout = view.findViewById(R.id.coordinatorLayout);
         ArrayList sizeArray = TasksForCurrentPerfomance.GetListTask();
         getArray(sizeArray);
+
         Switch sw = view.findViewById(R.id.switch1);
         sw.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +62,7 @@ public class MyCalendarView extends Fragment {
                 fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
             }
         });
+
         adapter = new DataAdaptermy(getContext(), tasks);
         // устанавливаем для списка адаптер
         recyclerView.setAdapter(adapter);
@@ -74,73 +79,26 @@ public class MyCalendarView extends Fragment {
                 int mDay = dayOfMonth;
                 String selectedDate = new StringBuilder().append(mDay)
                         .append(".").append(mMonth + 1).append(".").append(mYear).toString();
-               // Toast.makeText(getContext(), selectedDate, Toast.LENGTH_LONG).show();
 
 
                 sortedArrayToDay(selectedDate);
             }
         });
-      //  enableSwipeToDeleteAndUndo();
+
         return view;
 
-    }
-
-    private void enableSwipeToDeleteAndUndo() {
-        SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(getContext()) {
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-
-                final int position = viewHolder.getAdapterPosition();
-
-                DataBase.DBHelper dbHelper = new DataBase.DBHelper(getContext());
-
-                SQLiteDatabase db = dbHelper.getWritableDatabase();
-                Log.d("LOG", "--- Delete from mytable: ---");
-                // удаляем по id
-                TaskForRecyclerView temp = tasks.get(position);
-
-
-                int delCount = db.delete("mytable", "id = " + temp.getID(), null);
-                Log.d("LOG", "deleted rows count = " + delCount);
-                adapter.removeItem(position);
-                Snackbar snackbar = Snackbar
-                        .make(coordinatorLayout, "Item was removed from the list.", Snackbar.LENGTH_LONG);
-                snackbar.setAction("UNDO", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        try {
-
-
-                            adapter.restoreItem(tasks.get(0), position);
-
-                        } catch (IndexOutOfBoundsException ex) {
-
-                        }
-                        recyclerView.scrollToPosition(position);
-                    }
-                });
-
-                snackbar.setActionTextColor(Color.YELLOW);
-                snackbar.show();
-
-            }
-        };
-
-        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeToDeleteCallback);
-        itemTouchhelper.attachToRecyclerView(recyclerView);
     }
 
     private void sortedArrayToDay(String data) {
         ArrayList sizeArray = TasksForCurrentPerfomance.GetListTask();
         getArray(sizeArray);
-      //  Toast.makeText(getContext(), "df = " + data, Toast.LENGTH_SHORT).show();
+
         ArrayList<TaskForRecyclerView> thisDay = new ArrayList();
         String[] subDate;
         subDate = data.split("\\.");
         for (int i = 0; i < tasks.size(); i++) {
             String t = tasks.get(i).getTaskData();
-          //  Toast.makeText(getContext(), "data = " + t, Toast.LENGTH_SHORT).show();
+
             String[] subStr;
             subStr = t.split("\\."); // Разделения строки str с помощью метода split()
 
@@ -175,7 +133,6 @@ public class MyCalendarView extends Fragment {
                 ArrayList<ArrayList> temp = (ArrayList) ar.get(i);
                 Log.d("Tag", Integer.valueOf(String.valueOf(temp.get(8))).getClass() + "");
                 int index = Integer.valueOf(String.valueOf(temp.get(8)));
-                //Toast.makeText(getContext(), "size =  " + temp.size() + " /" + temp.get(8) + "/", Toast.LENGTH_SHORT).show();
                 tasks.add(new TaskForRecyclerView(String.valueOf(temp.get(1)), String.valueOf(temp.get(2)), String.valueOf(temp.get(3)), image_priority[index], Integer.valueOf(String.valueOf(temp.get(0))), getActivity()));
                 temp.clear();
             }

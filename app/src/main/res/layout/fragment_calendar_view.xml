@@ -15,8 +15,7 @@
             android:id="@+id/switch1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:text="Списочный вид" />
+            android:text="@string/listView" />
 
         <CalendarView
             android:id="@+id/calendarView"

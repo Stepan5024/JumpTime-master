@@ -15,23 +15,20 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class DataBase extends Fragment implements OnClickListener {
-    static final String LOG_TAG = "myLogs";
-
+    static final String LOG_TAG = "LOG";
     Button btnAdd, btnRead, btnClear, btnUpd, btnDel;
     EditText etName, etEmail, etID;
-     static ArrayList listtasks;
+    static ArrayList listtasks;
     static DBHelper dbHelper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -79,32 +76,13 @@ public class DataBase extends Fragment implements OnClickListener {
                 SQLiteDatabase dbq = dbHelper.getWritableDatabase();
 
                 cvq.put("category", "month");
-                cvq.put("name" , "write book");
-                cvq.put("time","21.2.2019");
+                cvq.put("name", "write book");
+                cvq.put("time", "21.2.2019");
                 cvq.put("active", "1");
                 // вставляем запись и получаем ее ID
                 long rowID = dbq.insert("table_plans", null, cvq);
                 Log.d(LOG_TAG, "row inserted, ID = " + rowID);
-                Toast.makeText(getContext(), "row inserted, ID = " + rowID, Toast.LENGTH_SHORT).show();
 
-
-
-             /*   Log.d(LOG_TAG, "--- Insert in mytable: ---");
-                // подготовим данные для вставки в виде пар: наименование столбца -
-                // значение
-                cv.put("name", name);
-                cv.put("data", email);
-                cv.put("time", name);
-                cv.put("k", email);
-                cv.put("i", name);
-                cv.put("l", email);
-                cv.put("o", name);
-                cv.put("priority", email);
-                cv.put("project", name);
-                cv.put("active", email);
-                // вставляем запись и получаем ее ID
-                long rowID = db.insert("mytable", null, cv);
-                Log.d(LOG_TAG, "row inserted, ID = " + rowID);*/
                 break;
             case R.id.btnRead:
                 readData();
@@ -116,7 +94,7 @@ public class DataBase extends Fragment implements OnClickListener {
                 // удаляем все записи
                 int clearCount = db.delete("mytable", null, null);
                 db.delete("table_plans", null, null);
-              //  db.delete("table_user_day", null, null);
+                //  db.delete("table_user_day", null, null);
                 Log.d(LOG_TAG, "deleted rows count = " + clearCount);
                 break;
             case R.id.btnUpd:
@@ -154,7 +132,7 @@ public class DataBase extends Fragment implements OnClickListener {
         dbHelper.close();
     }
 
-    public static void readData(){
+    public static void readData() {
         // создаем объект для данных
         ContentValues cv = new ContentValues();
         // создаем объект для создания и управления версиями БД
@@ -203,14 +181,13 @@ public class DataBase extends Fragment implements OnClickListener {
                                 + c.getString(nameColIndex) + ", email = "
                                 + c.getString(dataColIndex));
                 // переход на следующую строку
-                // а если следующей нет (текущая - последняя), то false -
-                // выходим из цикла
             } while (c.moveToNext());
         } else
             Log.d(LOG_TAG, "0 rows");
         c.close();
 
     }
+
     static class DBHelper extends SQLiteOpenHelper {
 
         DBHelper(Context context) {
@@ -221,8 +198,7 @@ public class DataBase extends Fragment implements OnClickListener {
 
         public void onCreate(SQLiteDatabase db) {
             Log.d("LOG", "--- onCreate database ---");
-            //Создавать таблицы с проверкой на предыдущее существование
-            // создаем таблицу с полями
+            //Создание таблиц
             db.execSQL("create table mytable ("
                     + "id integer primary key autoincrement,"
                     + "name text,"
@@ -242,7 +218,7 @@ public class DataBase extends Fragment implements OnClickListener {
                     + "name text,"
                     + "time text,"
                     + "active text"
-                     + ");");
+                    + ");");
             db.execSQL("create table table_steps ("
                     + "id integer primary key autoincrement,"
                     + "hp text,"
@@ -275,5 +251,5 @@ public class DataBase extends Fragment implements OnClickListener {
     }
 
 
-    }
+}
 
