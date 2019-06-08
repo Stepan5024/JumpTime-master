@@ -16,5 +16,9 @@
     <color name="red">#FF0000</color>
     <color name="green">#64DD17</color>
     <color name="sea">#9196B3</color>
+    <color name="white">#ffffff</color>
     <color name="pink">#B0FF80AB</color>
+    <color name="yellowLight">#9FEEFF41</color>
+    <color name="redLight">#C8FF5252</color>
+    <color name="orangeLight">#BAFFAB40</color>
 </resources>

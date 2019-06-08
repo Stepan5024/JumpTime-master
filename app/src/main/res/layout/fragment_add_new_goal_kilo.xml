@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@android:color/white"
+    android:background="@drawable/bg_default_app"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -15,6 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
+            android:textColor="@color/white"
             android:text="@string/MyGoal"
             android:textSize="140px"
             android:textStyle="bold" />
@@ -28,15 +29,15 @@
         android:layout_marginRight="40dp"
         android:gravity="center"
         android:hint="@string/input_goal"
-        android:textColorHint="#6221d8">
+        android:textColorHint="@color/colorAccent">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/task_plan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_light"
-            android:textColor="#6221d8"
-            android:textColorHint="#6221d8" />
+            android:textColor="@color/colorAccent"
+            android:textColorHint="@color/colorAccent" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -65,6 +66,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="@string/KILO"
+            android:textColor="@color/white"
             android:textSize="50sp"
             android:textStyle="bold" />
 
@@ -93,6 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:textColor="#304FFE"
             android:text="@string/K"
             android:textSize="50dp"
             android:textStyle="bold" />
@@ -105,15 +108,15 @@
             android:layout_toEndOf="@+id/label_k"
             android:layout_toRightOf="@+id/label_k"
             android:hint="@string/what"
-            android:textColorHint="#6221d8">
+            android:textColorHint="@color/colorAccent">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/goal_k"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_light"
-                android:textColor="#6221d8"
-                android:textColorHint="#6221d8" />
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/colorAccent" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -129,6 +132,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:textColor="#304FFE"
             android:text="@string/I"
             android:textSize="50dp"
             android:textStyle="bold" />
@@ -139,15 +143,15 @@
             android:layout_marginLeft="30dp"
             android:layout_toRightOf="@+id/label_i"
             android:hint="@string/howMach"
-            android:textColorHint="#6221d8">
+            android:textColorHint="@color/colorAccent">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/goal_i"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_light"
-                android:textColor="#6221d8"
-                android:textColorHint="#6221d8" />
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/colorAccent" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -164,6 +168,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:textColor="#304FFE"
             android:text="@string/L"
             android:textSize="50dp"
             android:textStyle="bold" />
@@ -176,15 +181,15 @@
             android:layout_toEndOf="@+id/label_l"
             android:layout_toRightOf="@+id/label_l"
             android:hint="@string/where"
-            android:textColorHint="#6221d8">
+            android:textColorHint="@color/colorAccent">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/goal_l"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_light"
-                android:textColor="#6221d8"
-                android:textColorHint="#6221d8" />
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/colorAccent" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -201,6 +206,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:textColor="#304FFE"
             android:text="@string/O"
             android:textSize="50dp"
             android:textStyle="bold" />
@@ -212,6 +218,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="30dp"
             android:layout_toRightOf="@+id/label_o"
+            android:textColor="#304FFE"
             android:text="@string/data"
             android:textSize="20sp"
             android:textStyle="bold"

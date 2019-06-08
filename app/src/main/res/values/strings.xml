@@ -47,6 +47,7 @@
     <string name="MyGoal">Моя цель:</string>
     <string name="new_step">Добавить ступень</string>
     <string name="input_text_please">Введите название</string>
+    <string name="input_del_please">Ориентировочное кол-во дел</string>
     <string name="enterRemember">Введите напоминание</string>
     <string name="save">Сохранить</string>
     <string name="enter">Войти</string>
@@ -86,13 +87,17 @@
     <string name="add">Добавить</string>
     <string name="analizes">анализ</string>
     <string name="my_goal">Моя цель:</string>
-    <string name="add_new_goal">добавить цель</string>
+    <string name="add_new_goal">новая цель</string>
+    <string name="icon">Иконка</string>
     <string name="example1">Например: студент в топ ВУЗе</string>
     <string name="OK">Ок</string>
+    <string name="Delete">Удалить</string>
     <string name="K">К - </string>
     <string name="I">И - </string>
     <string name="L">Л - </string>
     <string name="O">О - </string>
+    <string name="info_to_use">Вот так бы выглядел твой график выполненных дел за неделю, пользуйся приложением в течение 7 дней</string>
+    <string name="metka">Иконка</string>
     <string name="KILO">КИЛО</string>
     <string name="input_goal">Введите цель</string>
     <string name="deadline">DeadLine</string>
@@ -102,6 +107,7 @@
     <string name="where">где?</string>
     <string name="data">Коснитесь, чтобы ввести дату</string>
     <string name="deadline2">До:</string>
+    <string name="Data">Дата</string>
     <string name="minder">Напомнить за</string>
     <string name="priority">Приоритет</string>
     <string name="listView">Списочный вид</string>

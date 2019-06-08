@@ -1,0 +1,31 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView19"
+        android:layout_alignParentRight="true">
+
+        <view
+            android:id="@+id/line_view"
+            class="im.dacer.androidcharts.LineView"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp" />
+    </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:fontFamily="@font/rubik_medium"
+        android:layout_marginTop="10dp"
+        android:textColor="#FF0000"
+        android:layout_height="wrap_content"
+        android:text="@string/info_to_use" />
+
+
+</RelativeLayout>

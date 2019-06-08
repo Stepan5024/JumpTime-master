@@ -21,8 +21,14 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_7
     }
 }
-
+allprojects {
+    repositories {
+        google()
+        maven { url "https://jitpack.io" }
+    }
+}
 dependencies {
+
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:27.1.1'
@@ -39,6 +45,8 @@ dependencies {
     implementation 'com.android.support:cardview-v7:27.1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.sothree.slidinguppanel:library:3.0.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
+    implementation 'im.dacer:AndroidCharts:1.0.4'
 }
 
 apply plugin: 'com.google.gms.google-services'

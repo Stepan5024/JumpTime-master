@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="16dp"
+    android:background="@drawable/bg_default_app"
     tools:ignore="MissingDefaultResource">
 
     <ImageView
@@ -18,6 +19,7 @@
         android:id="@+id/news"
         android:layout_width="0dp"
         android:layout_height="100dp"
+        android:textColor="@color/white"
         android:layout_weight="1" />
 
 </LinearLayout>

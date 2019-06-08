@@ -32,10 +32,7 @@
     </group>
     <item android:title="Инструменты">
         <menu>
-           <!-- <item
-                android:id="@+id/nav_comand"
-                android:icon="@drawable/priv"
-                android:title="Привычка" />-->
+
             <item
                 android:id="@+id/nav_my_day"
                 android:icon="@drawable/my_day"
@@ -48,6 +45,10 @@
                 android:id="@+id/nav_time"
                 android:icon="@drawable/ic_motivation"
                 android:title="Мотивация" />
+            <item
+                android:id="@+id/nav_comand"
+                android:icon="@drawable/priv"
+                android:title="Статистика" />
             <item
                 android:id="@+id/nav_time_manadgment"
                 android:icon="@drawable/ic_time_menedgment"
