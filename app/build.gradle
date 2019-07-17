@@ -27,6 +27,17 @@ allprojects {
         maven { url "https://jitpack.io" }
     }
 }
+android {
+    packagingOptions {///////////////////
+        pickFirst 'META-INF/LICENSE.txt' // picks the JavaMail license file
+    }
+}
+repositories {
+    jcenter()
+    maven {
+        url "https://maven.java.net/content/groups/public/"
+    }
+}
 dependencies {
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -47,6 +58,11 @@ dependencies {
     implementation 'com.sothree.slidinguppanel:library:3.0.0'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
     implementation 'im.dacer:AndroidCharts:1.0.4'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation("com.squareup.okhttp3:okhttp:4.0.1")
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.sun.mail:android-mail:1.5.5'
+    implementation 'com.sun.mail:android-activation:1.5.5'
 }
 
 apply plugin: 'com.google.gms.google-services'

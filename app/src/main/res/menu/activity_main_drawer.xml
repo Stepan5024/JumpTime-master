@@ -53,6 +53,10 @@
                 android:id="@+id/nav_time_manadgment"
                 android:icon="@drawable/ic_time_menedgment"
                 android:title="Тайм-менеджмент" />
+            <item
+                android:id="@+id/message"
+                android:icon="@drawable/ic_time_menedgment"
+                android:title="Письмо разработчику" />
         </menu>
     </item>
 

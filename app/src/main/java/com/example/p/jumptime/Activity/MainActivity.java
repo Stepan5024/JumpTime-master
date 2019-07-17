@@ -29,23 +29,23 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.p.jumptime.Fragment.AddTask;
 import com.example.p.jumptime.Controller.AlarmReceiver;
+import com.example.p.jumptime.Controller.DataBase;
+import com.example.p.jumptime.Fragment.AddTask;
 import com.example.p.jumptime.Fragment.Article;
 import com.example.p.jumptime.Fragment.Categories;
-import com.example.p.jumptime.Controller.DataBase;
 import com.example.p.jumptime.Fragment.Goal2;
 import com.example.p.jumptime.Fragment.Home;
+import com.example.p.jumptime.Fragment.MessageApp;
 import com.example.p.jumptime.Fragment.Motivation;
 import com.example.p.jumptime.Fragment.Statistic;
-import com.example.p.jumptime.R;
-import com.example.p.jumptime.Model.TaskForRecyclerView;
 import com.example.p.jumptime.Fragment.TasksForCurrentPerfomance;
 import com.example.p.jumptime.Fragment.TimePlans;
 import com.example.p.jumptime.Fragment.UserDay;
+import com.example.p.jumptime.Model.TaskForRecyclerView;
+import com.example.p.jumptime.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -56,7 +56,9 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-import static java.util.Calendar.*;
+import static java.util.Calendar.HOUR_OF_DAY;
+import static java.util.Calendar.MINUTE;
+import static java.util.Calendar.getInstance;
 
 
 public class MainActivity extends AppCompatActivity
@@ -426,6 +428,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_comand) {
             fragment = new Statistic();
         }
+     else if (id == R.id.message) {
+        fragment = new MessageApp();
+    }
         if (fragment != null) {
 
             FragmentManager fragmentManager = getSupportFragmentManager();

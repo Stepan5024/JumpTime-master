@@ -89,6 +89,7 @@
     <string name="my_goal">Моя цель:</string>
     <string name="add_new_goal">новая цель</string>
     <string name="icon">Иконка</string>
+    <string name="your_string"><u>Underlined text</u></string>
     <string name="example1">Например: студент в топ ВУЗе</string>
     <string name="OK">Ок</string>
     <string name="Delete">Удалить</string>

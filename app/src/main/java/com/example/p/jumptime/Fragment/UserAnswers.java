@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.p.jumptime.Controller.DataBase;
-import com.example.p.jumptime.Fragment.Home;
 import com.example.p.jumptime.R;
 
 import java.text.DateFormat;
@@ -53,6 +52,8 @@ public class UserAnswers extends Fragment {
             public void onClick(View view) {
                 if (ed1.getText().toString().compareTo("") == 0 && ed2.getText().toString().compareTo("") == 0 && ed3.getText().toString().compareTo("") == 0) {
                 } else {
+
+                    //
 
                     Date currentDate = new Date();
 
