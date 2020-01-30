@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:foo="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/aims_aims_ultra"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="6dp"
+        android:layout_gravity="center"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/spacing_large">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+
+            <ImageView
+                android:layout_gravity="center"
+                android:id="@+id/color_back"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/icon_metka"/>
+            <ImageView
+                android:id="@+id/color_front"
+                android:tint="@color/colorWhite"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:src="@drawable/icon_metka"/>
+            </FrameLayout>
+
+            <View
+                android:layout_width="@dimen/spacing_middle"
+                android:layout_height="0dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_gravity="center">
+
+                <com.example.p.jumptime.Fragment.TextViewPlus
+                    android:id="@+id/name_of_aims"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Письма В будущее"
+                    android:textSize="15sp"
+                    foo:customFont="fonts/gothic.ttf"
+                    android:textColor="#000000" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="10dp" />
+
+                <com.example.p.jumptime.Fragment.TextViewPlus
+                    android:id="@+id/description_of_aims"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Используй напоминалки, чтобы не забыть самые важные события"
+                    android:textSize="12sp"
+
+                    android:textColor="@color/grey_10"
+                    foo:customFont="fonts/gothic.ttf"/>
+
+            </LinearLayout>
+            <View
+                android:layout_width="5dp"
+                android:layout_height="0dp"/>
+
+
+
+
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.01"
+                android:orientation="vertical"
+                android:layout_gravity="center">
+
+
+                <com.example.p.jumptime.Fragment.TextViewPlus
+                    android:id="@+id/time_of_aims"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:text="время"
+                    android:textColor="@color/grey_10"
+                    android:gravity="center"
+                    android:layout_gravity="center|top"
+                    android:textSize="12sp"
+                    foo:customFont="fonts/gothic.ttf" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

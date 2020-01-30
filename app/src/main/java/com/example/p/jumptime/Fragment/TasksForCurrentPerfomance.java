@@ -41,7 +41,7 @@ import java.util.List;
 import java.util.Locale;
 
 /*
- * Отображение текущих задач ввиде списка, удаление задачи по свайпу влево. Данные считывабтся из БД SQLite
+ * Отображение текущих задач в виде списка, удаление задачи по свайпу влево. Данные считывабтся из БД SQLite
  *
  * */
 public class TasksForCurrentPerfomance extends Fragment {

@@ -21,4 +21,39 @@
     <color name="yellowLight">#9FEEFF41</color>
     <color name="redLight">#C8FF5252</color>
     <color name="orangeLight">#BAFFAB40</color>
+    <color name="mti_default_primary">#01b37c</color>
+    <color name="mti_default_primary_dark">#09865f</color>
+    <color name="grey_10">#e6e6e6</color>
+    <color name="mti_bg_timeline">#FFFFFF</color>
+    <color name="mti_lbl_tab_selected">#FFFFFF</color>
+    <color name="mti_lbl_tab_before_selection">#5affffff</color>
+    <color name="mti_lbl_day">#b3bdc2</color>
+    <color name="mti_lbl_date">#555e6f</color>
+    <color name="mti_lbl_date_selected">#FFFFFF</color>
+    <color name="mti_bg_lbl_date_selected_color">#00b47c</color>
+    <color name="mti_ring_lbl_date_color">#d2f6eb</color>
+    <color name="mti_bg_lbl_today">#d6d6d6</color>
+    <color name="mti_lbl_label">#9b9b9b</color>
+    <color name="colorSecondary">#FE8585</color>
+    <color name="colorWhite">#FFF</color>
+    <color name="colorBlack">#000000</color>
+    <color name="deep_orange_400">#FF7043</color>
+
+    <!--for random color generator -->
+    <string-array name="mdcolor_random">
+        <item>#e91e63</item>
+        <item>#9c27b0</item>
+        <item>#673ab7</item>
+        <item>#E53935</item>
+        <item>#5677fc</item>
+        <item>#689F38</item>
+        <item>#03a9f4</item>
+        <item>#00bcd4</item>
+        <item>#009688</item>
+        <item>#259b24</item>
+        <item>#ff5722</item>
+        <item>#795548</item>
+        <item>#607d8b</item>
+        <item>#ff9800</item>
+    </string-array>
 </resources>

@@ -18,6 +18,7 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -28,14 +29,21 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.p.jumptime.Controller.AlarmReceiver;
 import com.example.p.jumptime.Controller.DataBase;
 import com.example.p.jumptime.Fragment.AddTask;
 import com.example.p.jumptime.Fragment.Article;
+import com.example.p.jumptime.Fragment.Business;
+import com.example.p.jumptime.Fragment.CalendarFragment;
 import com.example.p.jumptime.Fragment.Categories;
+import com.example.p.jumptime.Fragment.Famile;
 import com.example.p.jumptime.Fragment.Goal2;
 import com.example.p.jumptime.Fragment.Home;
+import com.example.p.jumptime.Fragment.HomeTaskView;
 import com.example.p.jumptime.Fragment.MessageApp;
 import com.example.p.jumptime.Fragment.Motivation;
 import com.example.p.jumptime.Fragment.Statistic;
@@ -62,12 +70,13 @@ import static java.util.Calendar.getInstance;
 
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     //хранятся дела пользователя
     ArrayList<TaskForRecyclerView> tasks;
     ArrayList sizeArray = new ArrayList();
-
+    Toolbar toolbar;
+    TextView textViewOfAppBar;
     //отвечают за создание уведомлений при входе
     private PendingIntent pendingIntent;
     int counter = 0;
@@ -79,6 +88,29 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+       // toolbar.setBackgroundColor(Color.parseColor("#ffffff"));
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
+                drawer,
+                toolbar,
+                R.string.nav_open_drawer,
+                R.string.nav_close_drawer);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) this);
+
+        textViewOfAppBar = (TextView) findViewById(R.id.for_diary);
+
+        ImageButton diaryButton = findViewById(R.id.diary_button);
+        diaryButton.setOnClickListener(this);
+        ImageButton appointButton = findViewById(R.id.appoint_button);
+        appointButton.setOnClickListener(this);
+        ImageButton veriButton = findViewById(R.id.veri_button);
+        veriButton.setOnClickListener(this);
         //проверка вошел ли пользователь
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) {
@@ -96,16 +128,6 @@ public class MainActivity extends AppCompatActivity
         startAt10();
 
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        //левое выдвижное меню
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
         //чтение списка дел и заполнение в листы
         try {
             sizeArray = GetListTask();
@@ -113,7 +135,6 @@ public class MainActivity extends AppCompatActivity
             sortedArrayToDate();
             sortedByDate();
         } catch (NullPointerException w) {
-
         }
 
         //поток в котором создаются уведомления
@@ -122,9 +143,7 @@ public class MainActivity extends AppCompatActivity
             public void run() {
                 for (int i = 0; i < tasks.size(); i++) {
                     String myDate2 = tasks.get(i).getTaskData() + " " + tasks.get(i).getTaskTime();
-
                     if (isNeed(tasks.get(i).getTaskData(), tasks.get(i).getTaskTime())) {
-
                         setApplicationNotification(myDate2, tasks.get(i).getTaskName());
                     }
 
@@ -133,9 +152,6 @@ public class MainActivity extends AppCompatActivity
         });
         hread.start();
 
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
 
         // устанавливаем начальный фрагмент - Home
         Fragment fragment = null;
@@ -147,9 +163,9 @@ public class MainActivity extends AppCompatActivity
         } catch (InstantiationException e) {
             e.printStackTrace();
         }
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        assert fragment != null;
-        fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content_frame, fragment);
+        ft.commit();
     }
 
     //проверяет две даты на истекшее время
@@ -189,14 +205,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public void cancel() {
-        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        manager.cancel(pendingIntent);
-    }
-
     public void startAt10() {
-        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        int interval = 1000 * 60 * 20;
 
         /* установка "Будильника" на 10:30*/
         Calendar calendar = getInstance();
@@ -204,8 +213,7 @@ public class MainActivity extends AppCompatActivity
         calendar.set(HOUR_OF_DAY, 10);
         calendar.set(MINUTE, 30);
         /* 20 minutes интервал */
-       /* manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                1000 * 60 * 20, pendingIntent);*/
+
     }
 
     //метод читает список задач из бд sqlite
@@ -235,7 +243,6 @@ public class MainActivity extends AppCompatActivity
             int projectColIndex = c.getColumnIndex("project");
             int activeColIndex = c.getColumnIndex("active");
 
-
             do {
                 ArrayList temp = new ArrayList();
                 temp.add(c.getInt(idColIndex));
@@ -251,15 +258,12 @@ public class MainActivity extends AppCompatActivity
                 temp.add(c.getString(activeColIndex));
                 listtasks.add(temp);
 
-
             } while (c.moveToNext());
         } else
             Log.d("TAG", "0 rows");
         c.close();
-
         return listtasks;
     }
-
 
     public  void setApplicationNotification(String myDate, String name) {
         Calendar c = new GregorianCalendar();
@@ -283,18 +287,15 @@ public class MainActivity extends AppCompatActivity
 
         builder.setLargeIcon(BitmapFactory.decodeResource(res, R.mipmap.ic_icon1));
         builder.setAutoCancel(true); // автоматически закрыть уведомление после нажатия
-
         builder.setWhen(mills);
         builder.setShowWhen(false);
+
         Notification notification = builder.build();
-
         notification.defaults = Notification.DEFAULT_ALL;
-
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(counter, notification);
         counter++;
-
 
     }
 
@@ -327,7 +328,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void sortedArrayToDate() {
-
         // Текущее время
         Date currentDate = new Date();
         // Форматирование времени как "день.месяц.год"
@@ -342,7 +342,6 @@ public class MainActivity extends AppCompatActivity
         for (int i = 0; i < tasks.size(); i++) {
             String t = tasks.get(i).getTaskData();
             String[] subStr;
-
             subStr = t.split("\\."); // Разделения строки str с помощью метода split()
 
             if (Integer.valueOf(subDate[2]) >= Integer.valueOf(subStr[2]) && Integer.valueOf(subDate[1]) >= Integer.valueOf(subStr[1]) && Integer.valueOf(subDate[0]) > Integer.valueOf(subStr[0]))
@@ -354,7 +353,6 @@ public class MainActivity extends AppCompatActivity
             else ToDay.add(tasks.get(i));
 
         }
-
 
         tasks.clear();
         for (int i = 0; i < Last.size(); i++) {
@@ -371,15 +369,6 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -394,8 +383,6 @@ public class MainActivity extends AppCompatActivity
         }
 
     }
-
-
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -415,7 +402,6 @@ public class MainActivity extends AppCompatActivity
             fragment = new Categories();
         } else if (id == R.id.nav_my_day) {
             fragment = new UserDay();
-
         } else if (id == R.id.nav_time) {
             fragment = new Motivation();
         } else if (id == R.id.nav_exit) {
@@ -430,25 +416,49 @@ public class MainActivity extends AppCompatActivity
         }
      else if (id == R.id.message) {
         fragment = new MessageApp();
-    }
-        if (fragment != null) {
+    }     if (fragment != null) {
 
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
-            // Выделяем выбранный пункт меню в шторке
-            // item.setChecked(true);
-            // Выводим выбранный пункт в заголовке
-            setTitle(item.getTitle());
-
-            DrawerLayout drawer = findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-
-
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_frame, fragment);
+            ft.commit();
+        } else {
         }
         return true;
-
     }
 
+    public void onClick(View v) {
+        Fragment fragment = null;
+        switch (v.getId()) {
+            case R.id.diary_button:
+                fragment = new Famile();
+
+                textViewOfAppBar.setText("Ежедневник");
+                textViewOfAppBar.setTextColor(Color.parseColor("#000000"));
+                toolbar.setBackgroundColor(Color.parseColor("#ffffff"));
+
+                break;
+
+            case R.id.appoint_button:
+                fragment = new CalendarFragment();
+                textViewOfAppBar.setText("Календарь");
+                toolbar.setBackgroundColor(Color.parseColor("#63D0F0"));
+                textViewOfAppBar.setTextColor(Color.parseColor("#ffffff"));
+
+                break;
+            case R.id.veri_button:
+                fragment = new Business();
+                toolbar.setBackgroundColor(Color.parseColor("#ffffff"));
+                textViewOfAppBar.setTextColor(Color.parseColor("#000000"));
+                textViewOfAppBar.setText("Цели на день");
+
+                break;
+        }
+        if (fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+        }
+
+    }
     public void getArray(ArrayList ar) {
         if (ar.isEmpty()) {
         } else {
@@ -461,6 +471,11 @@ public class MainActivity extends AppCompatActivity
                 temp.clear();
             }
         }
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }
 

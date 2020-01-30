@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_10"
+    android:id="@+id/diary_frag"
+    >
+
+
+
+
+
+
+
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="212dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/image_fir"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:scaleType="centerCrop"
+        app:layout_collapseMode="parallax" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="5dp"/>
+
+        <com.example.p.jumptime.Fragment.TextViewPlus
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center"
+            android:layout_marginBottom="@dimen/txt1_splash_margin_toporbottom"
+            android:gravity="center"
+            android:text="Цитата Дня"
+            android:textColor="@color/colorWhite"
+            android:textSize="25sp"
+            android:typeface="serif"
+            app:customFont="fonts/gothic.ttf"
+
+           >
+
+        </com.example.p.jumptime.Fragment.TextViewPlus>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="20dp"/>
+        <com.mederov.timelord.utils.TextViewPlus
+            android:id="@+id/textView3Final"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center"
+
+
+            android:padding="14dp"
+            android:gravity="center"
+            android:text="“Быть любимым — это больше, чем быть богатым, потому что быть любимым означает быть счастливым.”"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp"
+            android:typeface="serif"
+            app:customFont="fonts/gothic.ttf"
+            >
+
+        </com.mederov.timelord.utils.TextViewPlus>
+
+
+    </LinearLayout>
+
+</FrameLayout>
+
+
+
+
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nested_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+
+        android:clipToPadding="false"
+        android:scrollbars="none"
+        android:scrollingCache="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="10dp" />
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/radios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="750dp"
+                    android:id="@+id/listView"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+</android.support.design.widget.CoordinatorLayout>
+

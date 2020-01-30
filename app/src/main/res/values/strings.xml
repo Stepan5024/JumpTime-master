@@ -15,7 +15,8 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-
+    <string name="nav_open_drawer">Open navigation drawer</string>
+    <string name="nav_close_drawer">Close navigation drawer</string>
     <string-array name="list_for_repeat">
     <item>Рабочие дни</item>
     <item>Выходные</item>
@@ -128,7 +129,7 @@
     <string name="info_about_step">Добавьте контрольные точки</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="title_activity_sign_up">SignUp</string>
-
+    <string name="app_name_time">Иду к цели!</string>
     <string name="input_text">Введите задачу</string>
     <string name="newStep">Добавьте шаг</string>
 </resources>
